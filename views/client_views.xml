@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_custom_client_form" model="ir.ui.view">
+        <field name="name">custom.client.form</field>
+        <field name="model">custom.client</field>
+        <field name="arch" type="xml">
+            <form string="Cliente">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="nit"/>
+                        <field name="email"/>
+                        <field name="phone"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_custom_client_tree" model="ir.ui.view">
+        <field name="name">custom.client.tree</field>
+        <field name="model">custom.client</field>
+        <field name="arch" type="xml">
+            <tree string="Clientes">
+                <field name="name"/>
+                <field name="nit"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <menuitem id="custom_clients_menu" name="Clientes"/>
+    <menuitem id="custom_clients_submenu" name="Clientes Personalizados" parent="custom_clients_menu"/>
+
+    <act_window id="action_custom_client"
+                name="Clientes Personalizados"
+                res_model="custom.client"
+                view_mode="tree,form"
+                menu_id="custom_clients_submenu"/>
+</odoo>
