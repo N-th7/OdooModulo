@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
+    <!-- Vista formulario -->
     <record id="view_custom_client_form" model="ir.ui.view">
         <field name="name">custom.client.form</field>
         <field name="model">custom.client</field>
@@ -18,6 +20,7 @@
         </field>
     </record>
 
+    <!-- Vista lista -->
     <record id="view_custom_client_tree" model="ir.ui.view">
         <field name="name">custom.client.tree</field>
         <field name="model">custom.client</field>
@@ -32,12 +35,18 @@
         </field>
     </record>
 
-    <menuitem id="custom_clients_menu" name="Clientes"/>
-    <menuitem id="custom_clients_submenu" name="Clientes Personalizados" parent="custom_clients_menu"/>
+    <!-- Acción -->
+    <record id="action_custom_client" model="ir.actions.act_window">
+        <field name="name">Clientes Personalizados</field>
+        <field name="res_model">custom.client</field>
+        <field name="view_mode">tree,form</field>
+    </record>
 
-    <act_window id="action_custom_client"
-                name="Clientes Personalizados"
-                res_model="custom.client"
-                view_mode="tree,form"
-                menu_id="custom_clients_submenu"/>
+    <!-- Menús -->
+    <menuitem id="custom_clients_menu" name="Clientes"/>
+    <menuitem id="custom_clients_submenu"
+              name="Clientes Personalizados"
+              parent="custom_clients_menu"
+              action="action_custom_client"/>
+
 </odoo>
