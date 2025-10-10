@@ -8,7 +8,9 @@
     "category": "Custom",
     "depends": ["base"],
     "data": [
-        "views/client_views.xml",
+        'security/ir.model.access.csv',
+        'views/custom_client_views.xml',
+        
     ],
     "installable": True,
     "application": True,
