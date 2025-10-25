@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="plan_10mb" model="internet.plan">
+        <field name="name">Plan 10 Mbps</field>
+        <field name="speed">10 Mbps</field>
+        <field name="price">200.00</field>
+        <field name="description">Plan básico 10 Mbps</field>
+    </record>
+
+    <record id="plan_50mb" model="internet.plan">
+        <field name="name">Plan 50 Mbps</field>
+        <field name="speed">50 Mbps</field>
+        <field name="price">400.00</field>
+        <field name="description">Plan intermedio 50 Mbps</field>
+    </record>
+
+    <record id="plan_100mb" model="internet.plan">
+        <field name="name">Plan 100 Mbps</field>
+        <field name="speed">100 Mbps</field>
+        <field name="price">700.00</field>
+        <field name="description">Plan avanzado 100 Mbps</field>
+    </record>
+</odoo>
