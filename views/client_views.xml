@@ -1,52 +1,58 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
+  <record id="view_internet_client_tree" model="ir.ui.view">
+    <field name="name">internet.client.tree</field>
+    <field name="model">internet.client</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="ci"/>
+        <field name="plan_id"/>
+        <field name="status"/>
+        <field name="deuda_meses"/>
+      </tree>
+    </field>
+  </record>
 
-    <!-- Vista formulario -->
-    <record id="view_custom_client_form" model="ir.ui.view">
-        <field name="name">custom.client.form</field>
-        <field name="model">custom.client</field>
-        <field name="arch" type="xml">
-            <form string="Cliente">
-                <sheet>
-                    <group>
-                        <field name="name"/>
-                        <field name="nit"/>
-                        <field name="email"/>
-                        <field name="phone"/>
-                        <field name="active"/>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
+  <record id="view_internet_client_form" model="ir.ui.view">
+    <field name="name">internet.client.form</field>
+    <field name="model">internet.client</field>
+    <field name="arch" type="xml">
+      <form string="Cliente de Internet">
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="ci"/>
+            <field name="address"/>
+            <field name="phone"/>
+            <field name="email"/>
+            <field name="plan_id"/>
+            <field name="active"/>
+            <field name="status"/>
+            <field name="deuda_meses" readonly="1"/>
+          </group>
+          <notebook>
+            <page string="Facturas">
+              <field name="invoice_ids">
+                <tree editable="bottom">
+                  <field name="name"/>
+                  <field name="date_invoice"/>
+                  <field name="due_date"/>
+                  <field name="amount"/>
+                  <field name="state"/>
+                </tree>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
 
-    <!-- Vista lista -->
-    <record id="view_custom_client_tree" model="ir.ui.view">
-        <field name="name">custom.client.tree</field>
-        <field name="model">custom.client</field>
-        <field name="arch" type="xml">
-            <tree string="Clientes">
-                <field name="name"/>
-                <field name="nit"/>
-                <field name="email"/>
-                <field name="phone"/>
-                <field name="active"/>
-            </tree>
-        </field>
-    </record>
+  <record id="action_internet_clients" model="ir.actions.act_window">
+    <field name="name">Clientes</field>
+    <field name="res_model">internet.client</field>
+    <field name="view_mode">tree,form</field>
+  </record>
 
-    <!-- Acción -->
-    <record id="action_custom_client" model="ir.actions.act_window">
-        <field name="name">Clientes Personalizados</field>
-        <field name="res_model">custom.client</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
-    <!-- Menús -->
-    <menuitem id="custom_clients_menu" name="Clientes"/>
-    <menuitem id="custom_clients_submenu"
-              name="Clientes Personalizados"
-              parent="custom_clients_menu"
-              action="action_custom_client"/>
-
+  <menuitem id="menu_internet_clients" name="Clientes" parent="menu_internet_root" action="action_internet_clients"/>
 </odoo>
