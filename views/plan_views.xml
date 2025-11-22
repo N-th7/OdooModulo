@@ -87,7 +87,7 @@
     <field name="name">internet.plan.kanban</field>
     <field name="model">internet.plan</field>
     <field name="arch" type="xml">
-        <kanban class="o_kanban_mobile"
+        <kanban class="o_kanban_mobile internet_plan_kanban" 
         t-att-style="'display:grid; grid-template-columns:repeat(4, 1fr); gap:20px;'" archivable="false">
 
             <!-- CAMPOS A CARGAR -->
@@ -107,6 +107,11 @@
 
 
                         <!-- Nombre -->
+                        <div class="internet_plan_icon" 
+                             style="font-size:28px; display:flex; align-items:center; justify-content:center;
+                                    width:48px; height:48px; background:#e0e7ff; border-radius:12px;">
+                          <i class="fa fa-wifi" aria-hidden="true" style="color:#4f46e5;"></i>
+                        </div>
                         <div style="font-size:18px; font-weight:600;">
                             <t t-if="record.name">
                                 <t t-esc="record.name.value"/>
