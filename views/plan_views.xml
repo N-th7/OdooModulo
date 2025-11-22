@@ -26,7 +26,7 @@
         <field name="name">internet.plan.form</field>
         <field name="model">internet.plan</field>
         <field name="arch" type="xml">
-            <form string="Nuevo Plan">
+            <form string="Plan de Internet">
                 <sheet>
                     <group>
                         <field name="name"/>
@@ -94,7 +94,8 @@
                                     <button type="edit" class="btn btn-primary btn-sm">
                                         Editar
                                     </button>
-                                    <button type="delete" class="btn btn-danger btn-sm">
+
+                                    <button type="object" name="action_delete" class="btn btn-danger btn-sm">
                                         Eliminar
                                     </button>
                                 </div>

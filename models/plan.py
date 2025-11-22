@@ -13,3 +13,7 @@ class InternetPlan(models.Model):
 
     def name_get(self):
         return [(rec.id, f"{rec.name} ({rec.download_speed} Mbps)") for rec in self]
+
+    def action_delete(self):
+        for rec in self:
+            rec.unlink()
