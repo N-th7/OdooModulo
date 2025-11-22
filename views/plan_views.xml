@@ -49,66 +49,56 @@
     <!-- ========================= -->
     <!--      VISTA KANBAN        -->
     <!-- ========================= -->
-    <record id="view_internet_plan_kanban" model="ir.ui.view">
-        <field name="name">internet.plan.kanban</field>
-        <field name="model">internet.plan</field>
-        <field name="arch" type="xml">
-            <kanban class="o_kanban_mobile">
-                <templates>
-                    <t t-name="kanban-box">
-                        <div class="oe_kanban_global_click o_kanban_card">
-                            <div class="oe_kanban_details">
+    <div class="oe_kanban_details">
 
-                                <!-- Nombre -->
-                                <strong>
-                                    <field name="name"/>
-                                </strong>
+        <!-- Nombre -->
+        <strong>
+            <field name="name"/>
+        </strong>
 
-                                <!-- Estado -->
-                                <!-- Estado -->
-                                <div style="margin:4px 0;">
-                                    <t t-if="record.active and record.active.raw_value">
-                                        <span class="badge badge-success">Activo</span>
-                                    </t>
-                                    <t t-if="record.active and !record.active.raw_value">
-                                        <span class="badge badge-danger">Inactivo</span>
-                                    </t>
-                                </div>
+        <!-- Estado -->
+        <div style="margin:4px 0;">
+            <t t-if="record.active and record.active.raw_value">
+                <span class="badge badge-success">Activo</span>
+            </t>
+            <t t-if="record.active and !record.active.raw_value">
+                <span class="badge badge-danger">Inactivo</span>
+            </t>
+        </div>
 
+        <!-- Descripción -->
+        <p t-if="record.description">
+            <t t-esc="record.description.value"/>
+        </p>
 
-                                <!-- Descripción -->
-                                <p>
-                                    <t t-esc="record.description.value"/>
-                                </p>
+        <!-- Precio + velocidad -->
+        <div style="margin-top: 10px;">
 
-                                <!-- Precio + velocidad -->
-                                <div style="margin-top: 10px;">
-                                    <strong>Bs <t t-esc="record.price.value"/></strong> /mes
+            <strong t-if="record.price">
+                Bs <t t-esc="record.price.value"/>
+            </strong>
+            <t t-if="record.price">/mes</t>
 
-                                    <div style="margin-top: 4px;">
-                                        <i class="fa fa-wifi"/> 
-                                        <t t-esc="record.download_speed.value"/> Mbps
-                                    </div>
-                                </div>
+            <div style="margin-top: 4px;" t-if="record.download_speed">
+                <i class="fa fa-wifi"/> 
+                <t t-esc="record.download_speed.value"/> Mbps
+            </div>
 
-                                <!-- Botones -->
-                                <div class="oe_kanban_buttons" style="margin-top: 10px;">
-                                    <button type="edit" class="btn btn-primary btn-sm">
-                                        Editar
-                                    </button>
+        </div>
 
-                                    <button type="object" name="action_delete" class="btn btn-danger btn-sm">
-                                        Eliminar
-                                    </button>
-                                </div>
+        <!-- Botones -->
+        <div class="oe_kanban_buttons" style="margin-top: 10px;">
+            <button type="edit" class="btn btn-primary btn-sm">
+                Editar
+            </button>
 
-                            </div>
-                        </div>
-                    </t>
-                </templates>
-            </kanban>
-        </field>
-    </record>
+            <button type="object" name="action_delete" class="btn btn-danger btn-sm">
+                Eliminar
+            </button>
+        </div>
+
+    </div>
+
 
 
     <!-- ========================= -->
