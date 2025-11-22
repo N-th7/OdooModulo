@@ -56,7 +56,7 @@
     <field name="name">internet.plan.kanban</field>
     <field name="model">internet.plan</field>
     <field name="arch" type="xml">
-        <kanban class="o_kanban_mobile">
+        <kanban class="o_kanban_mobile" archivable="false">
 
             <!-- CAMPOS QUE ODOO DEBE CARGAR -->
             <field name="name"/>
