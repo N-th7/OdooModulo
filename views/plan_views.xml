@@ -107,7 +107,8 @@
 
 
                         <!-- Nombre -->
-                        <div class="internet_plan_icon" 
+                        <div style="display:flex; align-items:center; gap:12px;">
+                          <div class="internet_plan_icon" 
                              style="font-size:28px; display:flex; align-items:center; justify-content:center;
                                     width:48px; height:48px; background:#e0e7ff; border-radius:12px;">
                           <i class="fa fa-wifi" aria-hidden="true" style="color:#4f46e5;"></i>
@@ -116,6 +117,7 @@
                             <t t-if="record.name">
                                 <t t-esc="record.name.value"/>
                             </t>
+                        </div>
                         </div>
 
                         <!-- Estado -->
