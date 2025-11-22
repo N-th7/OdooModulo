@@ -65,14 +65,16 @@
                                 </strong>
 
                                 <!-- Estado -->
+                                <!-- Estado -->
                                 <div style="margin:4px 0;">
-                                    <t t-if="record.active.raw_value">
+                                    <t t-if="record.active and record.active.raw_value">
                                         <span class="badge badge-success">Activo</span>
                                     </t>
-                                    <t t-if="!record.active.raw_value">
+                                    <t t-if="record.active and !record.active.raw_value">
                                         <span class="badge badge-danger">Inactivo</span>
                                     </t>
                                 </div>
+
 
                                 <!-- Descripción -->
                                 <p>
