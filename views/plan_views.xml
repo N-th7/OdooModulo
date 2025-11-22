@@ -87,7 +87,8 @@
     <field name="name">internet.plan.kanban</field>
     <field name="model">internet.plan</field>
     <field name="arch" type="xml">
-        <kanban class="o_kanban_mobile" archivable="false">
+        <kanban class="o_kanban_mobile"
+        t-att-style="'display:grid; grid-template-columns:repeat(4, 1fr); gap:20px;'" archivable="false">
 
             <!-- CAMPOS A CARGAR -->
             <field name="name"/>
@@ -100,7 +101,7 @@
             <templates>
                 <t t-name="kanban-box">
 
-                    <div style="background:#fff; border-radius:16px; padding:20px; width:210px;
+                    <div style="background:#fff; border-radius:16px; padding:20px;
                                 box-shadow:0 4px 10px rgba(0,0,0,0.06); border:1px solid #e5e7eb;
                                 display:flex; flex-direction:column; gap:14px;">
 
