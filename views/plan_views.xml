@@ -105,6 +105,7 @@
                                 box-shadow:0 4px 10px rgba(0,0,0,0.06); border:1px solid #e5e7eb;
                                 display:flex; flex-direction:column; gap:14px;">
 
+
                         <!-- Nombre -->
                         <div style="font-size:18px; font-weight:600;">
                             <t t-if="record.name">
