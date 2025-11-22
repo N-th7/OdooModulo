@@ -3,6 +3,7 @@ from odoo import models, fields
 class InternetPlan(models.Model):
     _name = 'internet.plan'
     _description = 'Plan de Internet'
+    _active_name = False
 
     name = fields.Char('Nombre del Plan', required=True)
     upload_speed = fields.Float('Velocidad subida (Mbps)', required=True)
