@@ -53,61 +53,120 @@
     <!--      VISTA KANBAN        -->
     <!-- ========================= -->
     <record id="view_internet_plan_kanban" model="ir.ui.view">
-        <field name="name">internet.plan.kanban</field>
-        <field name="model">internet.plan</field>
-        <field name="arch" type="xml">
-            <kanban class="o_kanban_mobile">
-                <templates>
-                    <t t-name="kanban-box">
-                        <div class="oe_kanban_global_click o_kanban_card">
-                            <div class="oe_kanban_details">
+    <field name="name">internet.plan.kanban</field>
+    <field name="model">internet.plan</field>
+    <field name="arch" type="xml">
+        <kanban class="o_kanban_mobile" default_group_by="active">
 
-                                <strong>
-                                    <field name="name"/>
-                                </strong>
+            <templates>
+                <t t-name="kanban-box">
 
-                                <div style="margin:4px 0;">
-                                    <t t-if="record.active and record.active.raw_value">
-                                        <span class="badge badge-success">Activo</span>
-                                    </t>
-                                    <t t-if="record.active and !record.active.raw_value">
-                                        <span class="badge badge-danger">Inactivo</span>
-                                    </t>
-                                </div>
+                    <div style="
+                        background: #ffffff;
+                        border-radius: 16px;
+                        border: 1px solid #e5e7eb;
+                        padding: 20px;
+                        width: 280px;
+                        box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+                        display: flex;
+                        flex-direction: column;
+                        gap: 14px;
+                        transition: 0.2s ease-in-out;
+                    "
+                    onmouseover="this.style.boxShadow='0 6px 14px rgba(0,0,0,0.12)'"
+                    onmouseout="this.style.boxShadow='0 4px 10px rgba(0,0,0,0.06)'">
 
-                                <p t-if="record.description">
-                                    <t t-esc="record.description.value"/>
-                                </p>
-
-                                <div style="margin-top: 10px;">
-                                    <strong t-if="record.price">
-                                        Bs <t t-esc="record.price.value"/>
-                                    </strong>
-                                    <t t-if="record.price">/mes</t>
-
-                                    <div style="margin-top: 4px;" t-if="record.download_speed">
-                                        <i class="fa fa-wifi"/> 
-                                        <t t-esc="record.download_speed.value"/> Mbps
-                                    </div>
-                                </div>
-
-                                <div class="oe_kanban_buttons" style="margin-top: 10px;">
-                                    <button type="edit" class="btn btn-primary btn-sm">
-                                        Editar
-                                    </button>
-
-                                    <button type="object" name="action_delete" class="btn btn-danger btn-sm">
-                                        Eliminar
-                                    </button>
-                                </div>
-
+                        <!-- ICONO + NOMBRE -->
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <i class="fa fa-wifi" style="font-size: 22px; color: #4f46e5;"></i>
+                            <div style="font-size: 20px; font-weight: 600; color: #111827;">
+                                <t t-esc="record.name.value"/>
                             </div>
                         </div>
-                    </t>
-                </templates>
-            </kanban>
-        </field>
-    </record>
+
+                        <!-- ESTADO -->
+                        <div>
+                            <t t-if="record.active and record.active.raw_value">
+                                <span style="
+                                    background:#10b981;
+                                    color:#fff;
+                                    padding:4px 12px;
+                                    border-radius:12px;
+                                    font-size:12px;">
+                                    Activo
+                                </span>
+                            </t>
+                            <t t-if="record.active and !record.active.raw_value">
+                                <span style="
+                                    background:#ef4444;
+                                    color:#fff;
+                                    padding:4px 12px;
+                                    border-radius:12px;
+                                    font-size:12px;">
+                                    Inactivo
+                                </span>
+                            </t>
+                        </div>
+
+                        <!-- DESCRIPCIÓN -->
+                        <div style="color:#6b7280; font-size:14px; min-height:48px;">
+                            <t t-if="record.description">
+                                <t t-esc="record.description.value"/>
+                            </t>
+                        </div>
+
+                        <!-- PRECIO -->
+                        <div style="font-size:26px; font-weight:700; color:#111827;">
+                            Bs <t t-esc="record.price.value"/>
+                            <span style="font-size:12px; color:#6b7280;">/mes</span>
+                        </div>
+
+                        <!-- VELOCIDAD -->
+                        <div style="
+                            font-size:14px; 
+                            color:#374151; 
+                            display:flex; 
+                            align-items:center;
+                            gap:6px;">
+                            <i class="fa fa-tachometer" style="color:#4f46e5;"></i>
+                            <span t-if="record.download_speed">
+                                <t t-esc="record.download_speed.value"/> Mbps bajada
+                            </span>
+                        </div>
+
+                        <div style="
+                            font-size:14px; 
+                            color:#374151; 
+                            display:flex; 
+                            align-items:center;
+                            gap:6px;">
+                            <i class="fa fa-upload" style="color:#4f46e5;"></i>
+                            <span t-if="record.upload_speed">
+                                <t t-esc="record.upload_speed.value"/> Mbps subida
+                            </span>
+                        </div>
+
+                        <!-- BOTONES -->
+                        <div style="display:flex; gap:10px; margin-top:10px;">
+                            <button type="edit"
+                                style="padding:8px 14px; background:#4f46e5; color:#fff; border:none; border-radius:8px; font-weight:500;">
+                                Editar
+                            </button>
+
+                            <button type="object" name="action_delete"
+                                style="padding:8px 14px; background:#ef4444; color:#fff; border:none; border-radius:8px; font-weight:500;">
+                                Eliminar
+                            </button>
+                        </div>
+
+                    </div>
+
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
+
 
 
 
