@@ -24,27 +24,59 @@
     <!--      VISTA FORM          -->
     <!-- ========================= -->
     <record id="view_internet_plan_form" model="ir.ui.view">
-        <field name="name">internet.plan.form</field>
-        <field name="model">internet.plan</field>
-        <field name="arch" type="xml">
-            <form string="Plan de Internet">
-                <sheet>
+    <field name="name">internet.plan.form</field>
+    <field name="model">internet.plan</field>
+    <field name="arch" type="xml">
+
+        <form string="Nuevo Plan" class="internet_plan_form">
+
+            <header>
+            </header>
+
+            <sheet>
+
+                <!-- Título y subtítulo -->
+                <div class="form_title">
+                    <h2>Nuevo Plan</h2>
+                    <span>Crea un nuevo plan de internet</span>
+                </div>
+
+                <group>
+
+                    <!-- Nombre del plan -->
                     <group>
-                        <field name="name"/>
+                        <field name="name" placeholder="Ej: Plan 50 Mbps"/>
+                    </group>
 
-                        <group>
-                            <field name="upload_speed"/>
-                            <field name="download_speed"/>
-                        </group>
+                    <!-- Velocidades -->
+                    <group col="2">
+                        <field name="upload_speed" placeholder="10"/>
+                        <field name="download_speed" placeholder="10"/>
+                    </group>
 
-                        <field name="price"/>
+                    <!-- Precio -->
+                    <group>
+                        <field name="price" placeholder="200"/>
+                    </group>
+
+                    <!-- Descripción -->
+                    <group>
                         <field name="description"/>
+                    </group>
+
+                    <!-- Switch -->
+                    <group>
                         <field name="is_active"/>
                     </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
+
+                </group>
+
+            </sheet>
+
+        </form>
+
+    </field>
+</record>
 
 
 
@@ -68,7 +100,7 @@
             <templates>
                 <t t-name="kanban-box">
 
-                    <div style="background:#fff; border-radius:16px; padding:20px; width:280px;
+                    <div style="background:#fff; border-radius:16px; padding:20px; width:210px;
                                 box-shadow:0 4px 10px rgba(0,0,0,0.06); border:1px solid #e5e7eb;
                                 display:flex; flex-direction:column; gap:14px;">
 

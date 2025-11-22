@@ -18,4 +18,10 @@
     'installable': True,
     'application': True,
     'license': 'LGPL-3',
+    'assets': {
+    'web.assets_backend': [
+        'custom_clients/static/src/css/plan_form.css',
+    ],
+    },
+
 }

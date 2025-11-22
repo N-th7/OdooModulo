@@ -1,0 +1,46 @@
+.internet_plan_form .form_title {
+    margin-bottom: 20px;
+}
+
+.internet_plan_form .form_title h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.internet_plan_form .form_title span {
+    font-size: 13px;
+    color: #777;
+}
+
+.internet_plan_form input,
+.internet_plan_form textarea {
+    border-radius: 8px !important;
+    border: 1px solid #ddd !important;
+    background: #f7f7f9 !important;
+    padding: 10px !important;
+    width: 100%;
+}
+
+.internet_plan_form label {
+    font-weight: 600 !important;
+    margin-bottom: 4px !important;
+}
+
+.internet_plan_form .o_field_boolean input {
+    width: auto !important;
+}
+
+.internet_plan_form .o_form_button_cancel {
+    background: #f3f4f6;
+    color: #555;
+    border-radius: 8px;
+    padding: 6px 16px;
+}
+
+.internet_plan_form .o_form_button_save {
+    background: #9b28ff;
+    color: #fff;
+    border-radius: 8px;
+    padding: 6px 16px;
+}
