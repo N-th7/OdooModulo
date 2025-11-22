@@ -13,10 +13,11 @@
                 <field name="upload_speed"/>
                 <field name="download_speed"/>
                 <field name="price"/>
-                <field name="active"/>
+                <field name="is_active"/>
             </tree>
         </field>
     </record>
+
 
 
     <!-- ========================= -->
@@ -38,7 +39,7 @@
 
                         <field name="price"/>
                         <field name="description"/>
-                        <field name="active"/>
+                        <field name="is_active"/>
                     </group>
                 </sheet>
             </form>
@@ -46,40 +47,30 @@
     </record>
 
 
+
     <!-- ========================= -->
     <!--      VISTA KANBAN        -->
     <!-- ========================= -->
-        <!-- ========================= -->
-    <!--      VISTA KANBAN        -->
-    <!-- ========================= -->
-    <record id="view_internet_plan_kanban" model="ir.ui.view">
+  <record id="view_internet_plan_kanban" model="ir.ui.view">
     <field name="name">internet.plan.kanban</field>
     <field name="model">internet.plan</field>
     <field name="arch" type="xml">
         <kanban class="o_kanban_mobile" archivable="false">
 
-            <!-- CAMPOS QUE ODOO DEBE CARGAR -->
+            <!-- CAMPOS A CARGAR -->
             <field name="name"/>
             <field name="price"/>
             <field name="download_speed"/>
             <field name="upload_speed"/>
             <field name="description"/>
-            <field name="active"/>
+            <field name="is_active"/>
 
             <templates>
                 <t t-name="kanban-box">
 
-                    <div style="
-                        background: #ffffff;
-                        border-radius: 16px;
-                        border: 1px solid #e5e7eb;
-                        padding: 20px;
-                        width: 280px;
-                        box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-                        display: flex;
-                        flex-direction: column;
-                        gap: 14px;
-                    ">
+                    <div style="background:#fff; border-radius:16px; padding:20px; width:280px;
+                                box-shadow:0 4px 10px rgba(0,0,0,0.06); border:1px solid #e5e7eb;
+                                display:flex; flex-direction:column; gap:14px;">
 
                         <!-- Nombre -->
                         <div style="font-size:18px; font-weight:600;">
@@ -90,25 +81,13 @@
 
                         <!-- Estado -->
                         <div>
-                            <t t-if="record.active and record.active.raw_value">
-                                <span style="
-                                    background:#10b981;
-                                    color:#fff;
-                                    padding:4px 12px;
-                                    border-radius:12px;
-                                    font-size:12px;">
-                                    Activo
-                                </span>
+                            <t t-if="record.is_active and record.is_active.raw_value">
+                                <span style="background:#10b981;color:#fff;padding:4px 12px;
+                                             border-radius:12px;font-size:12px;">Activo</span>
                             </t>
-                            <t t-if="record.active and !record.active.raw_value">
-                                <span style="
-                                    background:#ef4444;
-                                    color:#fff;
-                                    padding:4px 12px;
-                                    border-radius:12px;
-                                    font-size:12px;">
-                                    Inactivo
-                                </span>
+                            <t t-if="record.is_active and !record.is_active.raw_value">
+                                <span style="background:#ef4444;color:#fff;padding:4px 12px;
+                                             border-radius:12px;font-size:12px;">Inactivo</span>
                             </t>
                         </div>
 
@@ -128,30 +107,32 @@
                         </div>
 
                         <!-- Velocidad bajada -->
-                        <div style="font-size:14px; color:#374151; display:flex; gap:6px; align-items:center;">
+                        <div style="display:flex; align-items:center; gap:6px; color:#374151;">
                             <i class="fa fa-download" style="color:#4f46e5;"></i>
-                            <span t-if="record.download_speed">
+                            <t t-if="record.download_speed">
                                 <t t-esc="record.download_speed.value"/> Mbps bajada
-                            </span>
+                            </t>
                         </div>
 
                         <!-- Velocidad subida -->
-                        <div style="font-size:14px; color:#374151; display:flex; gap:6px; align-items:center;">
+                        <div style="display:flex; align-items:center; gap:6px; color:#374151;">
                             <i class="fa fa-upload" style="color:#4f46e5;"></i>
-                            <span t-if="record.upload_speed">
+                            <t t-if="record.upload_speed">
                                 <t t-esc="record.upload_speed.value"/> Mbps subida
-                            </span>
+                            </t>
                         </div>
 
                         <!-- Botones -->
                         <div style="display:flex; gap:10px; margin-top:10px;">
                             <button type="edit"
-                                style="padding:8px 14px; background:#4f46e5; color:#fff; border:none; border-radius:8px; font-weight:500;">
+                                    style="padding:8px 14px; background:#4f46e5; color:#fff;
+                                           border:none; border-radius:8px;">
                                 Editar
                             </button>
 
                             <button type="object" name="action_delete"
-                                style="padding:8px 14px; background:#ef4444; color:#fff; border:none; border-radius:8px; font-weight:500;">
+                                    style="padding:8px 14px; background:#ef4444; color:#fff;
+                                           border:none; border-radius:8px;">
                                 Eliminar
                             </button>
                         </div>

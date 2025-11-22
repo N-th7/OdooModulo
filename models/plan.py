@@ -11,7 +11,7 @@ class InternetPlan(models.Model):
     download_speed = fields.Float('Velocidad bajada (Mbps)', required=True)
     price = fields.Float('Precio Mensual (Bs)', required=True)
     description = fields.Text('Descripción')
-    active = fields.Boolean('Plan activo', default=True)
+    is_active = fields.Boolean('Plan activo', default=True)
 
     def name_get(self):
         return [(rec.id, f"{rec.name} ({rec.download_speed} Mbps)") for rec in self]
