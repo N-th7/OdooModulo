@@ -20,22 +20,16 @@
 
 
 
-    <!-- ========================= -->
-    <!--      VISTA FORM          -->
-    <!-- ========================= -->
-    <record id="view_internet_plan_form" model="ir.ui.view">
+<record id="view_internet_plan_form" model="ir.ui.view">
     <field name="name">internet.plan.form</field>
     <field name="model">internet.plan</field>
     <field name="arch" type="xml">
 
         <form string="Nuevo Plan" class="internet_plan_form">
 
-            <header>
-            </header>
-
+            <header/>
             <sheet>
 
-                <!-- Título y subtítulo -->
                 <div class="form_title">
                     <h2>Nuevo Plan</h2>
                     <span>Crea un nuevo plan de internet</span>
@@ -43,18 +37,18 @@
 
                 <group>
 
-                    <!-- Nombre del plan -->
                     <group>
                         <field name="name" placeholder="Ej: Plan 50 Mbps"/>
                     </group>
+
                     <group col="2">
                         <field name="price" placeholder="200"/>
                     </group>
 
-                    <!-- Velocidades -->
                     <group>
                         <field name="upload_speed" placeholder="10"/>
                     </group>
+
                     <group col="2">
                         <field name="download_speed" placeholder="50"/> 
                     </group>
@@ -64,7 +58,7 @@
                     </group>
 
                     <group>
-                        <field name="is_active" widget="boolean"/>
+                        <field name="is_active" widget="boolean_toggle"/>
                     </group>
 
                 </group>
@@ -75,6 +69,7 @@
 
     </field>
 </record>
+
 
 
 

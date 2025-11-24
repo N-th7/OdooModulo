@@ -37,7 +37,8 @@
 }
 
 .internet_plan_form .o_boolean_toggle .o_toggle_track {
-    background: #4f46e5 !important;
+    background: #d1d5db !important;
+    border-radius: 20px !important;
 }
 
 .internet_plan_form .o_boolean_toggle.o_checked .o_toggle_track {
