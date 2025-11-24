@@ -40,7 +40,7 @@
 }
 
 .internet_plan_form .o_boolean_toggle.o_checked .o_toggle_track {
-    background: #4f46e5 !important;   /* Color cuando está activo */
+    background: #4f46e5 !important;
 }
 
 .internet_plan_form .o_boolean_toggle .o_toggle_handle {
