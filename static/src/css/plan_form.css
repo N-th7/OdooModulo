@@ -1,4 +1,4 @@
-/* -------- TITULAR -------- */
+/* ------------ TITULAR ------------- */
 .internet_plan_form .form_title {
     margin-bottom: 20px;
 }
@@ -14,7 +14,7 @@
     color: #777;
 }
 
-/* -------- CAMPOS -------- */
+/* ------------ CAMPOS ------------- */
 .internet_plan_form input,
 .internet_plan_form textarea {
     border-radius: 8px !important;
@@ -26,25 +26,28 @@
 .internet_plan_form label {
     font-weight: 600 !important;
     margin-bottom: 4px !important;
-    width: 120px !important;
+    width: 150px !important;
 }
 
-/* -------- TOGGLE REAL DE ODOO 17 -------- */
-.internet_plan_form .o_toggle {
-    width: 40px !important;
-    height: 22px !important;
-    border-radius: 12px !important;
+/* ------------ TOGGLE ODOO 17 (seguro) ------------- */
+
+/* Aumentar tamaño del toggle sin romper animación */
+.internet_plan_form .o_boolean_toggle .o_toggle {
+    transform: scale(1.25);
 }
 
-.internet_plan_form .o_toggle.o_checked .o_toggle_track {
-    background: #4f46e5 !important;
+/* Colores */
+.internet_plan_form .o_boolean_toggle .o_toggle_track {
+    background-color: #d1d5db !important;
+    transition: background-color .3s ease;
 }
 
-.internet_plan_form .o_toggle .o_toggle_track {
-    background: #d1d5db !important;
+/* Cuando está activo */
+.internet_plan_form .o_boolean_toggle.o_checked .o_toggle_track {
+    background-color: #4f46e5 !important;
 }
 
-.internet_plan_form .o_toggle .o_toggle_handle {
-    background: white !important;
-    border-radius: 50% !important;
+/* No tocar posicionamiento del handle */
+.internet_plan_form .o_boolean_toggle .o_toggle_handle {
+    background: #fff !important;
 }
