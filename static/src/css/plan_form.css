@@ -1,3 +1,4 @@
+/* -------- TITULAR -------- */
 .internet_plan_form .form_title {
     margin-bottom: 20px;
 }
@@ -13,6 +14,7 @@
     color: #777;
 }
 
+/* -------- CAMPOS -------- */
 .internet_plan_form input,
 .internet_plan_form textarea {
     border-radius: 8px !important;
@@ -27,21 +29,21 @@
     margin-bottom: 4px !important;
 }
 
-.internet_plan_form .o_field_boolean input {
-    width: auto !important;
+/* -------- TOGGLE ODOO 17 -------- */
+.internet_plan_form .o_boolean_toggle {
+    transform: scale(1.2);
+    margin-top: 6px;
 }
 
-.internet_plan_form .o_form_button_cancel {
-    background: #f3f4f6;
-    color: #555;
-    border-radius: 8px;
-    padding: 6px 16px;
+.internet_plan_form .o_boolean_toggle .o_toggle_track {
+    background: #ddd !important;
 }
 
-.internet_plan_form .o_form_button_save {
-    background: #9b28ff;
-    color: #fff;
-    border-radius: 8px;
-    padding: 6px 16px;
+.internet_plan_form .o_boolean_toggle.o_checked .o_toggle_track {
+    background: #4f46e5 !important;   /* Color cuando está activo */
 }
 
+.internet_plan_form .o_boolean_toggle .o_toggle_handle {
+    background: #fff !important;
+    border-radius: 50%;
+}
