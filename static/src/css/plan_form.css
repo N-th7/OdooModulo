@@ -30,4 +30,22 @@
     width: 110px !important;
 }
 
+/* Estilos del switch Odoo 17 */
+.internet_plan_form .o_switch {
+    transform: scale(1.2);
+    margin-top: 6px;
+}
 
+.internet_plan_form .o_switch_label {
+    background: #d1d5db !important;
+    border-radius: 20px !important;
+}
+
+.internet_plan_form .o_switch_input:checked + .o_switch_label {
+    background: #4f46e5 !important;
+}
+
+.internet_plan_form .o_switch_handle {
+    background: #fff !important;
+    border-radius: 50% !important;
+}
