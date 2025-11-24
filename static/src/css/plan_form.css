@@ -27,6 +27,7 @@
 .internet_plan_form label {
     font-weight: 600 !important;
     margin-bottom: 4px !important;
+    width: 110px !important;
 }
 
 /* -------- TOGGLE ODOO 17 -------- */
@@ -36,7 +37,7 @@
 }
 
 .internet_plan_form .o_boolean_toggle .o_toggle_track {
-    background: #ddd !important;
+    background: #4f46e5 !important;
 }
 
 .internet_plan_form .o_boolean_toggle.o_checked .o_toggle_track {
