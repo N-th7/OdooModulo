@@ -1,7 +1,8 @@
-.o_kanban_view.internet_plan_kanban {
+.o_kanban_view.internet_plan_kanban .o_kanban_renderer {
     display: grid !important;
     grid-template-columns: repeat(4, 1fr) !important;
     gap: 20px !important;
+    align-items: start;
 }
 
 .o_kanban_view.internet_plan_kanban .o_kanban_record {

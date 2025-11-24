@@ -66,7 +66,7 @@
 
                     <!-- Switch -->
                     <group>
-                        <field name="is_active" widget="boolean_toggle"/>
+                        <field name="is_active" widget="boolean"/>
                     </group>
 
                 </group>
@@ -87,8 +87,7 @@
     <field name="name">internet.plan.kanban</field>
     <field name="model">internet.plan</field>
     <field name="arch" type="xml">
-        <kanban class="o_kanban_mobile internet_plan_kanban" 
-        t-att-style="'display:grid; grid-template-columns:repeat(4, 1fr); gap:20px;'" archivable="false">
+        <kanban class="o_kanban_mobile internet_plan_kanban" archivable="false">
 
             <!-- CAMPOS A CARGAR -->
             <field name="name"/>
