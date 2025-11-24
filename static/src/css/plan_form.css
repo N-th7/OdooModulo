@@ -30,22 +30,4 @@
     width: 110px !important;
 }
 
-/* -------- TOGGLE ODOO 17 -------- */
-.internet_plan_form .o_boolean_toggle {
-    transform: scale(1.2);
-    margin-top: 6px;
-}
 
-.internet_plan_form .o_boolean_toggle .o_toggle_track {
-    background: #d1d5db !important;
-    border-radius: 20px !important;
-}
-
-.internet_plan_form .o_boolean_toggle.o_checked .o_toggle_track {
-    background: #4f46e5 !important;
-}
-
-.internet_plan_form .o_boolean_toggle .o_toggle_handle {
-    background: #fff !important;
-    border-radius: 50%;
-}
