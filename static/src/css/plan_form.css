@@ -15,11 +15,17 @@
 }
 
 /* ------------ CAMPOS ------------- */
+.internet_plan_form input[type="text"],
+.internet_plan_form input[type="number"],
 .internet_plan_form textarea {
     border-radius: 8px !important;
     border: 1px solid #ddd !important;
     background: #f7f7f9 !important;
     padding: 10px !important;
+}
+
+.internet_plan_form textarea {
+    width: 200% !important;
 }
 
 .internet_plan_form label {
