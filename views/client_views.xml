@@ -4,7 +4,7 @@
     <field name="model">internet.client</field>
     <field name="arch" type="xml">
       <tree>
-        <field name="internet.client_id"/>
+        <field name=" id"/>
         <field name="name"/>
         <field name="ci"/>
         <field name="phone"/>
