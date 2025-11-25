@@ -18,7 +18,7 @@
     <field name="name">internet.client.form</field>
     <field name="model">internet.client</field>
     <field name="arch" type="xml">
-      <form string="Cliente de Internet">
+      <form string="Cliente de Internet" class="internet_client_form">
         <sheet>
            <div class="form_title">
                     <h2>Nuevo Cliente</h2>
