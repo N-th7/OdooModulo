@@ -12,7 +12,7 @@ class InternetClient(models.Model):
     client_type = fields.Selection([
         ('residencial', 'Residencial'),
         ('empresa', 'Empresa'),
-    ], string='Tipo de Cliente', default='personal', required=True)
+    ], string='Tipo de Cliente', default='residencial', required=True)
     ci = fields.Char('CI / NIT', required=True)
     phone = fields.Char('Teléfono', required=True)
     alternative_phone = fields.Char('Teléfono alternativo')
