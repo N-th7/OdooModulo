@@ -16,6 +16,7 @@
 
 /* ------------ CAMPOS ------------- */
 .internet_client_form input[type="text"],
+.internet_client_form input[type="select"],
 .internet_client_form input[type="number"],
 .internet_client_form textarea {
     border-radius: 8px !important;
