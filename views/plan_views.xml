@@ -109,10 +109,7 @@
                             <t t-if="record.name">
                                 <t t-esc="record.name.value"/>
                             </t>
-                        </div>
-                        </div>
-
-                        <!-- Estado -->
+                            <!-- Estado -->
                         <div>
                             <t t-if="record.active and record.active.raw_value">
                                 <span style="background:#10b981;color:#fff;padding:4px 12px;
@@ -123,6 +120,10 @@
                                              border-radius:12px;font-size:12px;">Inactivo</span>
                             </t>
                         </div>
+                        </div>
+                        </div>
+
+                        
 
                         <!-- Descripción -->
                         <div style="color:#6b7280; font-size:14px; min-height:48px;">
