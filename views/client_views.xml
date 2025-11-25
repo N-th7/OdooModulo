@@ -44,10 +44,10 @@
         <field name="seller_id"/>
         <field name="active"/>
     </group>
-    <group>
+</group>
+<group>
       <field name="observations"/>
     </group>
-</group>
 
 
           <notebook>
