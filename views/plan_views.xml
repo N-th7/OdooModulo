@@ -53,8 +53,11 @@
                         <field name="download_speed" placeholder="50"/> 
                     </group>
 
-                    <group>
+                    <group colspan="2">
                         <field name="description"/>
+                    </group>
+
+                    <group>
                          <field name="active"/>
                     </group>
 
