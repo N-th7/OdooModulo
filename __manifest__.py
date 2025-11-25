@@ -22,6 +22,7 @@
     'web.assets_backend': [
         'custom_clients/static/src/css/plan_form.css',
         'custom_clients/static/src/css/kanban_plans.css',
+        'custom_clients/static/src/css/client_form.css',
     ],
     },
 
