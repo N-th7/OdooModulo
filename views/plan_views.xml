@@ -55,9 +55,6 @@
 
                     <group>
                         <field name="description"/>
-                    </group>
-
-                    <group>
                          <field name="active"/>
                     </group>
 

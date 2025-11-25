@@ -29,25 +29,3 @@
     width: 150px !important;
 }
 
-/* ------------ TOGGLE ODOO 17 (seguro) ------------- */
-
-/* Aumentar tamaño del toggle sin romper animación */
-.internet_plan_form .o_boolean_toggle .o_toggle {
-    transform: scale(1.25);
-}
-
-/* Colores */
-.internet_plan_form .o_boolean_toggle .o_toggle_track {
-    background-color: #d1d5db !important;
-    transition: background-color .3s ease;
-}
-
-/* Cuando está activo */
-.internet_plan_form .o_boolean_toggle.o_checked .o_toggle_track {
-    background-color: #4f46e5 !important;
-}
-
-/* No tocar posicionamiento del handle */
-.internet_plan_form .o_boolean_toggle .o_toggle_handle {
-    background: #fff !important;
-}
