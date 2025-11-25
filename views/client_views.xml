@@ -33,7 +33,7 @@
         <field name="phone"/>
         <field name="alternative_phone"/>
         <field name="email"/>
-        <field name="observations"/>
+        
     </group>
 
     <!-- COLUMNA DERECHA -->
@@ -44,6 +44,7 @@
         <field name="seller_id"/>
         <field name="active"/>
     </group>
+    <field name="observations"/>
 </group>
 
 
