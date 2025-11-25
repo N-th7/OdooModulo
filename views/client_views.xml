@@ -24,20 +24,42 @@
                     <h2>Nuevo Cliente</h2>
                     <span>Crea un nuevo cliente de internet</span>
                 </div>
-          <group>
-            <field name="name" />
-            <field name="second_name" col="2"/>
-            <field name="social_reason"/>
-            <field name="ci" col="2"/>
-            <field name="client_type" col="3"/>
-            <field name="phone"/>
-            <field name="alternative_phone" col="2"/>
-            <field name="email" col="3"/>
-            <field name="seller_id"/>
-            <field name="active" col="2"/>
-            <field name="city" col = "3"/>
-            <field name="observations"/>
-          </group>
+         <group>
+
+    <!-- Fila 1 -->
+    <group col="3">
+        <field name="name"/>
+        <field name="second_name"/>
+        <field name="social_reason"/>
+    </group>
+
+    <!-- Fila 2 -->
+    <group col="3">
+        <field name="ci"/>
+        <field name="client_type"/>
+        <field name="city"/>
+    </group>
+
+    <!-- Fila 3 -->
+    <group col="3">
+        <field name="phone"/>
+        <field name="alternative_phone"/>
+        <field name="email"/>
+    </group>
+
+    <!-- Fila 4 -->
+    <group col="2">
+        <field name="seller_id"/>
+        <field name="active"/>
+    </group>
+
+    <!-- Fila 5 -->
+    <group>
+        <field name="observations"/>
+    </group>
+
+</group>
+
           <notebook>
             <page string="Facturas">
               <field name="invoice_ids">
