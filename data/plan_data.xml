@@ -6,7 +6,7 @@
         <field name="download_speed">10</field>
         <field name="price">200.00</field>
         <field name="description">Plan básico 10 Mbps</field>
-        <field name="is_active">True</field>
+        <field name="active">True</field>
     </record>
 
 
@@ -16,7 +16,7 @@
         <field name="download_speed">50</field>
         <field name="price">400.00</field>
         <field name="description">Plan intermedio 50 Mbps</field>
-        <field name="is_active">True</field>
+        <field name="active">True</field>
     </record>
 
     <record id="plan_100mb" model="internet.plan">
@@ -25,6 +25,6 @@
         <field name="download_speed">100</field>
         <field name="price">700.00</field>
         <field name="description">Plan avanzado 100 Mbps</field>
-        <field name="is_active">False</field>
+        <field name="active">False</field>
     </record>
 </odoo>

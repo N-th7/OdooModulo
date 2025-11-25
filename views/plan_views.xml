@@ -13,7 +13,7 @@
                 <field name="upload_speed"/>
                 <field name="download_speed"/>
                 <field name="price"/>
-                <field name="is_active"/>
+                <field name="active"/>
             </tree>
         </field>
     </record>
@@ -58,7 +58,7 @@
                     </group>
 
                     <group>
-                         <field name="is_active"/>
+                         <field name="active"/>
                     </group>
 
                 </group>
@@ -88,7 +88,7 @@
             <field name="download_speed"/>
             <field name="upload_speed"/>
             <field name="description"/>
-            <field name="is_active"/>
+            <field name="active"/>
 
             <templates>
                 <t t-name="kanban-box">
@@ -114,11 +114,11 @@
 
                         <!-- Estado -->
                         <div>
-                            <t t-if="record.is_active and record.is_active.raw_value">
+                            <t t-if="record.active and record.active.raw_value">
                                 <span style="background:#10b981;color:#fff;padding:4px 12px;
                                              border-radius:12px;font-size:12px;">Activo</span>
                             </t>
-                            <t t-if="record.is_active and !record.is_active.raw_value">
+                            <t t-if="record.active and !record.active.raw_value">
                                 <span style="background:#ef4444;color:#fff;padding:4px 12px;
                                              border-radius:12px;font-size:12px;">Inactivo</span>
                             </t>
