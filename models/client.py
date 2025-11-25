@@ -5,6 +5,7 @@ class InternetClient(models.Model):
     _description = 'Cliente de Internet'
     _rec_name = 'name'
 
+    id = fields.Char('ID Cliente', readonly=True, default=lambda self: self.env['ir.sequence'].next_by_code('internet.client'))
     name = fields.Char('Nombre(s)', required=True)
     second_name = fields.Char('Apellido(s)', required=True)
     social_reason = fields.Char('Razón Social')
