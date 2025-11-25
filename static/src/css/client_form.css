@@ -1,30 +1,30 @@
 /* ------------ TITULAR ------------- */
-.internet_client_form .form_title {
+.view_internet_client_form .form_title {
     margin-bottom: 20px;
 }
 
-.internet_client_form    .form_title h2 {
+.view_internet_client_form    .form_title h2 {
     font-size: 20px;
     font-weight: 700;
     margin: 0;
 }
 
-.internet_client_form .form_title span {
+.view_internet_client_form .form_title span {
     font-size: 13px;
     color: #777;
 }
 
 /* ------------ CAMPOS ------------- */
-.internet_client_form input[type="text"],
-.internet_client_form input[type="number"],
-.internet_client_form textarea {
+.view_internet_client_form input[type="text"],
+.view_internet_client_form input[type="number"],
+.view_internet_client_form textarea {
     border-radius: 8px !important;
     border: 1px solid #ddd !important;
     background: #f7f7f9 !important;
     padding: 10px !important;
 }
 
-.internet_client_form label {
+.view_internet_client_form label {
     font-weight: 600 !important;
     margin-bottom: 4px !important;
     width: 150px !important;
