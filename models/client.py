@@ -5,19 +5,34 @@ class InternetClient(models.Model):
     _description = 'Cliente de Internet'
     _rec_name = 'name'
 
-    name = fields.Char('Nombre completo', required=True)
-    ci = fields.Char('CI / NIT')
-    address = fields.Char('Dirección')
-    phone = fields.Char('Teléfono')
+    name = fields.Char('Nombre(s)', required=True)
+    second_name = fields.Char('Apellido(s)', required=True)
+    social_reason = fields.Char('Razón Social')
+    client_type = fields.Selection([
+        ('residencial', 'Residencial'),
+        ('empresa', 'Empresa'),
+    ], string='Tipo de Cliente', default='personal', required=True)
+    ci = fields.Char('CI / NIT', required=True)
+    phone = fields.Char('Teléfono', required=True)
+    alternative_phone = fields.Char('Teléfono alternativo')
     email = fields.Char('Correo electrónico')
-    plan_id = fields.Many2one('internet.plan', string='Plan contratado', required=True)
     active = fields.Boolean('Activo', default=True)
-    status = fields.Selection([
-        ('activo', 'Activo'),
-        ('suspendido', 'Suspendido'),
-        ('cortado', 'Cortado'),
-    ], string='Estado del servicio', default='activo')
+    seller_id = fields.Many2one('res.users', string='Vendedor', default=lambda self: self.env.user)
+    city = fields.Selection([
+        ('la_paz', 'La Paz'),
+        ('el_alto', 'El Alto'),
+        ('cochabamba', 'Cochabamba'),
+        ('santa_cruz', 'Santa Cruz'),
+        ('oruro', 'Oruro'),
+        ('potosi', 'Potosí'),
+        ('sucre', 'Sucre'),
+        ('tarija', 'Tarija'),
+        ('beni', 'Beni'),
+        ('pando', 'Pando'),
+    ], string='Ciudad', required=True)
 
+    observations = fields.Text('Observaciones')
+    registration_date = fields.Date('Fecha de registro', default=fields.Date.context_today)
     invoice_ids = fields.One2many('internet.invoice', 'client_id', string='Facturas')
 
     deuda_meses = fields.Integer('Meses adeudados', compute='_compute_deuda', store=True)

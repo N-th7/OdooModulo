@@ -4,11 +4,13 @@
     <field name="model">internet.client</field>
     <field name="arch" type="xml">
       <tree>
+        <field name="internet.client_id"/>
         <field name="name"/>
         <field name="ci"/>
+        <field name="phone"/>
         <field name="plan_id"/>
-        <field name="status"/>
-        <field name="deuda_meses"/>
+        <field name="registration_date"/>
+        <field name="active"/>
       </tree>
     </field>
   </record>
@@ -19,16 +21,23 @@
     <field name="arch" type="xml">
       <form string="Cliente de Internet">
         <sheet>
+           <div class="form_title">
+                    <h2>Nuevo Cliente</h2>
+                    <span>Crea un nuevo plan de internet</span>
+                </div>
           <group>
             <field name="name"/>
+            <field name="second_name"/>
+            <field name="social_reason"/>
             <field name="ci"/>
-            <field name="address"/>
+            <field name="client_type"/>
             <field name="phone"/>
+            <field name="alternative_phone"/>
             <field name="email"/>
-            <field name="plan_id"/>
+            <field name="seller_id"/>
             <field name="active"/>
-            <field name="status"/>
-            <field name="deuda_meses" readonly="1"/>
+            <field name="city"/>
+            <field name="observations"/>
           </group>
           <notebook>
             <page string="Facturas">
