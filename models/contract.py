@@ -1,3 +1,5 @@
+from odoo import models, fields,api
+
 class InternetContract(models.Model):
     _name = "internet.contract"
     _description = "Contrato de Internet"
