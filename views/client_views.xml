@@ -20,23 +20,25 @@
     <field name="arch" type="xml">
       <form string="Cliente de Internet" class="internet_client_form">
         <sheet>
+
           <header>
             <button name="action_add_contract"
-              type="object"
-              class="oe_stat_button"
-              icon="fa-plus">
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-plus">
               <div class="o_stat_info">
                 <span>Agregar Contrato</span>
               </div>
             </button>
 
             <button type="action"
-              name="%(action_contracts_for_client)d"
-              class="oe_stat_button"
-              icon="fa-list">
+                    name="%(action_contracts_for_client)d"
+                    class="oe_stat_button"
+                    icon="fa-list">
               <field name="contract_count" widget="statinfo" string="Contratos" />
             </button>
           </header>
+
           <div class="form_title">
             <h2>Nuevo Cliente</h2>
             <span>Crea un nuevo cliente de internet</span>
@@ -110,6 +112,7 @@
     </field>
   </record>
 
+
   <record id="action_internet_clients" model="ir.actions.act_window">
     <field name="name">Clientes</field>
     <field name="res_model">internet.client</field>
@@ -117,7 +120,15 @@
   </record>
 
   <menuitem id="menu_internet_clients"
-    name="Clientes"
-    parent="menu_internet_root"
-    action="action_internet_clients" />
+            name="Clientes"
+            parent="menu_internet_root"
+            action="action_internet_clients" />
+
+  <record id="action_contracts_for_client" model="ir.actions.act_window">
+    <field name="name">Contratos del Cliente</field>
+    <field name="res_model">internet.contract</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[('client_id', '=', active_id)]</field>
+  </record>
+
 </odoo>
