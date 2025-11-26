@@ -5,14 +5,12 @@ class InternetClient(models.Model):
     _description = 'Cliente de Internet'
     _rec_name = 'name'
 
-    # Campo ID automático por secuencia
     id = fields.Char(
         'ID Cliente',
         readonly=True,
         default=lambda self: self.env['ir.sequence'].next_by_code('internet.client')
     )
 
-    # Datos personales
     name = fields.Char('Nombre(s)', required=True)
     second_name = fields.Char('Apellido(s)', required=True)
     social_reason = fields.Char('Razón Social')
@@ -93,3 +91,32 @@ class InternetClient(models.Model):
             'target': 'new',
             'context': {'default_client_id': self.id},
         }
+
+ def name_get(self):
+        """ Qué texto se mostrará al buscar un cliente """
+        result = []
+        for rec in self:
+            label = f"{rec.name} {rec.second_name} ({rec.phone or ''})"
+            result.append((rec.id, label))
+        return result
+
+    @api.model
+    def name_search(self, name, args=None, operator='ilike', limit=100):
+        """Permite buscar clientes por cualquier dato"""
+        args = args or []
+        if not name:
+            recs = self.search(args, limit=limit)
+            return recs.name_get()
+
+        domain = [
+            '|', '|', '|', '|', '|',
+            ('name', operator, name),
+            ('second_name', operator, name),
+            ('ci', operator, name),
+            ('phone', operator, name),
+            ('email', operator, name),
+            ('id', operator, name),  # tu código cliente (CF-00001)
+        ]
+
+        recs = self.search(domain + args, limit=limit)
+        return recs.name_get()
