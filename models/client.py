@@ -91,4 +91,22 @@ def action_new_contract(self):
         },
         'target': 'new',  # modal popup
     }
+    
+    @api.depends('contract_ids')
+    def _compute_contract_count(self):
+        for rec in self:
+            rec.contract_count = len(rec.contract_ids)
+
+    def action_add_contract(self):
+        """Abrir el formulario de nuevo contrato con el cliente preseleccionado"""
+        return {
+            'name': 'Nuevo Contrato',
+            'type': 'ir.actions.act_window',
+            'res_model': 'internet.contract',
+            'view_mode': 'form',
+            'target': 'current',
+            'context': {
+                'default_client_id': self.id
+            }
+        }
 
