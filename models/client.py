@@ -35,10 +35,10 @@ class InternetClient(models.Model):
     observations = fields.Text('Observaciones')
     registration_date = fields.Date('Fecha de registro', default=fields.Date.context_today)
     contract_ids = fields.One2many(
-    'internet.contract',  
-    'client_id',          
-    string='Contratos'
-)
+        'internet.contract',
+        'client_id',
+        string='Contratos'
+    )
     
 
     invoice_ids = fields.One2many('internet.invoice', 'client_id', string='Facturas')

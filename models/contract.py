@@ -5,7 +5,7 @@ class InternetContract(models.Model):
     client_id = fields.Many2one(
         'internet.client',
         string='Cliente',
-        required=True
+        ondelete='cascade'
     )
 
     plan_id = fields.Many2one(
