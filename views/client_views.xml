@@ -1,4 +1,13 @@
 <odoo>
+
+  <!-- ACCIÓN debe estar ANTES de las vistas -->
+  <record id="action_contracts_for_client" model="ir.actions.act_window">
+    <field name="name">Contratos del Cliente</field>
+    <field name="res_model">internet.contract</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[('client_id', '=', active_id)]</field>
+  </record>
+
   <record id="view_internet_client_tree" model="ir.ui.view">
     <field name="name">internet.client.tree</field>
     <field name="model">internet.client</field>
@@ -21,6 +30,7 @@
       <form string="Cliente de Internet" class="internet_client_form">
         <sheet>
 
+          <!-- SMART BUTTONS -->
           <header>
             <button name="action_add_contract"
                     type="object"
@@ -35,7 +45,9 @@
                     name="%(action_contracts_for_client)d"
                     class="oe_stat_button"
                     icon="fa-list">
-              <field name="contract_count" widget="statinfo" string="Contratos" />
+              <field name="contract_count"
+                     widget="statinfo"
+                     string="Contratos" />
             </button>
           </header>
 
@@ -105,13 +117,12 @@
                 </tree>
               </field>
             </page>
-
           </notebook>
+
         </sheet>
       </form>
     </field>
   </record>
-
 
   <record id="action_internet_clients" model="ir.actions.act_window">
     <field name="name">Clientes</field>
@@ -123,12 +134,5 @@
             name="Clientes"
             parent="menu_internet_root"
             action="action_internet_clients" />
-
-  <record id="action_contracts_for_client" model="ir.actions.act_window">
-    <field name="name">Contratos del Cliente</field>
-    <field name="res_model">internet.contract</field>
-    <field name="view_mode">tree,form</field>
-    <field name="domain">[('client_id', '=', active_id)]</field>
-  </record>
 
 </odoo>
