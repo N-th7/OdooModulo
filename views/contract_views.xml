@@ -5,16 +5,19 @@
         <field name="name">internet.contract.tree</field>
         <field name="model">internet.contract</field>
         <field name="arch" type="xml">
-            <tree>
-                <field name="client_id"/>
-                <field name="plan_id"/>
-                <field name="contract_type"/>
-                <field name="start_date"/>
-                <field name="address"/>
-                <field name="zone"/>
-                <field name="requires_invoice"/>
-                <field name="active"/>
-                <field name="state"/>
+            <tree decoration-success="state == 'activo'"
+                decoration-warning="state == 'suspendido'"
+                decoration-danger="state == 'cancelado'">
+                <field name="code" class="code-highlight"/>
+                <field name="client_id" />
+                <field name="plan_id" />
+                <field name="contract_type" />
+                <field name="start_date" />
+                <field name="address" />
+                <field name="zone" />
+                <field name="requires_invoice" />
+                <field name="active" />
+                <field name="state" widget="badge"/>
             </tree>
         </field>
     </record>
@@ -23,29 +26,29 @@
         <field name="name">internet.contract.form</field>
         <field name="model">internet.contract</field>
         <field name="arch" type="xml">
-            <form string="Contrato de Servicio">
+            <form string="Contrato de Servicio" class="internet_contract_form">
                 <sheet>
 
                     <group>
                         <group>
-                            <field name="client_id"/>
-                            <field name="plan_id"/>
-                            <field name="contract_type"/>
-                            <field name="start_date"/>
-                            <field name="requires_invoice"/>
+                            <field name="client_id" />
+                            <field name="plan_id" />
+                            <field name="contract_type" />
+                            <field name="start_date" />
+                            <field name="requires_invoice" />
                         </group>
 
                         <group>
-                            <field name="address"/>
-                            <field name="zone"/>
-                            <field name="gps"/>
-                            <field name="reference"/>
-                            <field name="url_location"/>
+                            <field name="address" />
+                            <field name="zone" />
+                            <field name="gps" />
+                            <field name="reference" />
+                            <field name="url_location" />
                         </group>
                     </group>
 
                     <group>
-                        <field name="observations"/>
+                        <field name="observations" />
                     </group>
 
                 </sheet>
@@ -62,7 +65,7 @@
     </record>
 
     <menuitem id="menu_internet_contracts"
-              name="Contratos"
-              parent="menu_internet_root"
-              action="action_internet_contracts"/>
+        name="Contratos"
+        parent="menu_internet_root"
+        action="action_internet_contracts" />
 </odoo>

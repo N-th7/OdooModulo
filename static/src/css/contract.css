@@ -1,0 +1,36 @@
+.internet_contract_form .form_title {
+    margin-bottom: 20px;
+}
+
+.internet_contract_form .form_title h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.internet_contract_form .form_title span {
+    font-size: 13px;
+    color: #777;
+}
+
+/* ------------ CAMPOS ------------- */
+.internet_contract_form input[type="text"],
+.internet_contract_form input[type="number"],
+.internet_contract_form textarea {
+    border-radius: 8px !important;
+    border: 1px solid #ddd !important;
+    background: #f7f7f9 !important;
+    padding: 10px !important;
+}
+
+.internet_contract_form label {
+    font-weight: 600 !important;
+    margin-bottom: 4px !important;
+    width: 150px !important;
+}
+
+.o_list_table .code-highlight {
+    color: #0a7cff !important;
+    font-weight: bold;
+}
+

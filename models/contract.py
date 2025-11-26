@@ -3,6 +3,9 @@ from odoo import models, fields,api
 class InternetContract(models.Model):
     _name = "internet.contract"
     _description = "Contrato de Internet"
+    
+    code = fields.Char(string="Código", readonly=True, copy=False)
+
 
     client_id = fields.Many2one(
         'internet.client',
@@ -36,12 +39,10 @@ class InternetContract(models.Model):
     ('cancelado', 'Cancelado'),
 ], string='Estado', default='activo')
 
-    
-    def action_activate(self):
-        self.write({'state': 'activo'})
-
-    def action_suspend(self):
-        self.write({'state': 'suspendido'})
-
-    def action_cancel(self):
-        self.write({'state': 'cancelado'})
+ 
+        
+@api.model
+def create(self, vals):
+    if vals.get('code', 'New') == 'New':
+        vals['code'] = self.env['ir.sequence'].next_by_code('internet.contract') or 'New'
+    return super(InternetContract, self).create(vals)
