@@ -30,6 +30,13 @@ class InternetContract(models.Model):
     requires_invoice = fields.Boolean("Cliente requiere factura")
     observations = fields.Text("Observaciones del Contrato")
     active = fields.Boolean('Activo', default=True)
+    state = fields.Selection([
+    ('borrador', 'Borrador'),
+    ('activo', 'Activo'),
+    ('suspendido', 'Suspendido'),
+    ('cancelado', 'Cancelado'),
+], string='Estado', default='borrador')
+
     
     def action_activate(self):
         self.write({'state': 'activo'})
