@@ -34,17 +34,23 @@
     font-weight: bold;
 }
 
-.badge-state-activo {
+.o_list_table .o_badge:contains("Activo"),
+.o_form_view .o_badge:contains("Activo") {
     background-color: #28a745 !important;
     color: white !important;
+    font-weight: 600 !important;
 }
 
-.badge-state-suspendido {
+.o_list_table .o_badge:contains("Suspendido"),
+.o_form_view .o_badge:contains("Suspendido") {
     background-color: #ffc107 !important;
     color: black !important;
+    font-weight: 600 !important;
 }
 
-.badge-state-cancelado {
+.o_list_table .o_badge:contains("Cancelado"),
+.o_form_view .o_badge:contains("Cancelado") {
     background-color: #dc3545 !important;
     color: white !important;
+    font-weight: 600 !important;
 }
