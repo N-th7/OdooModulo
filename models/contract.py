@@ -13,7 +13,7 @@ class InternetContract(models.Model):
     contract_type = fields.Selection(  [
         ('mensual', 'Mensual'),
         ('anual', 'Anual'),
-    ], default='mensual' string='Tipo de Contrato',  placeholder='Seleccione el tipo de contrato' )
+    ], default='mensual', string='Tipo de Contrato',  placeholder='Seleccione el tipo de contrato' )
 
     address = fields.Char(string='Dirección', required=True, placeholder='Calle, número, ciudad')
     zone = fields.Char(string='Zona', placeholder='Zona o barrio', required=True)
