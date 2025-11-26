@@ -34,3 +34,17 @@
     font-weight: bold;
 }
 
+.badge-state-activo {
+    background-color: #28a745 !important;
+    color: white !important;
+}
+
+.badge-state-suspendido {
+    background-color: #ffc107 !important;
+    color: black !important;
+}
+
+.badge-state-cancelado {
+    background-color: #dc3545 !important;
+    color: white !important;
+}

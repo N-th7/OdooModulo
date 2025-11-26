@@ -5,9 +5,7 @@
         <field name="name">internet.contract.tree</field>
         <field name="model">internet.contract</field>
         <field name="arch" type="xml">
-            <tree decoration-success="state == 'activo'"
-                decoration-warning="state == 'suspendido'"
-                decoration-danger="state == 'cancelado'">
+            <tree>
                 <field name="code" class="code-highlight"/>
                 <field name="client_id" />
                 <field name="plan_id" />

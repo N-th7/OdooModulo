@@ -1,9 +1,8 @@
 <odoo>
     <record id="seq_internet_contract" model="ir.sequence">
-        <field name="name">Internet Contract Sequence</field>
-        <field name="code">internet.contract</field>
-        <field name="prefix">CF-</field>
-        <field name="padding">5</field>
-        <field name="number_next">1</field>
+    <field name="name">Internet Contract Sequence</field>
+    <field name="code">internet.contract</field>
+    <field name="prefix">CF-</field>
+    <field name="padding">5</field>
     </record>
 </odoo>
