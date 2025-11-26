@@ -31,11 +31,10 @@ class InternetContract(models.Model):
     observations = fields.Text("Observaciones del Contrato")
     active = fields.Boolean('Activo', default=True)
     state = fields.Selection([
-    ('borrador', 'Borrador'),
     ('activo', 'Activo'),
     ('suspendido', 'Suspendido'),
     ('cancelado', 'Cancelado'),
-], string='Estado', default='borrador')
+], string='Estado', default='activo')
 
     
     def action_activate(self):

@@ -14,37 +14,17 @@
                 <field name="zone"/>
                 <field name="requires_invoice"/>
                 <field name="active"/>
+                <field name="state"/>
             </tree>
         </field>
     </record>
 
-    <!-- VISTA FORM DE CONTRATOS -->
     <record id="view_internet_contract_form" model="ir.ui.view">
         <field name="name">internet.contract.form</field>
         <field name="model">internet.contract</field>
         <field name="arch" type="xml">
             <form string="Contrato de Servicio">
                 <sheet>
-
-                    <header>
-                        <button name="action_activate"
-                                type="object"
-                                string="Activar"
-                                class="btn-primary"
-                                states="borrador"/>
-                        <button name="action_suspend"
-                                type="object"
-                                string="Suspender"
-                                class="btn-secondary"
-                                states="activo"/>
-                        <button name="action_cancel"
-                                type="object"
-                                string="Cancelar"
-                                class="btn-danger"
-                                states="activo,suspendido"/>
-                        <field name="state" widget="statusbar"
-                               statusbar_visible="borrador,activo,suspendido,cancelado"/>
-                    </header>
 
                     <group>
                         <group>
