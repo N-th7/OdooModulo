@@ -34,6 +34,13 @@ class InternetClient(models.Model):
 
     observations = fields.Text('Observaciones')
     registration_date = fields.Date('Fecha de registro', default=fields.Date.context_today)
+    contract_ids = fields.One2many(
+    'internet.contract',  
+    'client_id',          
+    string='Contratos'
+)
+    
+
     invoice_ids = fields.One2many('internet.invoice', 'client_id', string='Facturas')
 
     deuda_meses = fields.Integer('Meses adeudados', compute='_compute_deuda', store=True)
@@ -70,3 +77,18 @@ class InternetClient(models.Model):
                 client.status = 'cortado'
             elif client.deuda_meses == 1 and client.status == 'activo':
                 client.status = 'suspendido'
+                
+
+def action_new_contract(self):
+    self.ensure_one()
+    return {
+        'name': "Nuevo Contrato",
+        'view_mode': 'form',
+        'res_model': 'internet.contract',
+        'type': 'ir.actions.act_window',
+        'context': {
+            'default_client_id': self.id
+        },
+        'target': 'new',  # modal popup
+    }
+

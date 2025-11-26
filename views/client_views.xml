@@ -4,12 +4,12 @@
     <field name="model">internet.client</field>
     <field name="arch" type="xml">
       <tree>
-        <field name="id"/>
-        <field name="name"/>
-        <field name="ci"/>
-        <field name="phone"/>
-        <field name="registration_date"/>
-        <field name="active"/>
+        <field name="id" />
+        <field name="name" />
+        <field name="ci" />
+        <field name="phone" />
+        <field name="registration_date" />
+        <field name="active" />
       </tree>
     </field>
   </record>
@@ -20,45 +20,72 @@
     <field name="arch" type="xml">
       <form string="Cliente de Internet" class="internet_client_form">
         <sheet>
-           <div class="form_title">
-                    <h2>Nuevo Cliente</h2>
-                    <span>Crea un nuevo cliente de internet</span>
-                </div>
-         <group>
-    <!-- COLUMNA IZQUIERDA -->
-    <group>
-        <field name="name"/>
-        <field name="second_name"/>
-        <field name="social_reason"/>
-        <field name="phone"/>
-        <field name="alternative_phone"/>
-        <field name="email"/>
-        
-    </group>
+          <div class="form_title">
+            <h2>Nuevo Cliente</h2>
+            <span>Crea un nuevo cliente de internet</span>
+          </div>
+          <group>
+            <group>
+              <field name="name" />
+              <field name="second_name" />
+              <field name="social_reason" />
+              <field name="phone" />
+              <field name="alternative_phone" />
+              <field name="email" />
 
-    <!-- COLUMNA DERECHA -->
-    <group>
-        <field name="ci"/>
-        <field name="client_type"/>
-        <field name="city"/>
-        <field name="seller_id"/>
-        <field name="active"/>
-    </group>
-</group>
-<group>
-      <field name="observations"/>
-    </group>
+            </group>
+
+            <group>
+              <field name="ci" />
+              <field name="client_type" />
+              <field name="city" />
+              <field name="seller_id" />
+              <field name="active" />
+            </group>
+          </group>
+          <group>
+            <field name="observations" />
+          </group>
+
+          <notebook>
+            <page string="Contratos">
+              <group>
+                <field name="contract_ids">
+                  <tree>
+                    <field name="plan_id" />
+                    <field name="start_date" />
+                    <field name="contract_type" />
+                  </tree>
+
+                  <form>
+                    <group name="main">
+                      <field name="plan_id" />
+                      <field name="start_date" />
+                      <field name="contract_type" />
+                      <field name="address" />
+                      <field name="zone" />
+                      <field name="gps" />
+                      <field name="reference" />
+                      <field name="url_location" />
+                      <field name="requires_invoice" />
+                      <field name="observations" />
+                    </group>
+                  </form>
+                </field>
+              </group>
+            </page>
+          </notebook>
 
 
           <notebook>
             <page string="Facturas">
               <field name="invoice_ids">
                 <tree editable="bottom">
-                  <field name="name"/>
-                  <field name="date_invoice"/>
-                  <field name="due_date"/>
-                  <field name="amount"/>
-                  <field name="state"/>
+                  <field name="name" />
+                  <field name="date_invoice" />
+                  <field name="due_date" />
+                  <field name="amount" />
+                  <field name="state" />
                 </tree>
               </field>
             </page>
@@ -68,11 +95,13 @@
     </field>
   </record>
 
+
   <record id="action_internet_clients" model="ir.actions.act_window">
     <field name="name">Clientes</field>
     <field name="res_model">internet.client</field>
     <field name="view_mode">tree,form</field>
   </record>
 
-  <menuitem id="menu_internet_clients" name="Clientes" parent="menu_internet_root" action="action_internet_clients"/>
+  <menuitem id="menu_internet_clients" name="Clientes" parent="menu_internet_root"
+    action="action_internet_clients" />
 </odoo>

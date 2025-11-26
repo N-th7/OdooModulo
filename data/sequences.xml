@@ -1,5 +1,5 @@
 <odoo>
-  <record id="seq_internet_invoice" model="ir.sequence">
+  <record id="seq_internet_contract" model="ir.sequence">
     <field name="name">Internet Invoice</field>
     <field name="code">internet.invoice</field>
     <field name="prefix">INV%(year)s/</field>
