@@ -3,6 +3,7 @@ from odoo import models, fields, api
 class InternetContract(models.Model):
     _name = "internet.contract"
     _description = "Contrato de Internet"
+    _rec_name = 'code'
 
     code = fields.Char(string="Código", readonly=True, copy=False, default='New')
 

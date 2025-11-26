@@ -77,13 +77,11 @@ class InternetClient(models.Model):
             'context': {'default_client_id': self.id},
         }
 
-    # -----------------------------------
-    # BUSQUEDA Y DISPLAY
-    # -----------------------------------
+    
     def name_get(self):
         result = []
         for rec in self:
-            label = f"{rec.name} {rec.second_name} ({rec.phone or ''})"
+            label = f"{rec.name} {rec.second_name} ({rec.ci or ''})"
             result.append((rec.id, label))
         return result
 
