@@ -43,28 +43,15 @@ class InternetClient(models.Model):
     observations = fields.Text('Observaciones')
     registration_date = fields.Date('Fecha de registro', default=fields.Date.context_today)
 
-    # Relación con contratos
-    contract_ids = fields.One2many(
-        'internet.contract',
-        'client_id',
-        string='Contratos'
-    )
+    contract_ids = fields.One2many('internet.contract', 'client_id', string='Contratos')
+    contract_count = fields.Integer(string='N° Contratos', compute='_compute_contract_count')
 
-    # Cantidad de contratos para el smart button
-    contract_count = fields.Integer(
-        string='N° Contratos',
-        compute='_compute_contract_count'
-    )
-
-    # Relación con facturas
     invoice_ids = fields.One2many('internet.invoice', 'client_id', string='Facturas')
-
     deuda_meses = fields.Integer('Meses adeudados', compute='_compute_deuda', store=True)
 
-    # ---------------------------
-    #       COMPUTES
-    # ---------------------------
-
+    # -----------------------------------
+    # COMPUTES
+    # -----------------------------------
     @api.depends('invoice_ids.state')
     def _compute_deuda(self):
         for rec in self:
@@ -76,12 +63,10 @@ class InternetClient(models.Model):
         for rec in self:
             rec.contract_count = len(rec.contract_ids)
 
-    # ---------------------------
-    #       ACCIONES
-    # ---------------------------
-
+    # -----------------------------------
+    # ACTION
+    # -----------------------------------
     def action_add_contract(self):
-        """Abrir formulario de contrato con cliente preseleccionado"""
         self.ensure_one()
         return {
             'name': 'Nuevo Contrato',
@@ -92,8 +77,10 @@ class InternetClient(models.Model):
             'context': {'default_client_id': self.id},
         }
 
- def name_get(self):
-        """ Qué texto se mostrará al buscar un cliente """
+    # -----------------------------------
+    # BUSQUEDA Y DISPLAY
+    # -----------------------------------
+    def name_get(self):
         result = []
         for rec in self:
             label = f"{rec.name} {rec.second_name} ({rec.phone or ''})"
@@ -102,7 +89,6 @@ class InternetClient(models.Model):
 
     @api.model
     def name_search(self, name, args=None, operator='ilike', limit=100):
-        """Permite buscar clientes por cualquier dato"""
         args = args or []
         if not name:
             recs = self.search(args, limit=limit)
@@ -115,7 +101,7 @@ class InternetClient(models.Model):
             ('ci', operator, name),
             ('phone', operator, name),
             ('email', operator, name),
-            ('id', operator, name),  # tu código cliente (CF-00001)
+            ('id', operator, name),
         ]
 
         recs = self.search(domain + args, limit=limit)
