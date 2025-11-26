@@ -34,17 +34,17 @@
     font-weight: bold;
 }
 
-.badge:contains("Activo") {
+td[name="state"][data-tooltip="Activo"] span {
     background-color: #28a745 !important;
     color: white !important;
 }
 
-.badge:contains("Suspendido") {
+td[name="state"][data-tooltip="Suspendido"] span {
     background-color: #ffc107 !important;
     color: black !important;
 }
 
-.badge:contains("Cancelado") {
+td[name="state"][data-tooltip="Cancelado"] span {
     background-color: #dc3545 !important;
     color: white !important;
 }
