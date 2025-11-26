@@ -1,0 +1,88 @@
+<odoo>
+
+    <!-- VISTA TREE DE CONTRATOS -->
+    <record id="view_internet_contract_tree" model="ir.ui.view">
+        <field name="name">internet.contract.tree</field>
+        <field name="model">internet.contract</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="client_id"/>
+                <field name="plan_id"/>
+                <field name="contract_type"/>
+                <field name="start_date"/>
+                <field name="address"/>
+                <field name="zone"/>
+                <field name="requires_invoice"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- VISTA FORM DE CONTRATOS -->
+    <record id="view_internet_contract_form" model="ir.ui.view">
+        <field name="name">internet.contract.form</field>
+        <field name="model">internet.contract</field>
+        <field name="arch" type="xml">
+            <form string="Contrato de Servicio">
+                <sheet>
+
+                    <header>
+                        <button name="action_activate"
+                                type="object"
+                                string="Activar"
+                                class="btn-primary"
+                                states="borrador"/>
+                        <button name="action_suspend"
+                                type="object"
+                                string="Suspender"
+                                class="btn-secondary"
+                                states="activo"/>
+                        <button name="action_cancel"
+                                type="object"
+                                string="Cancelar"
+                                class="btn-danger"
+                                states="activo,suspendido"/>
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="borrador,activo,suspendido,cancelado"/>
+                    </header>
+
+                    <group>
+                        <group>
+                            <field name="client_id"/>
+                            <field name="plan_id"/>
+                            <field name="contract_type"/>
+                            <field name="start_date"/>
+                            <field name="requires_invoice"/>
+                        </group>
+
+                        <group>
+                            <field name="address"/>
+                            <field name="zone"/>
+                            <field name="gps"/>
+                            <field name="reference"/>
+                            <field name="url_location"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <field name="observations"/>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ACCIÓN PARA ABRIR CONTRATOS -->
+    <record id="action_internet_contracts" model="ir.actions.act_window">
+        <field name="name">Contratos</field>
+        <field name="res_model">internet.contract</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+    </record>
+
+    <menuitem id="menu_internet_contracts"
+              name="Contratos"
+              parent="menu_internet_root"
+              action="action_internet_contracts"/>
+</odoo>

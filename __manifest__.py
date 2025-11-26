@@ -14,6 +14,8 @@
         'views/plan_views.xml',
         'views/client_views.xml',
         'views/invoice_views.xml',
+        'views/contract_views.xml',
+        
     ],
     'installable': True,
     'application': True,
