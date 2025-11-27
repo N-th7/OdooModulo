@@ -89,8 +89,8 @@
                                 <a t-attf-href="/web#id={{ record.id.raw_value }}&amp;model=internet.survey&amp;view_type=form" class="o_kanban_preview"/>
 
                                 <!-- Status indicator -->
-                                  <div style="width:8px; height:56px; border-radius:4px;"
-                                      t-att-style="'background:' + ({'pendiente':'#f59e0b','en_proceso':'#3b82f6','resuelto':'#10b981'}[record.resolution_status.raw_value] || '#9ca3af')"/>
+                                <div class="status-indicator" t-att-data-status="record.resolution_status.raw_value"
+                                     style="width:8px; height:56px; border-radius:4px; background:#9ca3af;"/>
 
                                 <div style="flex:1;">
                                     <!-- Header: client + date + channel tag -->
@@ -100,7 +100,7 @@
                                                 <strong style="font-size:14px;">
                                                     <field name="client_id"/>
                                                 </strong>
-                                                <div style="color:#6b7280; font-size:12px;">Ticket: <t t-esc="'ENC-' + (record.id.raw_value || '')"/></div>
+                                                <div style="color:#6b7280; font-size:12px;">Ticket: ENC-<t t-esc="record.id.raw_value"/></div>
                                             </div>
                                             <div style="color:#6b7280; font-size:12px;">Fecha: <t t-esc="record.survey_date.value"/></div>
                                         </div>
@@ -113,16 +113,16 @@
                                     <!-- Body: comment preview and meta -->
                                     <div style="margin-top:10px; display:flex; justify-content:space-between; gap:12px;">
                                         <div style="flex:1; color:#374151;">
-                                            <t t-if="record.comments &amp;&amp; record.comments.value">
-                                                <t t-esc="(record.comments.value||'').length &gt; 140 ? (record.comments.value||'').slice(0,140) + '...' : (record.comments.value||'')"/> 
+                                            <t t-if="record.comments.value">
+                                                <t t-esc="record.comments.value"/>
                                             </t>
-                                            <t t-if="!(record.comments &amp;&amp; record.comments.value)">
+                                            <t t-else="">
                                                 <span style="color:#9ca3af;">Sin comentarios</span>
                                             </t>
                                         </div>
 
                                         <div style="min-width:220px; text-align:right; position:relative; z-index:2;">
-                                            <div style="font-size:12px; color:#6b7280;">Realizada Por: <t t-esc="record.surveyor_id.value || ''"/></div>
+                                            <div style="font-size:12px; color:#6b7280;">Realizada Por: <t t-esc="record.surveyor_id.value"/></div>
                                             <div style="margin-top:8px; display:flex; gap:8px; justify-content:flex-end;">
                                                 <a t-attf-href="/web#id={{ record.id.raw_value }}&amp;model=internet.survey&amp;view_type=form" class="btn btn-sm btn-outline-secondary"><i class="fa fa-eye"/> Ver</a>
                                                 <button type="edit" class="btn btn-sm btn-primary"><i class="fa fa-edit"/> Editar</button>

@@ -14,6 +14,19 @@
 
 .internet_survey_kanban .list_card .actions{position:relative; z-index:2}
 
+/* Status indicator colors */
+.internet_survey_kanban .status-indicator[data-status="pendiente"] {
+  background: #f59e0b !important;
+}
+
+.internet_survey_kanban .status-indicator[data-status="en_proceso"] {
+  background: #3b82f6 !important;
+}
+
+.internet_survey_kanban .status-indicator[data-status="resuelto"] {
+  background: #10b981 !important;
+}
+
 .internet_survey_kanban .list_card strong{
   font-size:14px;
   color:#111827;
