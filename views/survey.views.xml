@@ -84,7 +84,9 @@
                     <field name="resolution_status"/>
                     <templates>
                         <t t-name="kanban-box">
-                            <div class="o_kanban_record list_card" style="display:flex; gap:16px; padding:14px; align-items:flex-start; border-bottom:1px solid #eee; background:#fff;">
+                            <div class="o_kanban_record list_card" style="display:flex; gap:16px; padding:14px; align-items:flex-start; border-bottom:1px solid #eee; background:#fff; position:relative;">
+
+                                <a t-attf-href="/web#id={{ record.id.raw_value }}&amp;model=internet.survey&amp;view_type=form" class="o_kanban_preview"/>
 
                                 <!-- Status indicator -->
                                 <div style="width:8px; height:56px; border-radius:4px;"
@@ -112,18 +114,18 @@
                                     <div style="margin-top:10px; display:flex; justify-content:space-between; gap:12px;">
                                         <div style="flex:1; color:#374151;">
                                             <t t-if="record.comments and record.comments.value">
-                                                <t t-esc="record.comments.value"/> 
+                                                <t t-esc="(record.comments.value or '')[:140] + ('...' if (record.comments.value and len(record.comments.value) &gt; 140) else '')"/> 
                                             </t>
                                             <t t-if="not (record.comments and record.comments.value)">
                                                 <span style="color:#9ca3af;">Sin comentarios</span>
                                             </t>
                                         </div>
 
-                                        <div style="min-width:220px; text-align:right;">
+                                        <div style="min-width:220px; text-align:right; position:relative; z-index:2;">
                                             <div style="font-size:12px; color:#6b7280;">Realizada Por: <t t-esc="record.surveyor_id.value or ''"/></div>
                                             <div style="margin-top:8px; display:flex; gap:8px; justify-content:flex-end;">
-                                                <a t-attf-href="/web#id={{ record.id.raw_value }}&amp;model=internet.survey&amp;view_type=form" class="btn btn-sm btn-outline-secondary">Ver Detalles</a>
-                                                <button type="edit" class="btn btn-sm btn-primary">Editar</button>
+                                                <a t-attf-href="/web#id={{ record.id.raw_value }}&amp;model=internet.survey&amp;view_type=form" class="btn btn-sm btn-outline-secondary"><i class="fa fa-eye"/> Ver</a>
+                                                <button type="edit" class="btn btn-sm btn-primary"><i class="fa fa-edit"/> Editar</button>
                                             </div>
                                         </div>
                                     </div>

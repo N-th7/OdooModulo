@@ -1,0 +1,61 @@
+/* Styles for survey kanban list cards */
+.internet_survey_kanban .list_card{
+  display:flex;
+  gap:16px;
+  padding:14px 18px;
+  align-items:flex-start;
+  border-bottom:1px solid #eef2f6;
+  background:#fff;
+}
+
+.internet_survey_kanban .list_card{position:relative}
+
+.internet_survey_kanban .list_card a.o_kanban_preview{position:absolute; inset:0; z-index:1}
+
+.internet_survey_kanban .list_card .actions{position:relative; z-index:2}
+
+.internet_survey_kanban .list_card strong{
+  font-size:14px;
+  color:#111827;
+}
+
+.internet_survey_kanban .list_card .ticket{
+  color:#6b7280;
+  font-size:12px;
+}
+
+.internet_survey_kanban .list_card .channel_badge{
+  font-size:12px;
+  padding:6px 10px;
+  border-radius:12px;
+  background:#eef2ff;
+  color:#4338ca;
+}
+
+.internet_survey_kanban .list_card .comments{
+  color:#374151;
+  font-size:13px;
+}
+
+.internet_survey_kanban .list_card .meta{
+  color:#6b7280;
+  font-size:12px;
+}
+
+.internet_survey_kanban .list_card .btn{
+  padding:6px 10px;
+  border-radius:6px;
+  font-size:12px;
+}
+
+.internet_survey_kanban .list_card .btn-primary{
+  background:#2563eb;
+  color:#fff;
+  border:none;
+}
+
+.internet_survey_kanban .list_card .btn-outline-secondary{
+  background:transparent;
+  border:1px solid #e5e7eb;
+  color:#374151;
+}

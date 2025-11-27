@@ -28,6 +28,7 @@
         'custom_clients/static/src/css/kanban_plans.css',
         'custom_clients/static/src/css/client_form.css',
         'custom_clients/static/src/css/contract.css',
+        'custom_clients/static/src/css/survey_kanban.css',
     ],
     },
 
