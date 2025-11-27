@@ -16,6 +16,7 @@
         <field name="ci" class="ci-highlight" />
         <field name="name" />
         <field name="phone" />
+        <field name="email"/>
         <field name="registration_date" />
         <field name="active" />
       </tree>
@@ -78,45 +79,45 @@
             <field name="observations" />
           </group>
 
-          <notebook>
+            <notebook>
             <page string="Contratos">
               <field name="contract_ids">
-                <tree editable="bottom">
-                  <field name="plan_id" />
-                  <field name="start_date" />
-                  <field name="contract_type" />
-                </tree>
+              <tree>
+                <field name="plan_id" />
+                <field name="start_date" />
+                <field name="contract_type" />
+              </tree>
 
-                <form>
-                  <group>
-                    <field name="plan_id" />
-                    <field name="start_date" />
-                    <field name="contract_type" />
-                    <field name="address" />
-                    <field name="zone" />
-                    <field name="gps" />
-                    <field name="reference" />
-                    <field name="url_location" />
-                    <field name="requires_invoice" />
-                    <field name="observations" />
-                  </group>
-                </form>
+              <form>
+                <group>
+                <field name="plan_id" />
+                <field name="start_date" />
+                <field name="contract_type" />
+                <field name="address" />
+                <field name="zone" />
+                <field name="gps" />
+                <field name="reference" />
+                <field name="url_location" />
+                <field name="requires_invoice" />
+                <field name="observations" />
+                </group>
+              </form>
 
               </field>
             </page>
 
             <page string="Facturas">
               <field name="invoice_ids">
-                <tree editable="bottom">
-                  <field name="name" />
-                  <field name="date_invoice" />
-                  <field name="due_date" />
-                  <field name="amount" />
-                  <field name="state" />
-                </tree>
+              <tree>
+                <field name="name" />
+                <field name="date_invoice" />
+                <field name="due_date" />
+                <field name="amount" />
+                <field name="state" />
+              </tree>
               </field>
             </page>
-          </notebook>
+            </notebook>
 
         </sheet>
       </form>

@@ -40,3 +40,8 @@
     appearance: none !important;
 }
 
+
+.o_list_table .ci-highlight {
+    color: #0a7cff !important;
+    font-weight: bold;
+}

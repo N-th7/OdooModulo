@@ -16,6 +16,7 @@
         'views/client_views.xml',
         'views/invoice_views.xml',
         'views/contract_views.xml',
+        'views/survey_views.xml',
         
     ],
     'installable': True,

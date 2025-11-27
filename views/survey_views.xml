@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Form View -->
+        <record id="internet_survey_form" model="ir.ui.view">
+            <field name="name">internet.survey.form</field>
+            <field name="model">internet.survey</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="client_id"/>
+                                <field name="survey_date"/>
+                                <field name="survey_chanel"/>
+                                <field name="surveyor_id"/>
+                            </group>
+                            <group>
+                                <field name="satisfaction_level"/>
+                                <field name="resolution_status"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Evaluación del Servicio">
+                                <group>
+                                    <field name="internet_velocity"/>
+                                    <field name="atention_quality"/>
+                                    <field name="response_time"/>
+                                    <field name="qualityprice_ratio"/>
+                                    <field name="service_reliability"/>
+                                    <field name="recomedation_likelihood"/>
+                                </group>
+                            </page>
+                            <page string="Comentarios">
+                                <field name="comments" nolabel="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record id="internet_survey_tree" model="ir.ui.view">
+            <field name="name">internet.survey.tree</field>
+            <field name="model">internet.survey</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="client_id"/>
+                    <field name="survey_date"/>
+                    <field name="survey_chanel"/>
+                    <field name="satisfaction_level"/>
+                    <field name="resolution_status"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="internet_survey_search" model="ir.ui.view">
+            <field name="name">internet.survey.search</field>
+            <field name="model">internet.survey</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="client_id"/>
+                    <field name="survey_chanel"/>
+                    <field name="satisfaction_level"/>
+                    <filter name="pending" string="Pendiente" domain="[('resolution_status','=','pendiente')]"/>
+                    <filter name="resolved" string="Resuelto" domain="[('resolution_status','=','resuelto')]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Kanban View -->
+        <record id="internet_survey_kanban" model="ir.ui.view">
+            <field name="name">internet.survey.kanban</field>
+            <field name="model">internet.survey</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="client_id"/>
+                    <field name="satisfaction_level"/>
+                    <field name="resolution_status"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="o_kanban_card">
+                                <strong><field name="client_id"/></strong>
+                                <div>
+                                    <span t-if="record.satisfaction_level">Nivel: <t t-esc="record.satisfaction_level.value"/></span>
+                                </div>
+                                <div>
+                                    <span t-if="record.resolution_status">Estado: <t t-esc="record.resolution_status.value"/></span>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Calendar View -->
+        <record id="internet_survey_calendar" model="ir.ui.view">
+            <field name="name">internet.survey.calendar</field>
+            <field name="model">internet.survey</field>
+            <field name="arch" type="xml">
+                <calendar string="Calendario de Encuestas" date_start="survey_date">
+                    <field name="client_id"/>
+                </calendar>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="internet_survey_action" model="ir.actions.act_window">
+            <field name="name">Encuestas de Satisfacción</field>
+            <field name="res_model">internet.survey</field>
+            <field name="view_mode">kanban,calendar,tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Crea y gestiona las encuestas de satisfacción de clientes.</p>
+            </field>
+        </record>
+
+        <!-- Menu -->
+        <menuitem id="menu_internet_surveys"
+                  name="Encuestas"
+                  parent="menu_internet_root"
+                  action="internet_survey_action" />
+    </data>
+</odoo>
