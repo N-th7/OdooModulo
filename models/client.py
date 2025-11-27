@@ -1,19 +1,19 @@
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 class InternetClient(models.Model):
     _name = 'internet.client'
     _description = 'Cliente de Internet'
-    _rec_name = 'name'
+    _rec_name = False  
 
-    id = fields.Char(
-        'ID Cliente',
-        readonly=True,
-        default=lambda self: self.env['ir.sequence'].next_by_code('internet.client')
-    )
+    _sql_constraints = [
+        ('unique_ci', 'unique(ci)', 'El CI / NIT ya está registrado para otro cliente.')
+    ]
 
     name = fields.Char('Nombre(s)', required=True)
     second_name = fields.Char('Apellido(s)', required=True)
     social_reason = fields.Char('Razón Social')
+
     client_type = fields.Selection([
         ('residencial', 'Residencial'),
         ('empresa', 'Empresa'),
@@ -47,25 +47,18 @@ class InternetClient(models.Model):
     contract_count = fields.Integer(string='N° Contratos', compute='_compute_contract_count')
 
     invoice_ids = fields.One2many('internet.invoice', 'client_id', string='Facturas')
-    deuda_meses = fields.Integer('Meses adeudados', compute='_compute_deuda', store=True)
 
-    # -----------------------------------
-    # COMPUTES
-    # -----------------------------------
     @api.depends('invoice_ids.state')
     def _compute_deuda(self):
         for rec in self:
-            impagas = rec.invoice_ids.filtered(lambda i: i.state == 'impaga')
-            rec.deuda_meses = len(impagas)
+            rec.deuda_meses = len(rec.invoice_ids.filtered(lambda i: i.state == 'impaga'))
 
     @api.depends('contract_ids')
     def _compute_contract_count(self):
         for rec in self:
             rec.contract_count = len(rec.contract_ids)
 
-    # -----------------------------------
-    # ACTION
-    # -----------------------------------
+
     def action_add_contract(self):
         self.ensure_one()
         return {
@@ -77,30 +70,36 @@ class InternetClient(models.Model):
             'context': {'default_client_id': self.id},
         }
 
-    
+
     def name_get(self):
         result = []
         for rec in self:
-            label = f"{rec.name} {rec.second_name} ({rec.ci or ''})"
+            label = f"{rec.name} {rec.second_name} ({rec.ci})"
             result.append((rec.id, label))
         return result
 
     @api.model
     def name_search(self, name, args=None, operator='ilike', limit=100):
         args = args or []
+
         if not name:
-            recs = self.search(args, limit=limit)
-            return recs.name_get()
+            return self.search(args, limit=limit).name_get()
 
         domain = [
-            '|', '|', '|', '|', '|',
+            '|', '|', '|', '|',
             ('name', operator, name),
             ('second_name', operator, name),
             ('ci', operator, name),
             ('phone', operator, name),
             ('email', operator, name),
-            ('id', operator, name),
         ]
 
         recs = self.search(domain + args, limit=limit)
         return recs.name_get()
+
+
+    @api.constrains('ci')
+    def _check_unique_ci(self):
+        for rec in self:
+            if self.search([('ci', '=', rec.ci), ('id', '!=', rec.id)]):
+                raise ValidationError("El CI ya está registrado.")

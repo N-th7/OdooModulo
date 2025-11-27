@@ -36,3 +36,28 @@ class InternetContract(models.Model):
         if vals.get('code', 'New') == 'New':
             vals['code'] = self.env['ir.sequence'].next_by_code('internet.contract') or 'New'
         return super().create(vals)
+
+    def name_get(self):
+        result = []
+        for rec in self:
+            label = f"{rec.code} {rec.client_id.name.} {rec.client_id.second_name}({rec.client_id.ci}) - {rec.plan_id.name}"
+            result.append((rec.id, label))
+        return result
+
+    @api.model
+    def name_search(self, name, args=None, operator='ilike', limit=100):
+        args = args or []
+        if not name:
+            recs = self.search(args, limit=limit)
+            return recs.name_get()
+
+        domain = [
+            '|', '|', '|', '|', '|',
+            ('code', operator, code),
+            ('start_date', operator, start_date),
+            ('state', operator, state),
+            ('id', operator, name),
+        ]
+
+        recs = self.search(domain + args, limit=limit)
+        return recs.name_get()

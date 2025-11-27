@@ -13,9 +13,8 @@
     <field name="model">internet.client</field>
     <field name="arch" type="xml">
       <tree>
-        <field name="id" />
+        <field name="ci" class="ci-highlight" />
         <field name="name" />
-        <field name="ci" />
         <field name="phone" />
         <field name="registration_date" />
         <field name="active" />
