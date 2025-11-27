@@ -3,4 +3,5 @@ access_internet_plan,internet.plan,model_internet_plan,,1,1,1,1
 access_internet_client,internet.client,model_internet_client,,1,1,1,1
 access_internet_invoice,internet.invoice,model_internet_invoice,,1,1,1,1
 access_internet_contract,internet.contract,model_internet_contract,,1,1,1,1
+access_internet_survey,internet.survey,model_internet_survey,,1,1,1,1
 
