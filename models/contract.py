@@ -40,7 +40,7 @@ class InternetContract(models.Model):
     def name_get(self):
         result = []
         for rec in self:
-            label = f"{rec.code} {rec.client_id.name.} {rec.client_id.second_name}({rec.client_id.ci}) - {rec.plan_id.name}"
+            label = f"{rec.code} {rec.client_id.name} {rec.client_id.second_name}({rec.client_id.ci}) - {rec.plan_id.name}"
             result.append((rec.id, label))
         return result
 
