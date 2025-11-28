@@ -163,31 +163,37 @@
                                     <div style="margin-top:10px; display:flex; gap:24px; flex-wrap:wrap;">
                                         <div>
                                             <span class="label-card">Velocidad de internet:</span>
+                                            <br/>   
                                             <field name="internet_speed" />
                                         </div>
                                         <div>
                                             <span class="label-card">
                                                 Calidad de atención:</span>
+                                            <br/>
                                             <field name="atention_quality" />
                                         </div>
                                         <div>
                                             <span class="label-card">
                                                 Tiempo de respuesta:</span>
+                                            <br/>
                                             <field name="response_time" />
                                         </div>
                                         <div>
                                             <span class="label-card">
                                                 Relación calidad/precio:</span>
+                                            <br/>
                                             <field name="qualityprice_ratio" />
                                         </div>
                                         <div>
                                             <span class="label-card">
                                                 Confiabilidad del servicio:</span>
+                                            <br/>
                                             <field name="service_reliability" />
                                         </div>
                                         <div>
                                             <span class="label-card">
                                                 Probabilidad de recomendación:</span>
+                                            <br/>
                                             <field name="recomedation_likelihood" />
                                         </div>
                                     </div>

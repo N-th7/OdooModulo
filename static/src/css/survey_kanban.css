@@ -1,4 +1,11 @@
 /* Styles for survey kanban list cards */
+.o_kanban_view.internet_plan_kanban .o_kanban_renderer {
+    display: grid !important;
+    grid-template-columns: repeat(1, 1fr) !important;
+    gap: 20px !important;
+    align-items: start;
+}
+
 .internet_survey_kanban .list_card{
   display:flex;
   gap:16px;
