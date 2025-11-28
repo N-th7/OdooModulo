@@ -121,10 +121,7 @@
                                         <div>
                                             <span class="label-card">Cliente:</span> 
                                             <br/>
-                                                <span t-esc="record.client_id.name or ''"/> 
-                                                <span t-esc="record.client_id.second_name or ''"/>
-                                            <br/>
-                                            <span style="color: #666;">CI: <span t-esc="record.client_id.ci or ''"/></span>
+                                            <field name="client_id" />
                                         </div>
                                         <div>
                                             <span class="label-card">Fecha:</span>
