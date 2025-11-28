@@ -10,6 +10,7 @@
                 <field name="plan_id" />
                 <field name="contract_type" />
                 <field name="start_date" />
+                <field name="end_date" />
                 <field name="address" />
                 <field name="zone" />
                 <field name="requires_invoice" />
@@ -32,6 +33,7 @@
                             <field name="plan_id" />
                             <field name="contract_type" />
                             <field name="start_date" />
+                            <field name="end_date" />
                             <field name="requires_invoice" />
                         </group>
 

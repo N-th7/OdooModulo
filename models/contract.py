@@ -10,6 +10,7 @@ class InternetContract(models.Model):
     client_id = fields.Many2one('internet.client', string='Cliente', ondelete='cascade')
     plan_id = fields.Many2one('internet.plan', string='Plan de Internet', required=True, placeholder='Seleccione un plan')
     start_date = fields.Date('Fecha de Inicio', required=True)
+    end_date = fields.Date('Fecha de Fin')    
 
     contract_type = fields.Selection(  [
         ('mensual', 'Mensual'),
