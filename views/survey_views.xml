@@ -97,15 +97,10 @@
                                     t-attf-href="/web#id={{ record.id.raw_value }}&amp;model=internet.survey&amp;view_type=form"
                                     class="o_kanban_preview" />
 
-                                <!-- Status indicator -->
-                                <div class="status-indicator"
-                                    t-att-data-status="record.resolution_status.raw_value"
-                                    style="width:  8px; height:56px; border-radius:4px; background:#9ca3af;" />
-
                                 <div style="flex:1;">
                                     <!-- Header: client + date + channel tag -->
                                     <div>
-                                        <div style="display:flex; gap:150px; align-items:center;">
+                                        <div style="display:flex; gap:80px; align-items:center;">
                                             <div style="display:flex; gap:150px;">
                                                 <strong style="font-size:14px;">
                                                     <field name="survey_code" />
@@ -160,7 +155,7 @@
 
                                         
                                     </div>
-                                    <div style="margin-top:10px; display:flex; gap:24px; flex-wrap:wrap;">
+                                    <div style="margin-top:10px; display:flex; gap:40px; flex-wrap:wrap;">
                                         <div>
                                             <span class="label-card">Velocidad de internet:</span>
                                             <br/>   
