@@ -83,6 +83,8 @@
 }
 
 .internet_survey_kanban .o_text_overflow {
+  border: 1px solid #111827;
+  
   border-radius: 10px;
 }
 
