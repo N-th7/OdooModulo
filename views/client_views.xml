@@ -68,11 +68,11 @@
             <group>
               <field name="ci" />
               <group>
-                <field name="ci_anverso" widget="image" class="ci-image-field" options="{'preview_image': 'ci_anverso'}"/>
+                <field name="ci_anverso" widget="image" class="ci-image-field"/>
                
               </group>
               <group>
-                <field name="ci_reverso" widget="image" class="ci-image-field" options="{'preview_image': 'ci_reverso'}"/>
+                <field name="ci_reverso" widget="image" class="ci-image-field"/>
               </group>
               <field name="client_type" />
               <field name="city" />
