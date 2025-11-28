@@ -1,24 +1,89 @@
-.list_card {
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    padding: 16px;
-    background-color: #ffffff;
-    transition: box-shadow 0.3s ease;
+/* Styles for survey kanban list cards */
+.internet_survey_kanban .list_card{
+  display:flex;
+  gap:16px;
+  padding:14px 18px;
+  align-items:flex-start;
+  border-bottom:1px solid #eef2f6;
+  background:#fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  position:relative;
 }
 
-.list_card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-.list_card .label-card {
-    font-size: 12px;
-    font-weight: bold;
-    color: var(--color-gray-500);
-    padding: 4px 8px;
-    display: inline-block;
-    margin-bottom: 8px;
+.internet_survey_kanban .list_card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.o_text_overflow {
-    border: var(--color-gray-500);
-    border-radius: 10px;
+.internet_survey_kanban .list_card a.o_kanban_preview{
+  position:absolute; 
+  inset:0; 
+  z-index:1;
+}
+
+.internet_survey_kanban .list_card .actions{
+  position:relative; 
+  z-index:2;
+}
+
+/* Status indicator colors */
+.internet_survey_kanban .status-indicator[data-status="pendiente"] {
+  background: #f59e0b !important;
+}
+
+.internet_survey_kanban .status-indicator[data-status="en_proceso"] {
+  background: #3b82f6 !important;
+}
+
+.internet_survey_kanban .status-indicator[data-status="resuelto"] {
+  background: #10b981 !important;
+}
+
+/* Satisfaction level colors */
+.internet_survey_kanban .satisfaction-badge[data-satisfaction="muy_satisfecho"],
+.internet_survey_kanban .satisfaction-badge[data-satisfaction="satisfecho"] {
+  background-color: #10b981 !important;
+  color: white !important;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.internet_survey_kanban .satisfaction-badge[data-satisfaction="neutral"] {
+  background-color: #f59e0b !important;
+  color: white !important;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.internet_survey_kanban .satisfaction-badge[data-satisfaction="insatisfecho"],
+.internet_survey_kanban .satisfaction-badge[data-satisfaction="muy_insatisfecho"] {
+  background-color: #ef4444 !important;
+  color: white !important;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.internet_survey_kanban .list_card .label-card {
+  font-size: 12px;
+  font-weight: bold;
+  color: #6b7280;
+  padding: 4px 8px;
+  display: inline-block;
+  margin-bottom: 8px;
+  margin-right: 8px;
+}
+
+.internet_survey_kanban .o_text_overflow {
+  border-radius: 10px;
+}
+
+.internet_survey_kanban .list_card strong{
+  font-size:14px;
+  color:#111827;
+}
+
+.internet_survey_kanban .list_card .comments{
+  color:#374151;
+  font-size:13px;
 }

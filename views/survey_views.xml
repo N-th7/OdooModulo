@@ -110,7 +110,7 @@
                                                 <strong style="font-size:14px;">
                                                     <field name="survey_code" />
                                                 </strong>
-                                                <div class="o_text_overflow" t-att-style="'background-color: ' + ('green' if record.satisfaction_level.raw_value in ['muy_satisfecho', 'satisfecho'] else 'orange' if record.satisfaction_level.raw_value == 'neutral' else 'red')">
+                                                <div class="o_text_overflow satisfaction-badge" t-att-data-satisfaction="record.satisfaction_level.raw_value">
                                                     <field name="satisfaction_level" />
                                                 </div>
                                                 <div class="o_text_overflow">
