@@ -109,13 +109,10 @@
               <group string="Carnet de Identidad">
                 <group>
                   <field name="ci_anverso" widget="image" class="oe_avatar" options="{'size': [300, 200]}"/>
-                  <field name="ci_anverso_filename" invisible="1"/>
-                  <label for="ci_anverso" string="Anverso del Carnet"/>
+
                 </group>
                 <group>
                   <field name="ci_reverso" widget="image" class="oe_avatar" options="{'size': [300, 200]}"/>
-                  <field name="ci_reverso_filename" invisible="1"/>
-                  <label for="ci_reverso" string="Reverso del Carnet"/>
                 </group>
               </group>
             </page>

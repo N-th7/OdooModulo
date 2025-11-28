@@ -21,9 +21,7 @@ class InternetClient(models.Model):
 
     ci = fields.Char('CI / NIT', required=True)
     ci_anverso = fields.Binary('Carnet Anverso', attachment=True)
-    ci_anverso_filename = fields.Char('Nombre archivo anverso')
     ci_reverso = fields.Binary('Carnet Reverso', attachment=True)
-    ci_reverso_filename = fields.Char('Nombre archivo reverso')
     phone = fields.Char('Teléfono', required=True)
     alternative_phone = fields.Char('Teléfono alternativo')
     email = fields.Char('Correo electrónico')
