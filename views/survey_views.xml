@@ -84,6 +84,9 @@
                 <kanban class="internet_survey_kanban o_kanban_small_column" create="false" edit="false" default_group_by="">
                     <field name="survey_code" />
                     <field name="client_id" />
+                    <field name="client_id.name"/>
+                    <field name="client_id.second_name"/>
+                    <field name="client_id.ci"/>
                     <field name="survey_date" />
                     <field name="survey_chanel" />
                     <field name="surveyor_id" />
@@ -122,6 +125,10 @@
                                             <span class="label-card">Cliente:</span> 
                                             <br/>
                                             <field name="client_id" />
+                                            <br/>
+                                            <field name="client_id.name" />
+                                            <field name="client_id.second_name" />
+                                            <field name="client_id.ci" />
                                         </div>
                                         <div>
                                             <span class="label-card">Fecha:</span>
