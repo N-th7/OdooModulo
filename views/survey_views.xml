@@ -81,7 +81,7 @@
             <field name="name">internet.survey.kanban</field>
             <field name="model">internet.survey</field>
             <field name="arch" type="xml">
-                <kanban class="o_kanban_mobile internet_survey_kanban" create="false" edit="false">
+                <kanban class=" internet_survey_kanban" create="false" edit="false">
                     <field name="survey_code" />
                     <field name="client_id" />
                     <field name="survey_date" />
@@ -122,24 +122,29 @@
 
                         
                                     </div>
-                                    <div style="margin-top:10px; display:flex; gap:24px; flex-wrap:wrap;">
+                                    <div style="margin-top:10px; display:flex; gap:40px; flex-wrap:wrap;">
                                         <div>
-                                            <span class="label-card">Canal:</span>
-                                            <field name="survey_chanel" />
+                                            <span class="label-card">Cliente:</span> 
+                                            <br/>
+                                            <field name="client_id" />
                                         </div>
                                         <div>
                                             <span class="label-card">Fecha:</span>
+                                            <br/>
                                             <field name="survey_date" />
                                         </div>
                                         <div>
                                             <span class="label-card">Realizada por:</span>
+                                            <br/>
                                             <field name="surveyor_id" />
                                         </div>
                                     </div>
                                     <div>
-                                        <span>
-                                            Medio de Contacto: <field name="survey_chanel" />
+                                        <span class="label-card">
+                                            Medio de Contacto: 
                                         </span>
+                                        <br/>   
+                                        <field name="survey_chanel" />
                                     </div>
 
                                     <div
