@@ -94,7 +94,7 @@ class InternetSurvey(models.Model):
         if vals.get('survey_code', 'New') == 'New':
             sequence = self.env['ir.sequence'].next_by_code('internet.survey')
             if sequence:
-                vals['survey_code'] = hex(int(sequence))[2:].upper()
+                vals['survey_code'] = f"ENC-{hex(int(sequence))[2:].upper().zfill(4)}"
             else:
                 vals['survey_code'] = 'New'
         return super().create(vals)

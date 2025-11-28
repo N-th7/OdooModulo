@@ -10,6 +10,7 @@
         'security/ir.model.access.csv',
         'data/sequences.xml',
         'data/contract_sequence.xml',
+        'data/survey_sequence.xml',
         'data/plan_data.xml',
         'data/cron_jobs.xml',
         'views/plan_views.xml',

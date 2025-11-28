@@ -2,7 +2,7 @@
     <record id="seq_internet_survey" model="ir.sequence">
     <field name="name">Internet Survey Sequence</field>
     <field name="code">internet.survey</field>
-    <field name="prefix">ENC-</field>
-    <field name="padding">5</field>
+    <field name="prefix"></field>
+    <field name="padding">1</field>
     </record>
 </odoo>
