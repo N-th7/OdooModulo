@@ -1,6 +1,5 @@
 <odoo>
 
-    <!-- VISTA TREE DE CONTRATOS -->
     <record id="view_internet_contract_tree" model="ir.ui.view">
         <field name="name">internet.contract.tree</field>
         <field name="model">internet.contract</field>
@@ -54,7 +53,6 @@
         </field>
     </record>
 
-    <!-- ACCIÓN PARA ABRIR CONTRATOS -->
     <record id="action_internet_contracts" model="ir.actions.act_window">
         <field name="name">Contratos</field>
         <field name="res_model">internet.contract</field>

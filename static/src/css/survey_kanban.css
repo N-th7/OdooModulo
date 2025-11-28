@@ -1,74 +1,24 @@
-/* Styles for survey kanban list cards */
-.internet_survey_kanban .list_card{
-  display:flex;
-  gap:16px;
-  padding:14px 18px;
-  align-items:flex-start;
-  border-bottom:1px solid #eef2f6;
-  background:#fff;
+.list_card {
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    background-color: #ffffff;
+    transition: box-shadow 0.3s ease;
 }
 
-.internet_survey_kanban .list_card{position:relative}
-
-.internet_survey_kanban .list_card a.o_kanban_preview{position:absolute; inset:0; z-index:1}
-
-.internet_survey_kanban .list_card .actions{position:relative; z-index:2}
-
-/* Status indicator colors */
-.internet_survey_kanban .status-indicator[data-status="pendiente"] {
-  background: #f59e0b !important;
+.list_card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.list_card .label-card {
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--color-gray-500);
+    padding: 4px 8px;
+    display: inline-block;
+    margin-bottom: 8px;
 }
 
-.internet_survey_kanban .status-indicator[data-status="en_proceso"] {
-  background: #3b82f6 !important;
-}
-
-.internet_survey_kanban .status-indicator[data-status="resuelto"] {
-  background: #10b981 !important;
-}
-
-.internet_survey_kanban .list_card strong{
-  font-size:14px;
-  color:#111827;
-}
-
-.internet_survey_kanban .list_card .ticket{
-  color:#6b7280;
-  font-size:12px;
-}
-
-.internet_survey_kanban .list_card .channel_badge{
-  font-size:12px;
-  padding:6px 10px;
-  border-radius:12px;
-  background:#eef2ff;
-  color:#4338ca;
-}
-
-.internet_survey_kanban .list_card .comments{
-  color:#374151;
-  font-size:13px;
-}
-
-.internet_survey_kanban .list_card .meta{
-  color:#6b7280;
-  font-size:12px;
-}
-
-.internet_survey_kanban .list_card .btn{
-  padding:6px 10px;
-  border-radius:6px;
-  font-size:12px;
-}
-
-.internet_survey_kanban .list_card .btn-primary{
-  background:#2563eb;
-  color:#fff;
-  border:none;
-}
-
-.internet_survey_kanban .list_card .btn-outline-secondary{
-  background:transparent;
-  border:1px solid #e5e7eb;
-  color:#374151;
+.o_text_overflow {
+    border: var(--color-gray-500);
+    border-radius: 10px;
 }

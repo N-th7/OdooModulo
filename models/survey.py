@@ -4,8 +4,13 @@ class InternetSurvey(models.Model):
     _name = "internet.survey"
     _description = "Encuesta de Satisfacción del Cliente"
     _rec_name = 'client_id'
+    
+    
 
     client_id = fields.Many2one('internet.client', string='Cliente', required=True)
+    survey_code = fields.Char('Código', readonly=True, copy=False, default='New')
+    
+    
     survey_chanel= fields.Selection([
         ('telefono', 'Teléfono'),
         ('email', 'Correo Electrónico'),
@@ -23,7 +28,7 @@ class InternetSurvey(models.Model):
     ], string='Nivel de Satisfacción', required=True)
     comments = fields.Text('Comentarios Adicionales')
     surveyor_id = fields.Many2one('res.users', string='Encuestador', default=lambda self: self.env.user)
-    internet_velocity = fields.Selection([
+    internet_speed = fields.Selection([
         ('excelente', 'Excelente'),
         ('buena', 'Buena'),
         ('regular', 'Regular'),
@@ -77,3 +82,19 @@ class InternetSurvey(models.Model):
         ('resuelto', 'Resuelto'),
     ], string='Estado de Resolución', default='pendiente')
     
+    survey_type = fields.Selection([
+        ('periodica', 'Periódica'),
+        ('post_instalacion', 'Post-Instalación'),
+        ('post_soporte', 'Post-Soporte'),
+        ('cancelacion', 'Cancelación'),
+    ], string='Tipo de Encuesta', required=True)
+    
+    @api.model
+    def create(self, vals):
+        if vals.get('survey_code', 'New') == 'New':
+            sequence = self.env['ir.sequence'].next_by_code('internet.survey')
+            if sequence:
+                vals['survey_code'] = hex(int(sequence))[2:].upper()
+            else:
+                vals['survey_code'] = 'New'
+        return super().create(vals)

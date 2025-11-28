@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <!-- Form View -->
         <record id="internet_survey_form" model="ir.ui.view">
             <field name="name">internet.survey.form</field>
             <field name="model">internet.survey</field>
@@ -10,29 +9,30 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="client_id"/>
-                                <field name="survey_date"/>
-                                <field name="survey_chanel"/>
-                                <field name="surveyor_id"/>
+                                <field name="client_id" />
+                                <field name="survey_date" />
+                                <field name="survey_chanel" />
+                                <field name="surveyor_id" />
                             </group>
                             <group>
-                                <field name="satisfaction_level"/>
-                                <field name="resolution_status"/>
+                                <field name="survey_type" />
+                                <field name="satisfaction_level" />
+                                <field name="resolution_status" />
                             </group>
                         </group>
                         <notebook>
                             <page string="Evaluación del Servicio">
                                 <group>
-                                    <field name="internet_velocity"/>
-                                    <field name="atention_quality"/>
-                                    <field name="response_time"/>
-                                    <field name="qualityprice_ratio"/>
-                                    <field name="service_reliability"/>
-                                    <field name="recomedation_likelihood"/>
+                                    <field name="internet_speed" />
+                                    <field name="atention_quality" />
+                                    <field name="response_time" />
+                                    <field name="qualityprice_ratio" />
+                                    <field name="service_reliability" />
+                                    <field name="recomedation_likelihood" />
                                 </group>
                             </page>
                             <page string="Comentarios">
-                                <field name="comments" nolabel="1"/>
+                                <field name="comments" nolabel="1" />
                             </page>
                         </notebook>
                     </sheet>
@@ -40,17 +40,18 @@
             </field>
         </record>
 
-        <!-- Tree View -->
         <record id="internet_survey_tree" model="ir.ui.view">
             <field name="name">internet.survey.tree</field>
             <field name="model">internet.survey</field>
             <field name="arch" type="xml">
                 <tree>
-                    <field name="client_id"/>
-                    <field name="survey_date"/>
-                    <field name="survey_chanel"/>
-                    <field name="satisfaction_level"/>
-                    <field name="resolution_status"/>
+                    <field name="survey_code" />
+                    <field name="client_id" />
+                    <field name="survey_date" />
+                    <field name="survey_type" />
+                    <field name="survey_chanel" />
+                    <field name="satisfaction_level" />
+                    <field name="resolution_status" />
                 </tree>
             </field>
         </record>
@@ -61,72 +62,128 @@
             <field name="model">internet.survey</field>
             <field name="arch" type="xml">
                 <search>
-                    <field name="client_id"/>
-                    <field name="survey_chanel"/>
-                    <field name="satisfaction_level"/>
-                    <filter name="pending" string="Pendiente" domain="[('resolution_status','=','pendiente')]"/>
-                    <filter name="resolved" string="Resuelto" domain="[('resolution_status','=','resuelto')]"/>
+                    <field name="client_id" />
+                    <field name="survey_chanel" />
+                    <field name="satisfaction_level" />
+                    <field name="survey_type" />
+                    <field name="survey_date" />
+                    <field name="resolution_status" />
+                    <field name="survey_code" />
+                    <filter name="pending" string="Pendiente"
+                        domain="[('resolution_status','=','pendiente')]" />
+                    <filter name="resolved" string="Resuelto"
+                        domain="[('resolution_status','=','resuelto')]" />
                 </search>
             </field>
         </record>
 
-        <!-- Kanban (List-style cards) -->
         <record id="internet_survey_kanban" model="ir.ui.view">
             <field name="name">internet.survey.kanban</field>
             <field name="model">internet.survey</field>
             <field name="arch" type="xml">
                 <kanban class="o_kanban_mobile internet_survey_kanban" create="false" edit="false">
-                    <field name="client_id"/>
-                    <field name="survey_date"/>
-                    <field name="survey_chanel"/>
-                    <field name="surveyor_id"/>
-                    <field name="comments"/>
-                    <field name="resolution_status"/>
+                    <field name="survey_code" />
+                    <field name="client_id" />
+                    <field name="survey_date" />
+                    <field name="survey_chanel" />
+                    <field name="surveyor_id" />
+                    <field name="comments" />
+                    <field name="resolution_status" />
                     <templates>
                         <t t-name="kanban-box">
-                            <div class="o_kanban_record list_card" style="display:flex; gap:16px; padding:14px; align-items:flex-start; border-bottom:1px solid #eee; background:#fff; position:relative;">
+                            <div class="o_kanban_record list_card">
 
-                                <a t-attf-href="/web#id={{ record.id.raw_value }}&amp;model=internet.survey&amp;view_type=form" class="o_kanban_preview"/>
+                                <a
+                                    t-attf-href="/web#id={{ record.id.raw_value }}&amp;model=internet.survey&amp;view_type=form"
+                                    class="o_kanban_preview" />
 
                                 <!-- Status indicator -->
-                                <div class="status-indicator" t-att-data-status="record.resolution_status.raw_value"
-                                     style="width:8px; height:56px; border-radius:4px; background:#9ca3af;"/>
+                                <div class="status-indicator"
+                                    t-att-data-status="record.resolution_status.raw_value"
+                                    style="width:  8px; height:56px; border-radius:4px; background:#9ca3af;" />
 
                                 <div style="flex:1;">
                                     <!-- Header: client + date + channel tag -->
-                                    <div style="display:flex; justify-content:space-between; align-items:center; gap:12px;">
+                                    <div>
                                         <div style="display:flex; gap:12px; align-items:center;">
                                             <div>
                                                 <strong style="font-size:14px;">
-                                                    <field name="client_id"/>
+                                                    <field name="survey_code" />
                                                 </strong>
-                                                <div style="color:#6b7280; font-size:12px;">Ticket: ENC-<t t-esc="record.id.raw_value"/></div>
+                                                <div class="o_text_overflow" t-att-style="'background-color: ' + ('green' if record.satisfaction_level.raw_value in ['muy_satisfecho', 'satisfecho'] else 'orange' if record.satisfaction_level.raw_value == 'neutral' else 'red')">
+                                                    <field name="satisfaction_level" />
+                                                </div>
+                                                <div class="o_text_overflow">
+                                                    <field name="survey_type" />
+                                                </div>
                                             </div>
-                                            <div style="color:#6b7280; font-size:12px;">Fecha: <t t-esc="record.survey_date.value"/></div>
+                                            
                                         </div>
 
-                                        <div style="display:flex; gap:8px; align-items:center;">
-                                            <div style="font-size:12px; padding:6px 10px; border-radius:12px; background:#eef2ff; color:#4338ca;"> <t t-esc="record.survey_chanel.value"/> </div>
+                        
+                                    </div>
+                                    <div style="margin-top:10px; display:flex; gap:24px; flex-wrap:wrap;">
+                                        <div>
+                                            <span class="label-card">Canal:</span>
+                                            <field name="survey_chanel" />
+                                        </div>
+                                        <div>
+                                            <span class="label-card">Fecha:</span>
+                                            <field name="survey_date" />
+                                        </div>
+                                        <div>
+                                            <span class="label-card">Realizada por:</span>
+                                            <field name="surveyor_id" />
                                         </div>
                                     </div>
+                                    <div>
+                                        <span>
+                                            Medio de Contacto: <field name="survey_chanel" />
+                                        </span>
+                                    </div>
 
-                                    <!-- Body: comment preview and meta -->
-                                    <div style="margin-top:10px; display:flex; justify-content:space-between; gap:12px;">
+                                    <div
+                                        style="margin-top:10px; display:flex; justify-content:space-between; gap:12px;">
                                         <div style="flex:1; color:#374151;">
                                             <t t-if="record.comments.value">
-                                                <t t-esc="record.comments.value"/>
+                                                <t t-esc="record.comments.value" />
                                             </t>
                                             <t t-else="">
                                                 <span style="color:#9ca3af;">Sin comentarios</span>
                                             </t>
                                         </div>
 
-                                        <div style="min-width:220px; text-align:right; position:relative; z-index:2;">
-                                            <div style="font-size:12px; color:#6b7280;">Realizada Por: <t t-esc="record.surveyor_id.value"/></div>
-                                            <div style="margin-top:8px; display:flex; gap:8px; justify-content:flex-end;">
-                                                <a t-attf-href="/web#id={{ record.id.raw_value }}&amp;model=internet.survey&amp;view_type=form" class="btn btn-sm btn-outline-secondary"><i class="fa fa-eye"/> Ver</a>
-                                                <button type="edit" class="btn btn-sm btn-primary"><i class="fa fa-edit"/> Editar</button>
-                                            </div>
+                                        
+                                    </div>
+                                    <div style="margin-top:10px; display:flex; gap:24px; flex-wrap:wrap;">
+                                        <div>
+                                            <span class="label-card">Velocidad de internet:</span>
+                                            <field name="internet_speed" />
+                                        </div>
+                                        <div>
+                                            <span class="label-card">
+                                                Calidad de atención:</span>
+                                            <field name="atention_quality" />
+                                        </div>
+                                        <div>
+                                            <span class="label-card">
+                                                Tiempo de respuesta:</span>
+                                            <field name="response_time" />
+                                        </div>
+                                        <div>
+                                            <span class="label-card">
+                                                Relación calidad/precio:</span>
+                                            <field name="qualityprice_ratio" />
+                                        </div>
+                                        <div>
+                                            <span class="label-card">
+                                                Confiabilidad del servicio:</span>
+                                            <field name="service_reliability" />
+                                        </div>
+                                        <div>
+                                            <span class="label-card">
+                                                Probabilidad de recomendación:</span>
+                                            <field name="recomedation_likelihood" />
                                         </div>
                                     </div>
                                 </div>
@@ -137,31 +194,29 @@
             </field>
         </record>
 
-        <!-- Calendar View -->
         <record id="internet_survey_calendar" model="ir.ui.view">
             <field name="name">internet.survey.calendar</field>
             <field name="model">internet.survey</field>
             <field name="arch" type="xml">
                 <calendar string="Calendario de Encuestas" date_start="survey_date">
-                    <field name="client_id"/>
+                    <field name="client_id" />
                 </calendar>
             </field>
         </record>
 
-        <!-- Action -->
         <record id="internet_survey_action" model="ir.actions.act_window">
             <field name="name">Encuestas de Satisfacción</field>
             <field name="res_model">internet.survey</field>
             <field name="view_mode">kanban,calendar,tree,form</field>
             <field name="help" type="html">
-                <p class="o_view_nocontent_smiling_face">Crea y gestiona las encuestas de satisfacción de clientes.</p>
+                <p class="o_view_nocontent_smiling_face">Crea y gestiona las encuestas de
+                    satisfacción de clientes.</p>
             </field>
         </record>
 
-        <!-- Menu -->
         <menuitem id="menu_internet_surveys"
-                  name="Encuestas"
-                  parent="menu_internet_root"
-                  action="internet_survey_action" />
+            name="Encuestas"
+            parent="menu_internet_root"
+            action="internet_survey_action" />
     </data>
 </odoo>

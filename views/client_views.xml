@@ -1,6 +1,5 @@
 <odoo>
 
-  <!-- ACCIÓN debe estar ANTES de las vistas -->
   <record id="action_contracts_for_client" model="ir.actions.act_window">
     <field name="name">Contratos del Cliente</field>
     <field name="res_model">internet.contract</field>
