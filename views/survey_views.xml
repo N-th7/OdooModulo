@@ -81,7 +81,7 @@
             <field name="name">internet.survey.kanban</field>
             <field name="model">internet.survey</field>
             <field name="arch" type="xml">
-                <kanban class=" internet_survey_kanban" create="false" edit="false">
+                <kanban class="internet_survey_kanban o_kanban_small_column" create="false" edit="false" default_group_by="">
                     <field name="survey_code" />
                     <field name="client_id" />
                     <field name="survey_date" />

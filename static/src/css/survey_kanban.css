@@ -1,9 +1,13 @@
 /* Styles for survey kanban list cards */
 .o_kanban_view.internet_survey_kanban .o_kanban_renderer {
-    display: grid !important;
-    grid-template-columns: repeat(1, 1fr) !important;
-    gap: 20px !important;
-    align-items: start;
+    display: block !important;
+    width: 100% !important;
+}
+
+.internet_survey_kanban .o_kanban_record {
+    width: 100% !important;
+    max-width: none !important;
+    margin-bottom: 10px !important;
 }
 
 .internet_survey_kanban .list_card{
@@ -17,7 +21,8 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
   position:relative;
-  margin: auto !important;
+  width: 100% !important;
+  box-sizing: border-box;
 }
 
 .internet_survey_kanban .list_card:hover {
