@@ -30,6 +30,8 @@
         'custom_clients/static/src/css/client_form.css',
         'custom_clients/static/src/css/contract.css',
         'custom_clients/static/src/css/survey_kanban.css',
+        'custom_clients/static/src/js/survey_kanban.js',
+        'custom_clients/static/src/js/survey_kanban_renderer.js',
     ],
     },
 
