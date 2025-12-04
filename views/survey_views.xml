@@ -82,7 +82,7 @@
             <field name="model">internet.survey</field>
             <field name="arch" type="xml">
 
-                <kanban js_class="internet_survey_kanban_js">
+                <kanban js_class="internet_survey_kanban_js"
                     class="internet_survey_kanban o_kanban_small_column"
                     create="false" edit="false">
 
