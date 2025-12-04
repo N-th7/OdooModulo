@@ -81,7 +81,42 @@
             <field name="name">internet.survey.kanban</field>
             <field name="model">internet.survey</field>
             <field name="arch" type="xml">
-                <kanban class="internet_survey_kanban o_kanban_small_column" create="false" edit="false" default_group_by="">
+
+                <kanban js_class="kanban"
+                    class="internet_survey_kanban o_kanban_small_column"
+                    create="false" edit="false">
+
+                    <!-- HEADER / DASHBOARD -->
+                    <kanban_header>
+                        <div class="survey-dashboard"
+                            style="display:flex; gap:20px; margin:20px; padding:20px; background:#f8f9fa; border-radius:8px;">
+
+                            <div class="kpi-card"
+                                style="flex:1; background:white; padding:20px; border-radius:8px; text-align:center;
+                                box-shadow:0 2px 4px rgba(0,0,0,0.1);">
+                                <div style="font-size:24px; font-weight:bold; color:#28a745;">3.8</div>
+                                <div style="font-size:14px; color:#888;">/ 5.0</div>
+                                <div style="color:#666;">Promedio Satisfacción</div>
+                            </div>
+
+                            <div class="kpi-card"
+                                style="flex:1; background:white; padding:20px; border-radius:8px; text-align:center;
+                                box-shadow:0 2px 4px rgba(0,0,0,0.1);">
+                                <div style="font-size:32px; font-weight:bold; color:#007bff;">4</div>
+                                <div style="color:#666;">Encuestas Positivas</div>
+                            </div>
+
+                            <div class="kpi-card"
+                                style="flex:1; background:white; padding:20px; border-radius:8px; text-align:center;
+                                box-shadow:0 2px 4px rgba(0,0,0,0.1);">
+                                <div style="font-size:32px; font-weight:bold; color:#dc3545;">1</div>
+                                <div style="color:#666;">Encuestas Negativas</div>
+                            </div>
+
+                        </div>
+                    </kanban_header>
+
+                    <!-- CAMPOS DEL KANBAN -->
                     <field name="survey_code" />
                     <field name="client_id" />
                     <field name="survey_date" />
@@ -97,60 +132,38 @@
                     <field name="service_reliability" />
                     <field name="recomedation_likelihood" />
                     <field name="resolution_status" />
-                    
+
+                    <!-- PLANTILLAS -->
                     <templates>
-                        <t t-name="kanban-menu">
-                            <div class="survey-dashboard" style="display:flex; gap:20px; margin:20px; padding:20px; background:#f8f9fa; border-radius:8px;">
-                                <div class="kpi-card" style="flex:1; background:white; padding:20px; border-radius:8px; text-align:center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                                    <div style="font-size:24px; font-weight:bold; color:#28a745; margin-bottom:5px;">3.8</div>
-                                    <div style="font-size:14px; color:#888;">/ 5.0</div>
-                                    <div style="color:#666; margin-top:10px;">Promedio Satisfacción</div>
-                                    <div style="font-size:12px; color:#999; margin-top:5px;">📈</div>
-                                </div>
-                                <div class="kpi-card" style="flex:1; background:white; padding:20px; border-radius:8px; text-align:center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                                    <div style="font-size:32px; font-weight:bold; color:#007bff; margin-bottom:10px;">4</div>
-                                    <div style="color:#666;">Encuestas Positivas</div>
-                                    <div style="font-size:12px; color:#999; margin-top:5px;">Satisfacción ≥ 4</div>
-                                    <div style="font-size:12px; color:#999;">😊</div>
-                                </div>
-                                <div class="kpi-card" style="flex:1; background:white; padding:20px; border-radius:8px; text-align:center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                                    <div style="font-size:32px; font-weight:bold; color:#dc3545; margin-bottom:10px;">1</div>
-                                    <div style="color:#666;">Encuestas Negativas</div>
-                                    <div style="font-size:12px; color:#999; margin-top:5px;">Satisfacción ≤ 2</div>
-                                    <div style="font-size:12px; color:#999;">😟</div>
-                                </div>
-                                <div class="kpi-card" style="flex:1; background:white; padding:20px; border-radius:8px; text-align:center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                                    <div style="font-size:24px; font-weight:bold; color:#ffc107; margin-bottom:5px;">66.7%</div>
-                                    <div style="color:#666;">Tasa de Recomendación</div>
-                                    <div style="font-size:12px; color:#999; margin-top:5px;">4 de 6</div>
-                                    <div style="font-size:12px; color:#999;">👍</div>
-                                </div>
-                            </div>
-                        </t>
                         <t t-name="kanban-box">
                             <div class="o_kanban_record list_card">
-                                <a t-attf-href="/web#id={{ record.id.raw_value }}&amp;model=internet.survey&amp;view_type=form" class="o_kanban_preview" />
+
+                                <a
+                                    t-attf-href="/web#id={{ record.id.raw_value }}&amp;model=internet.survey&amp;view_type=form"
+                                    class="o_kanban_preview" />
+
                                 <div style="flex:1;">
-                                    <div>
-                                        <div style="display:flex; gap:80px; align-items:center;">
-                                            <div style="display:flex; gap:150px;">
-                                                <strong style="font-size:14px;">
-                                                    <field name="survey_code" />
-                                                </strong>
-                                                <div class="o_text_overflow satisfaction-badge" t-att-data-satisfaction="record.satisfaction_level.raw_value">
-                                                    <field name="satisfaction_level" />
-                                                </div>
-                                                <div class="o_text_overflow">
-                                                    <field name="survey_type" />
-                                                </div>
-                                            </div>
+
+                                    <div style="display:flex; gap:150px; align-items:center;">
+                                        <strong style="font-size:14px;">
+                                            <field name="survey_code" />
+                                        </strong>
+                                        <div class="o_text_overflow satisfaction-badge"
+                                            t-att-data-satisfaction="record.satisfaction_level.raw_value">
+                                            <field name="satisfaction_level" />
+                                        </div>
+                                        <div class="o_text_overflow">
+                                            <field name="survey_type" />
                                         </div>
                                     </div>
-                                    <div style="margin-top:10px; display:flex; gap:40px; flex-wrap:wrap;">
+
+                                    <div
+                                        style="margin-top:10px; display:flex; gap:40px; flex-wrap:wrap;">
                                         <div>
                                             <span class="label-card">Cliente:</span>
                                             <br />
-                                            <span t-esc="record.client_id.value.name or record.client_id.value"/>
+                                            <span
+                                                t-esc="record.client_id.value.name or record.client_id.value" />
                                         </div>
                                         <div>
                                             <span class="label-card">Fecha:</span>
@@ -163,22 +176,24 @@
                                             <field name="surveyor_id" />
                                         </div>
                                     </div>
+
                                     <div>
                                         <span class="label-card">Medio de Contacto:</span>
                                         <br />
                                         <field name="survey_chanel" />
                                     </div>
-                                    <div style="margin-top:10px; display:flex; justify-content:space-between; gap:12px;">
-                                        <div style="flex:1; color:#374151;">
-                                            <t t-if="record.comments.value">
-                                                <t t-esc="record.comments.value" />
-                                            </t>
-                                            <t t-else="">
-                                                <span style="color:#9ca3af;">Sin comentarios</span>
-                                            </t>
-                                        </div>
+
+                                    <div style="margin-top:10px;">
+                                        <t t-if="record.comments.value">
+                                            <t t-esc="record.comments.value" />
+                                        </t>
+                                        <t t-else="">
+                                            <span style="color:#9ca3af;">Sin comentarios</span>
+                                        </t>
                                     </div>
-                                    <div style="margin-top:10px; display:flex; gap:50px; flex-wrap:wrap;">
+
+                                    <div
+                                        style="margin-top:10px; display:flex; gap:50px; flex-wrap:wrap;">
                                         <div>
                                             <span class="label-card">Velocidad de internet:</span>
                                             <br />
@@ -210,13 +225,17 @@
                                             <field name="recomedation_likelihood" />
                                         </div>
                                     </div>
+
                                 </div>
+
                             </div>
                         </t>
                     </templates>
+
                 </kanban>
             </field>
         </record>
+
 
         <record id="internet_survey_calendar" model="ir.ui.view">
             <field name="name">internet.survey.calendar</field>
