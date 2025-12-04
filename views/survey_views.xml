@@ -81,85 +81,50 @@
             <field name="name">internet.survey.kanban</field>
             <field name="model">internet.survey</field>
             <field name="arch" type="xml">
-
-                <kanban js_class="survey_kanban_view" class="o_survey_kanban">
-
-                    <!-- 🔥 DASHBOARD SUPERIOR -->
-                    <templates>
-                        <div class="survey-stats"
-                            style="display:flex; gap:20px; margin:20px 0;">
-
-                            <div class="kpi-card">
-                                <h3><t t-esc="kanban.stats.avg_satisfaction" /> / 5</h3>
-                                <span>Promedio de Satisfacción</span>
-                            </div>
-
-                            <div class="kpi-card">
-                                <h3>
-                                    <t t-esc="kanban.stats.positive" />
-                                </h3>
-                                <span>Encuestas Positivas</span>
-                            </div>
-
-                            <div class="kpi-card">
-                                <h3>
-                                    <t t-esc="kanban.stats.negative" />
-                                </h3>
-                                <span>Encuestas Negativas</span>
-                            </div>
-
-                            <div class="kpi-card">
-                                <h3><t t-esc="kanban.stats.recommendation_rate" />%</h3>
-                                <span>Tasa de Recomendación</span>
-                            </div>
-
-                        </div>
-                    </templates>
-
-                    <!-- 🔽 DEBAJO VA TU KANBAN ACTUAL (SIN CAMBIAR NADA) -->
+                <kanban class="internet_survey_kanban o_kanban_small_column" create="false" edit="false" default_group_by="">
                     <field name="survey_code" />
                     <field name="client_id" />
                     <field name="survey_date" />
                     <field name="survey_chanel" />
                     <field name="surveyor_id" />
                     <field name="comments" />
+                    <field name="satisfaction_level" />
+                    <field name="survey_type" />
                     <field name="internet_speed" />
+                    <field name="atention_quality" />
+                    <field name="response_time" />
+                    <field name="qualityprice_ratio" />
+                    <field name="service_reliability" />
+                    <field name="recomedation_likelihood" />
+                    <field name="resolution_status" />
 
                     <templates>
                         <t t-name="kanban-box">
                             <div class="o_kanban_record list_card">
-
-                                <a
-                                    t-attf-href="/web#id={{ record.id.raw_value }}&amp;model=internet.survey&amp;view_type=form"
-                                    class="o_kanban_preview" />
-
+                                <a t-attf-href="/web#id={{ record.id.raw_value }}&amp;model=internet.survey&amp;view_type=form" class="o_kanban_preview" />
                                 <div style="flex:1;">
-                                    <!-- Header: client + date + channel tag -->
+                                    <!-- Header -->
                                     <div>
                                         <div style="display:flex; gap:80px; align-items:center;">
                                             <div style="display:flex; gap:150px;">
                                                 <strong style="font-size:14px;">
                                                     <field name="survey_code" />
                                                 </strong>
-                                                <div class="o_text_overflow satisfaction-badge"
-                                                    t-att-data-satisfaction="record.satisfaction_level.raw_value">
+                                                <div class="o_text_overflow satisfaction-badge" t-att-data-satisfaction="record.satisfaction_level.raw_value">
                                                     <field name="satisfaction_level" />
                                                 </div>
                                                 <div class="o_text_overflow">
                                                     <field name="survey_type" />
                                                 </div>
                                             </div>
-
                                         </div>
-
-
                                     </div>
-                                    <div
-                                        style="margin-top:10px; display:flex; gap:40px; flex-wrap:wrap;">
+                                    <!-- Info Principal -->
+                                    <div style="margin-top:10px; display:flex; gap:40px; flex-wrap:wrap;">
                                         <div>
                                             <span class="label-card">Cliente:</span>
                                             <br />
-                                            <field name="client_id" />
+                                            <span t-esc="record.client_id.value.name or record.client_id.value"/>
                                         </div>
                                         <div>
                                             <span class="label-card">Fecha:</span>
@@ -173,15 +138,12 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <span class="label-card">
-                                            Medio de Contacto:
-                                        </span>
+                                        <span class="label-card">Medio de Contacto:</span>
                                         <br />
                                         <field name="survey_chanel" />
                                     </div>
-
-                                    <div
-                                        style="margin-top:10px; display:flex; justify-content:space-between; gap:12px;">
+                                    <!-- Comentarios -->
+                                    <div style="margin-top:10px; display:flex; justify-content:space-between; gap:12px;">
                                         <div style="flex:1; color:#374151;">
                                             <t t-if="record.comments.value">
                                                 <t t-esc="record.comments.value" />
@@ -190,46 +152,45 @@
                                                 <span style="color:#9ca3af;">Sin comentarios</span>
                                             </t>
                                         </div>
-
-
                                     </div>
-                                    <div
-                                        style="margin-top:10px; display:flex; gap:40px; flex-wrap:wrap;">
+                                    <!-- Evaluaciones del Servicio -->
+                                    <div style="margin-top:10px; display:flex; gap:40px; flex-wrap:wrap;">
                                         <div>
                                             <span class="label-card">Velocidad de internet:</span>
                                             <br />
                                             <field name="internet_speed" />
                                         </div>
                                         <div>
-                                            <span class="label-card">
-                                                Calidad de atención:</span>
+                                            <span class="label-card">Calidad de atención:</span>
                                             <br />
                                             <field name="atention_quality" />
                                         </div>
                                         <div>
-                                            <span class="label-card">
-                                                Tiempo de respuesta:</span>
+                                            <span class="label-card">Tiempo de respuesta:</span>
                                             <br />
                                             <field name="response_time" />
                                         </div>
                                         <div>
-                                            <span class="label-card">
-                                                Relación calidad/precio:</span>
+                                            <span class="label-card">Relación calidad/precio:</span>
                                             <br />
                                             <field name="qualityprice_ratio" />
                                         </div>
                                         <div>
-                                            <span class="label-card">
-                                                Confiabilidad del servicio:</span>
+                                            <span class="label-card">Confiabilidad del servicio:</span>
                                             <br />
                                             <field name="service_reliability" />
                                         </div>
                                         <div>
-                                            <span class="label-card">
-                                                Probabilidad de recomendación:</span>
+                                            <span class="label-card">Probabilidad de recomendación:</span>
                                             <br />
                                             <field name="recomedation_likelihood" />
                                         </div>
+                                    </div>
+                                    <!-- Estado -->
+                                    <div style="margin-top:10px;">
+                                        <span class="label-card">Estado:</span>
+                                        <br />
+                                        <field name="resolution_status" />
                                     </div>
                                 </div>
                             </div>
