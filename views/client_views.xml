@@ -14,6 +14,9 @@
       <tree>
         <field name="ci" class="ci-highlight" />
         <field name="name" />
+        <field name="second_name" />
+        <field name="client_type" widget="badge" />
+        <field name="ci"/>
         <field name="phone" />
         <field name="email"/>
         <field name="registration_date" />
@@ -21,6 +24,25 @@
       </tree>
     </field>
   </record>
+  <!-- Search View -->
+        <record id="internet_client_search" model="ir.ui.view">
+            <field name="name">internet.client.search</field>
+            <field name="model">internet.client</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" />
+                    <field name="second_name" />
+                    <field name="ci" />
+                    <field name="phone" />
+                    <field name="email" />
+                    <field name="client_type" />
+                    <filter name="active_clients" string="Active Clients" domain="[('active', '=', True)]"/>  
+                    
+                    
+                </search>
+            </field>
+        </record>
+
 
   <record id="view_internet_client_form" model="ir.ui.view">
     <field name="name">internet.client.form</field>
