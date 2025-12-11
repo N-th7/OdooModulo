@@ -36,27 +36,26 @@
     </field>
   </record>
 
-  <record id="view_internet_invoice_list_group" model="ir.ui.view">
-    <field name="name">internet.invoice.list.group</field>
+  <record id="view_internet_invoice_tree_group" model="ir.ui.view">
+    <field name="name">internet.invoice.tree.group</field>
     <field name="model">internet.invoice</field>
     <field name="arch" type="xml">
-      <list expand="1">
-        <groupby name="client_id">
-          <field name="name"/>
-          <field name="date_invoice"/>
-          <field name="due_date"/>
-          <field name="amount"/>
-          <field name="state"/>
-          <button name="action_register_payment" type="object" icon="fa-credit-card" string="Pagar"/>
-        </groupby>
-      </list>
+      <tree expand="1">
+        <field name="client_id"/>
+        <field name="name"/>
+        <field name="date_invoice"/>
+        <field name="due_date"/>
+        <field name="amount"/>
+        <field name="state"/>
+        <button name="action_register_payment" type="object" icon="fa-credit-card" string="Pagar"/>
+      </tree>
     </field>
   </record>
 
   <record id="action_internet_invoices" model="ir.actions.act_window">
     <field name="name">Facturas</field>
     <field name="res_model">internet.invoice</field>
-    <field name="view_mode">list,tree,form</field>
+    <field name="view_mode">tree,form</field>
   </record>
 
   <menuitem id="menu_internet_invoices" name="Facturas" parent="menu_internet_root" action="action_internet_invoices"/>
