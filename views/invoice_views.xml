@@ -37,44 +37,19 @@
   </record>
 
   <record id="view_internet_invoice_kanban" model="ir.ui.view">
-    <field name="name">internet.invoice.kanban.group</field>
+    <field name="name">internet.invoice.list.group</field>
     <field name="model">internet.invoice</field>
     <field name="arch" type="xml">
-      <kanban group_by="client_id">
-        <field name="client_id"/>
-        <field name="name"/>
-        <field name="date_invoice"/>
-        <field name="due_date"/>
-        <field name="amount"/>
-        <field name="state"/>
-        <templates>
-          <t t-name="kanban-box">
-            <div class="oe_kanban_card">
-              <div class="o_kanban_record_body">
-                <div>
-                  <strong><t t-esc="record.name.value"/></strong>
-                  <span t-attf-class="badge ms-2 #{record.state.value == 'pagada' and 'bg-success' or record.state.value == 'impaga' and 'bg-danger' or 'bg-warning'}">
-                    <t t-esc="record.state.value"/>
-                  </span>
-                </div>
-                <div class="small text-muted mt-2">
-                  <div>Emisión: <t t-esc="record.date_invoice.value"/></div>
-                  <div>Vence: <t t-esc="record.due_date.value"/></div>
-                </div>
-                <div class="mt-2">
-                  <div><small>Total: <strong>Bs <t t-esc="record.amount.value"/></strong></small></div>
-                  <div><small>Pendiente: <strong class="text-danger">Bs <t t-esc="record.amount.value"/></strong></small></div>
-                </div>
-                <div class="mt-2">
-                  <button name="action_register_payment" type="object" class="btn btn-primary btn-sm">
-                    Pagar
-                  </button>
-                </div>
-              </div>
-            </div>
-          </t>
-        </templates>
-      </kanban>
+      <list expand="1">
+        <groupby name="client_id">
+          <field name="name"/>
+          <field name="date_invoice"/>
+          <field name="due_date"/>
+          <field name="amount"/>
+          <field name="state"/>
+          <button name="action_register_payment" type="object" icon="fa-credit-card" string="Pagar"/>
+        </groupby>
+      </list>
     </field>
   </record>
 
