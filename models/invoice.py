@@ -20,7 +20,15 @@ class InternetInvoice(models.Model):
             vals['name'] = self.env['ir.sequence'].next_by_code('internet.invoice') or '/'
         if 'client_id' in vals and not vals.get('amount'):
             client = self.env['internet.client'].browse(vals['client_id'])
-            vals['amount'] = client.plan_id.price if client and client.plan_id else 0.0
+            # Obtener el precio del plan del primer contrato activo del cliente
+            if client and client.contract_ids:
+                active_contract = client.contract_ids.filtered(lambda c: c.plan_id)
+                if active_contract:
+                    vals['amount'] = active_contract[0].plan_id.price
+                else:
+                    vals['amount'] = 0.0
+            else:
+                vals['amount'] = 0.0
         if not vals.get('due_date'):
             vals['due_date'] = date.today()
         return super().create(vals)

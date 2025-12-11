@@ -37,54 +37,19 @@
   </record>
 
   <record id="view_internet_invoice_kanban" model="ir.ui.view">
-    <field name="name">internet.invoice.kanban</field>
+    <field name="name">internet.invoice.tree.group</field>
     <field name="model">internet.invoice</field>
     <field name="arch" type="xml">
-      <kanban group_by="client_id" default_group_by="client_id">
-        <field name="client_id"/>
-        <field name="name"/>
-        <field name="date_invoice"/>
-        <field name="due_date"/>
-        <field name="amount"/>
-        <field name="state"/>
-        <templates>
-          <t t-name="kanban-box">
-            <div class="oe_kanban_card">
-              <div class="o_kanban_record_body">
-                <div class="mt-2">
-                  <strong><t t-esc="record.name.value"/></strong>
-                  <span t-attf-class="badge ms-2 #{record.state.value == 'pagada' and 'bg-success' or record.state.value == 'impaga' and 'bg-danger' or 'bg-warning'}">
-                    <t t-esc="record.state.value"/>
-                  </span>
-                </div>
-                <div class="row mt-2 text-muted small">
-                  <div class="col-6">
-                    <small>Emisión: <t t-esc="record.date_invoice.value"/></small>
-                  </div>
-                  <div class="col-6">
-                    <small>Vence: <t t-esc="record.due_date.value"/></small>
-                  </div>
-                </div>
-                <div class="row mt-2">
-                  <div class="col-6">
-                    <small class="text-muted">Total:</small>
-                    <div><strong>Bs <t t-esc="record.amount.value"/></strong></div>
-                  </div>
-                  <div class="col-6">
-                    <small class="text-muted">Pendiente:</small>
-                    <div><strong class="text-danger">Bs <t t-esc="record.amount.value"/></strong></div>
-                  </div>
-                </div>
-                <div class="mt-3">
-                  <button name="action_register_payment" type="object" class="btn btn-primary btn-sm" string="Pagar">
-                    <i class="fa fa-credit-card"/> Pagar
-                  </button>
-                </div>
-              </div>
-            </div>
-          </t>
-        </templates>
-      </kanban>
+      <tree expand="1" default_order="client_id">
+        <groupby name="client_id">
+          <field name="name"/>
+          <field name="date_invoice"/>
+          <field name="due_date"/>
+          <field name="amount"/>
+          <field name="state"/>
+          <button name="action_register_payment" type="object" icon="fa-credit-card" string="Pagar"/>
+        </groupby>
+      </tree>
     </field>
   </record>
 
