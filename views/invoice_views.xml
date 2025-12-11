@@ -40,7 +40,7 @@
     <field name="name">internet.invoice.kanban</field>
     <field name="model">internet.invoice</field>
     <field name="arch" type="xml">
-      <kanban>
+      <kanban group_by="client_id" default_group_by="client_id">
         <field name="client_id"/>
         <field name="name"/>
         <field name="date_invoice"/>
@@ -49,28 +49,20 @@
         <field name="state"/>
         <templates>
           <t t-name="kanban-box">
-            <div class="oe_kanban_card oe_kanban_global_click">
+            <div class="oe_kanban_card">
               <div class="o_kanban_record_body">
-                <strong><t t-esc="record.client_id.value"/></strong>
-                <div class="text-muted small">
-                  <t t-if="record.client_id.record" t-esc="record.client_id.record.phone"/> 
-                  <t t-if="record.client_id.record"> | </t>
-                  <t t-if="record.client_id.record" t-esc="record.client_id.record.email"/>
-                </div>
                 <div class="mt-2">
                   <strong><t t-esc="record.name.value"/></strong>
-                  <span t-attf-class="badge #{record.state.value == 'pagada' and 'badge-success' or record.state.value == 'impaga' and 'badge-danger' or 'badge-warning'}">
+                  <span t-attf-class="badge ms-2 #{record.state.value == 'pagada' and 'bg-success' or record.state.value == 'impaga' and 'bg-danger' or 'bg-warning'}">
                     <t t-esc="record.state.value"/>
                   </span>
                 </div>
-                <div class="row mt-2">
+                <div class="row mt-2 text-muted small">
                   <div class="col-6">
-                    <small class="text-muted">Emisión:</small>
-                    <div><t t-esc="record.date_invoice.value"/></div>
+                    <small>Emisión: <t t-esc="record.date_invoice.value"/></small>
                   </div>
                   <div class="col-6">
-                    <small class="text-muted">Vence:</small>
-                    <div><t t-esc="record.due_date.value"/></div>
+                    <small>Vence: <t t-esc="record.due_date.value"/></small>
                   </div>
                 </div>
                 <div class="row mt-2">
