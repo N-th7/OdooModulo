@@ -36,7 +36,7 @@
     </field>
   </record>
 
-  <record id="view_internet_invoice_tree_group" model="ir.ui.view">
+  <record id="view_internet_invoice_kanban_group" model="ir.ui.view">
     <field name="name">internet.invoice.kanban</field>
     <field name="model">internet.invoice</field>
     <field name="arch" type="xml">
