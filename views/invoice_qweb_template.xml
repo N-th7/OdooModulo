@@ -9,7 +9,7 @@
               <span class="o_toggle_btn" onclick="toggleInvoices(this)" style="cursor:pointer; font-size:18px; user-select:none;">
                 <i class="fa fa-chevron-right" aria-hidden="true"></i>
               </span>
-              <strong t-esc="group[0].name + ' ' + group[0].last_name"/> - <span t-esc="group[0].ci"/> - <span t-esc="group[0].phone"/>
+              <strong t-esc="group[0].name + ' ' + group[0].second_name"/> - <span t-esc="group[0].ci"/> - <span t-esc="group[0].phone"/>
             </div>
             <div class="o_invoices_list" style="display:none;">
               <t t-foreach="group[1]" t-as="inv">
