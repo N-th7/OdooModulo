@@ -6,9 +6,12 @@
         <t t-foreach="invoices_grouped.items()" t-as="group">
           <div class="o_client_group">
             <div class="o_client_header">
+              <span class="o_toggle_btn" onclick="toggleInvoices(this)" style="cursor:pointer; font-size:18px; user-select:none;">
+                <i class="fa fa-chevron-right"></i>
+              </span>
               <strong t-esc="group[0].name"/> - <span t-esc="group[0].ci"/> - <span t-esc="group[0].phone"/>
             </div>
-            <div class="o_invoices_list">
+            <div class="o_invoices_list" style="display:none;">
               <t t-foreach="group[1]" t-as="inv">
                 <div class="o_invoice_card">
                   <div><strong t-esc="inv.name"/> (<span t-esc="inv.state"/>)</div>
@@ -21,7 +24,27 @@
           </div>
         </t>
       </div>
+      <script type="text/javascript">
+        function toggleInvoices(icon) {
+          var header = icon.closest('.o_client_header');
+          var group = header.parentElement;
+          var invoiceList = group.querySelector('.o_invoices_list');
+          var chevron = icon.querySelector('i');
+          if (invoiceList.style.display === 'none') {
+            invoiceList.style.display = '';
+            chevron.classList.remove('fa-chevron-right');
+            chevron.classList.add('fa-chevron-down');
+            icon.style.color = '#007bff';
+          } else {
+            invoiceList.style.display = 'none';
+            chevron.classList.remove('fa-chevron-down');
+            chevron.classList.add('fa-chevron-right');
+            icon.style.color = '#333';
+          }
+        }
+      </script>
       <style>
+        .o_toggle_btn { margin-right: 8px; }
         .o_invoice_container { padding: 20px; }
         .o_client_group { background: #fff; margin-bottom: 20px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.07); }
         .o_client_header { background: #f5f5f5; padding: 10px 20px; font-size: 16px; border-bottom: 1px solid #eee; }
