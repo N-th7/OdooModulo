@@ -7,14 +7,26 @@
           <div class="o_client_group">
             <div class="o_client_header">
               <span class="o_toggle_btn" onclick="toggleInvoices(this)" style="cursor:pointer; font-size:18px; user-select:none;">
-                <i class="fa fa-chevron-right"></i>
+                <i class="fa fa-chevron-right" aria-hidden="true"></i>
               </span>
               <strong t-esc="group[0].name"/> - <span t-esc="group[0].ci"/> - <span t-esc="group[0].phone"/>
             </div>
             <div class="o_invoices_list" style="display:none;">
               <t t-foreach="group[1]" t-as="inv">
                 <div class="o_invoice_card">
-                  <div><strong t-esc="inv.name"/> (<span t-esc="inv.state"/>)</div>
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                      <strong t-esc="inv.name"/> (<span t-esc="inv.state"/>)
+                    </div>
+                    <t t-if="inv.state == 'impaga'">
+                      <form method="post" action="/custom_clients/pay_invoice" style="margin:0;">
+                        <input type="hidden" name="invoice_id" t-att-value="inv.id"/>
+                        <button type="submit" class="btn btn-primary btn-sm" style="margin-left:10px;">
+                          <i class="fa fa-credit-card" aria-hidden="true"></i> Pagar
+                        </button>
+                      </form>
+                    </t>
+                  </div>
                   <div>Emisión: <t t-esc="inv.date_invoice"/> | Vence: <t t-esc="inv.due_date"/></div>
                   <div>Total: <strong>Bs <t t-esc="inv.amount"/></strong></div>
                   <div>Pendiente: <strong class="text-danger">Bs <t t-esc="inv.amount if inv.state == 'impaga' else '0.00'"/></strong></div>
@@ -44,6 +56,7 @@
         }
       </script>
       <style>
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
         .o_toggle_btn { margin-right: 8px; }
         .o_invoice_container { padding: 20px; }
         .o_client_group { background: #fff; margin-bottom: 20px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.07); }
