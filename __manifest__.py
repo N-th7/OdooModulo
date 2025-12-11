@@ -5,7 +5,7 @@
     'summary': 'Clientes, planes, facturación mensual y cortes automáticos.',
     'author': 'Nathaly García',
     'website': 'https://www.allygo.dev',
-    'depends': ['base'],
+    'depends': ['base', 'web'],
     'data': [
         'security/ir.model.access.csv',
         'data/sequences.xml',
@@ -16,6 +16,7 @@
         'views/plan_views.xml',
         'views/client_views.xml',
         'views/invoice_views.xml',
+        'views/invoice_qweb_template.xml',
         'views/contract_views.xml',
         'views/survey_views.xml',
         

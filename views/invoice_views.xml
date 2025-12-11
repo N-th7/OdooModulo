@@ -221,5 +221,13 @@
 
   <menuitem id="menu_internet_invoices" name="Facturas" parent="menu_internet_root" action="action_internet_invoices"/>
 
+  <record id="action_custom_invoice_dashboard" model="ir.actions.act_url">
+    <field name="name">Facturas agrupadas por cliente</field>
+    <field name="type">ir.actions.act_url</field>
+    <field name="url">/custom_clients/invoice_dashboard</field>
+    <field name="target">self</field>
+  </record>
+
+  <menuitem id="menu_custom_invoice_dashboard" name="Dashboard Facturas" parent="menu_internet_root" action="action_custom_invoice_dashboard"/>
 
 </odoo>

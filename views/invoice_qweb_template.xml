@@ -1,0 +1,33 @@
+<odoo>
+  <template id="custom_invoice_dashboard" name="Facturas agrupadas por cliente">
+    <t t-call="web.layout">
+      <div class="o_invoice_container">
+        <h2>Facturas agrupadas por cliente</h2>
+        <t t-foreach="invoices_grouped.items()" t-as="group">
+          <div class="o_client_group">
+            <div class="o_client_header">
+              <strong t-esc="group[0].name"/> - <span t-esc="group[0].ci"/> - <span t-esc="group[0].phone"/>
+            </div>
+            <div class="o_invoices_list">
+              <t t-foreach="group[1]" t-as="inv">
+                <div class="o_invoice_card">
+                  <div><strong t-esc="inv.name"/> (<span t-esc="inv.state"/>)</div>
+                  <div>Emisión: <t t-esc="inv.date_invoice"/> | Vence: <t t-esc="inv.due_date"/></div>
+                  <div>Total: <strong>Bs <t t-esc="inv.amount"/></strong></div>
+                  <div>Pendiente: <strong class="text-danger">Bs <t t-esc="inv.amount if inv.state == 'impaga' else '0.00'"/></strong></div>
+                </div>
+              </t>
+            </div>
+          </div>
+        </t>
+      </div>
+      <style>
+        .o_invoice_container { padding: 20px; }
+        .o_client_group { background: #fff; margin-bottom: 20px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.07); }
+        .o_client_header { background: #f5f5f5; padding: 10px 20px; font-size: 16px; border-bottom: 1px solid #eee; }
+        .o_invoices_list { padding: 10px 20px; }
+        .o_invoice_card { margin-bottom: 10px; padding: 10px; background: #fafafa; border-left: 4px solid #007bff; border-radius: 2px; }
+      </style>
+    </t>
+  </template>
+</odoo>
