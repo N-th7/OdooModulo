@@ -37,54 +37,179 @@
   </record>
 
   <record id="view_internet_invoice_kanban_group" model="ir.ui.view">
-    <field name="name">internet.invoice.kanban</field>
+    <field name="name">internet.invoice.qweb</field>
     <field name="model">internet.invoice</field>
     <field name="arch" type="xml">
-      <kanban group_by="client_id" class="o_kanban_mobile">
-        <field name="client_id"/>
-        <field name="name"/>
-        <field name="date_invoice"/>
-        <field name="due_date"/>
-        <field name="amount"/>
-        <field name="state"/>
-        <templates>
-          <t t-name="kanban-box">
-            <div class="oe_kanban_card">
-              <div class="o_kanban_record_body">
-                <div class="row">
-                  <div class="col-8">
-                    <strong><t t-esc="record.name.value"/></strong>
+      <div class="o_invoice_container">
+        <div class="o_invoice_header">
+          <h3>Facturas</h3>
+          <div class="o_invoice_stats">
+            <span class="o_stat">Total Facturas: <strong t-esc="len(docs)"/></span>
+            <span class="o_stat">Ingresos: <strong class="text-success">Bs <t t-esc="sum([inv.amount for inv in docs if inv.state == 'pagada'])"/></strong></span>
+            <span class="o_stat">Pendiente: <strong class="text-danger">Bs <t t-esc="sum([inv.amount for inv in docs if inv.state == 'impaga'])"/></strong></span>
+            <span class="o_stat">Vendidas: <strong t-esc="len([inv for inv in docs if inv.state == 'pagada'])"></strong></span>
+          </div>
+        </div>
+        
+        <div class="o_invoice_list">
+          <t t-foreach="docs.sorted(key=lambda x: x.client_id.id)" t-as="invoice">
+            <t t-if="invoice_index == 0 or invoice.client_id.id != docs.sorted(key=lambda x: x.client_id.id)[invoice_index - 1].client_id.id">
+              <div class="o_client_group">
+                <div class="o_client_header">
+                  <div class="o_client_info">
+                    <i class="fa fa-chevron-down o_toggle_btn"></i>
+                    <strong t-esc="invoice.client_id.name"/>
+                    <span class="o_client_code" t-esc="invoice.client_id.ci"/>
+                    <span class="o_client_phone" t-esc="invoice.client_id.phone"/>
+                    <span class="o_client_plan" t-esc="invoice.client_id.contract_ids[0].plan_id.name if invoice.client_id.contract_ids else 'Sin Plan'"/>
                   </div>
-                  <div class="col-4 text-right">
-                    <span t-attf-class="badge #{record.state.value == 'pagada' and 'badge-success' or record.state.value == 'impaga' and 'badge-danger' or 'badge-warning'}">
-                      <t t-esc="record.state.value"/>
+                  <div class="o_client_stats">
+                    <span t-if="len([inv for inv in docs if inv.client_id.id == invoice.client_id.id and inv.state == 'impaga']) > 0" class="o_pending_badge">
+                      <t t-esc="len([inv for inv in docs if inv.client_id.id == invoice.client_id.id and inv.state == 'impaga'])"/> factura(s) pendiente(s)
                     </span>
+                    <span class="o_total_debt">Deuda total: <strong class="text-danger">Bs <t t-esc="sum([inv.amount for inv in docs if inv.client_id.id == invoice.client_id.id and inv.state == 'impaga'])"/></strong></span>
                   </div>
                 </div>
-                <div class="text-muted small mt-2">
-                  <div>Emisión: <t t-esc="record.date_invoice.value"/></div>
-                  <div>Vence: <t t-esc="record.due_date.value"/></div>
-                </div>
-                <div class="row mt-3">
-                  <div class="col-6">
-                    <small class="text-muted">Total:</small>
-                    <div><strong>Bs <t t-esc="record.amount.value"/></strong></div>
-                  </div>
-                  <div class="col-6">
-                    <small class="text-muted">Pendiente:</small>
-                    <div><strong class="text-danger">Bs <t t-esc="record.amount.value"/></strong></div>
-                  </div>
-                </div>
-                <div class="mt-3">
-                  <button name="action_register_payment" type="object" class="btn btn-primary btn-sm btn-block">
-                    <i class="fa fa-credit-card"/> Pagar
-                  </button>
+                
+                <div class="o_invoices_list">
+                  <t t-foreach="docs.filtered(lambda x: x.client_id.id == invoice.client_id.id)" t-as="inv">
+                    <div class="o_invoice_card">
+                      <div class="o_invoice_number">
+                        <strong t-esc="inv.name"/>
+                        <span t-attf-class="badge #{inv.state == 'pagada' and 'badge-success' or 'badge-danger'}" t-esc="inv.state"/>
+                      </div>
+                      <div class="o_invoice_dates">
+                        <span>Emisión: <t t-esc="inv.date_invoice"/></span>
+                        <span>Vence: <t t-esc="inv.due_date"/></span>
+                      </div>
+                      <div class="o_invoice_amounts">
+                        <div>Total: <strong>Bs <t t-esc="inv.amount"/></strong></div>
+                        <div>Pendiente: <strong class="text-danger">Bs <t t-esc="inv.amount if inv.state == 'impaga' else '0.00'"/></strong></div>
+                      </div>
+                      <div class="o_invoice_actions">
+                        <button t-if="inv.state == 'impaga'" class="btn btn-primary btn-sm">
+                          <i class="fa fa-credit-card"/> Pagar
+                        </button>
+                      </div>
+                    </div>
+                  </t>
                 </div>
               </div>
-            </div>
+            </t>
           </t>
-        </templates>
-      </kanban>
+        </div>
+      </div>
+      
+      <style>
+        .o_invoice_container {
+          padding: 20px;
+          background-color: #f5f5f5;
+        }
+        .o_invoice_header {
+          background-color: white;
+          padding: 20px;
+          margin-bottom: 20px;
+          border-radius: 4px;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .o_invoice_header h3 {
+          margin-top: 0;
+        }
+        .o_invoice_stats {
+          display: flex;
+          gap: 30px;
+          margin-top: 15px;
+        }
+        .o_stat {
+          font-size: 14px;
+        }
+        .o_client_group {
+          background-color: white;
+          margin-bottom: 15px;
+          border-radius: 4px;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+          overflow: hidden;
+        }
+        .o_client_header {
+          background-color: #f9f9f9;
+          padding: 15px 20px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          cursor: pointer;
+          border-bottom: 1px solid #e0e0e0;
+        }
+        .o_client_info {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          flex: 1;
+        }
+        .o_toggle_btn {
+          cursor: pointer;
+          font-size: 16px;
+        }
+        .o_client_code {
+          font-size: 12px;
+          color: #666;
+        }
+        .o_client_phone {
+          font-size: 12px;
+          color: #666;
+        }
+        .o_client_plan {
+          font-size: 12px;
+          color: #999;
+          background-color: #e8e8e8;
+          padding: 2px 8px;
+          border-radius: 3px;
+        }
+        .o_client_stats {
+          display: flex;
+          gap: 20px;
+          align-items: center;
+          text-align: right;
+        }
+        .o_pending_badge {
+          background-color: #fff3cd;
+          color: #856404;
+          padding: 4px 8px;
+          border-radius: 3px;
+          font-size: 12px;
+        }
+        .o_invoices_list {
+          padding: 10px;
+        }
+        .o_invoice_card {
+          padding: 15px;
+          margin-bottom: 10px;
+          background-color: #fafafa;
+          border-left: 4px solid #007bff;
+          border-radius: 2px;
+        }
+        .o_invoice_number {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 10px;
+        }
+        .o_invoice_dates {
+          display: flex;
+          gap: 30px;
+          font-size: 13px;
+          color: #666;
+          margin-bottom: 10px;
+        }
+        .o_invoice_amounts {
+          display: flex;
+          gap: 30px;
+          font-size: 13px;
+          margin-bottom: 10px;
+        }
+        .o_invoice_actions {
+          margin-top: 10px;
+        }
+      </style>
     </field>
   </record>
 
