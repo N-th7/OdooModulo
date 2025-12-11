@@ -41,13 +41,21 @@
     <field name="model">internet.invoice</field>
     <field name="arch" type="xml">
       <kanban>
+        <field name="client_id"/>
+        <field name="name"/>
+        <field name="date_invoice"/>
+        <field name="due_date"/>
+        <field name="amount"/>
+        <field name="state"/>
         <templates>
           <t t-name="kanban-box">
             <div class="oe_kanban_card oe_kanban_global_click">
               <div class="o_kanban_record_body">
                 <strong><t t-esc="record.client_id.value"/></strong>
                 <div class="text-muted small">
-                  <t t-esc="record.client_id.record.phone"/> | <t t-esc="record.client_id.record.email"/>
+                  <t t-if="record.client_id.record" t-esc="record.client_id.record.phone"/> 
+                  <t t-if="record.client_id.record"> | </t>
+                  <t t-if="record.client_id.record" t-esc="record.client_id.record.email"/>
                 </div>
                 <div class="mt-2">
                   <strong><t t-esc="record.name.value"/></strong>
