@@ -19,6 +19,9 @@
         'views/invoice_qweb_template.xml',
         'views/contract_views.xml',
         'views/survey_views.xml',
+        'views/assets.xml',
+        'views/menu_items.xml',
+        "views/menu.xml",
         
     ],
     'installable': True,
@@ -34,6 +37,9 @@
         'custom_clients/static/src/js/survey_kanban.js',
         'custom_clients/static/src/js/survey_kanban_renderer.js',
         'custom_clients/static/src/js/internet_survey_kanban.js',
+        'custom_clients/static/src/js/invoice_dashboard.js',
+        'custom_clients/static/src/css/invoice_dashboard.css',
+        
     ],
     },
 
