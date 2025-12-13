@@ -40,7 +40,7 @@
   <record id="action_internet_invoices" model="ir.actions.act_window">
     <field name="name">Facturas</field>
     <field name="res_model">internet.invoice</field>
-    <field name="view_mode">kanban,tree,form</field>
+    <field name="view_mode">kanban,tree,form,custom_invoice_dashboard</field>
   </record>
 
   <menuitem id="menu_internet_invoices" name="Facturas" parent="menu_internet_root"
