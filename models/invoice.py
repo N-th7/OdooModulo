@@ -24,7 +24,7 @@ class InternetInvoice(models.Model):
     ], string='Estado', default='impaga', required=True)
     
     # Campos anteriores mantenidos para compatibilidad
-    client_id = fields.Many2one('internet.client', string='Cliente (Legacy)', required=True, ondelete='cascade')
+    client_id = fields.Many2one('internet.client', string='Cliente (Legacy)', compute='_compute_client_id', store=True)
     date_invoice = fields.Date('Fecha de emisión', default=fields.Date.context_today)
     due_date = fields.Date('Fecha de vencimiento')
     amount = fields.Float('Monto', digits=(16,2))
@@ -33,6 +33,11 @@ class InternetInvoice(models.Model):
     # Relaciones según el diagrama
     pago_ids = fields.One2many('internet.pagos', 'factura_id', string='Pagos')
     aviso_cobro_ids = fields.One2many('internet.aviso_cobro', 'factura_id', string='Avisos de Cobro')
+    
+    @api.depends('contrato_id')
+    def _compute_client_id(self):
+        for record in self:
+            record.client_id = record.contrato_id.cliente_id if record.contrato_id else False
     
     @api.depends('pago_ids.monto')
     def _compute_monto_pagado(self):
@@ -57,19 +62,21 @@ class InternetInvoice(models.Model):
     def create(self, vals):
         if vals.get('name', 'New') == 'New':
             vals['name'] = self.env['ir.sequence'].next_by_code('internet.invoice') or '/'
-        if 'client_id' in vals and not vals.get('amount'):
-            client = self.env['internet.client'].browse(vals['client_id'])
-            # Obtener el precio del plan del primer contrato activo del cliente
-            if client and client.contract_ids:
-                active_contract = client.contract_ids.filtered(lambda c: c.plan_id)
-                if active_contract:
-                    vals['amount'] = active_contract[0].plan_id.price
-                else:
-                    vals['amount'] = 0.0
-            else:
-                vals['amount'] = 0.0
-        if not vals.get('due_date'):
+        
+        # Sincronizar campos nuevos con legacy
+        if 'contrato_id' in vals and vals.get('contrato_id'):
+            contrato = self.env['internet.contract'].browse(vals['contrato_id'])
+            if contrato.plan_id and not vals.get('monto_factura'):
+                vals['monto_factura'] = contrato.plan_id.price
+                vals['amount'] = contrato.plan_id.price
+                
+        if not vals.get('due_date') and not vals.get('fecha_vencimiento'):
             vals['due_date'] = date.today()
+            vals['fecha_vencimiento'] = date.today()
+            
+        if vals.get('fecha_factura') and not vals.get('date_invoice'):
+            vals['date_invoice'] = vals['fecha_factura']
+            
         return super().create(vals)
 
     def action_register_payment(self):

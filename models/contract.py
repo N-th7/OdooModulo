@@ -23,27 +23,29 @@ class InternetContract(models.Model):
     coordenadas = fields.Char('Coordenadas')
 
     # Campos anteriores mantenidos para compatibilidad
-    client_id = fields.Many2one('internet.client', string='Cliente (Legacy)', ondelete='cascade')
     start_date = fields.Date('Fecha de Inicio', required=True)
     end_date = fields.Date('Fecha de Fin')    
 
     contract_type = fields.Selection(  [
         ('mensual', 'Mensual'),
         ('anual', 'Anual'),
-    ], default='mensual', string='Tipo de Contrato',  placeholder='Seleccione el tipo de contrato' )
+    ], default='mensual', string='Tipo de Contrato' )
 
-    address = fields.Char(string='Dirección', required=True, placeholder='Calle, número, ciudad')
-    zone = fields.Char(string='Zona', placeholder='Zona o barrio', required=True)
-    gps = fields.Char( string='Coordenadas GPS', placeholder='Latitud, Longitud' )
-    reference = fields.Char( string='Referencia', placeholder='Puntos de referencia cercanos' )
-    url_location = fields.Char( string='URL de Ubicación', placeholder='Enlace a Google Maps' )
+    address = fields.Char(string='Dirección', required=True)
+    zone = fields.Char(string='Zona', required=True)
+    gps = fields.Char( string='Coordenadas GPS' )
+    reference = fields.Char( string='Referencia' )
+    url_location = fields.Char( string='URL de Ubicación' )
     requires_invoice = fields.Boolean( string='Requiere Factura', default=False )
     observations = fields.Text( string='Observaciones')
     active = fields.Boolean(default=True)
 
+    # Campo de compatibilidad
+    client_id = fields.Many2one(related='cliente_id', string='Cliente (Legacy)', store=True, readonly=True)
+
     # Relaciones según el diagrama
     instalacion_ids = fields.One2many('internet.instalacion', 'contrato_id', string='Instalaciones')
-    factura_ids = fields.One2many('internet.invoice', 'contract_id', string='Facturas')
+    invoice_ids = fields.One2many('internet.invoice', 'contrato_id', string='Facturas')
     ticket_ids = fields.One2many('internet.tickets', 'contrato_id', string='Tickets')
     aviso_cobro_ids = fields.One2many('internet.aviso_cobro', 'contrato_id', string='Avisos de Cobro')
 
@@ -76,11 +78,10 @@ class InternetContract(models.Model):
             return recs.name_get()
 
         domain = [
-            '|', '|', '|', '|', '|',
-            ('code', operator, code),
-            ('start_date', operator, start_date),
-            ('state', operator, state),
-            ('id', operator, name),
+            '|', '|', '|',
+            ('code', operator, name),
+            ('start_date', operator, name),
+            ('state', operator, name),
         ]
 
         recs = self.search(domain + args, limit=limit)
