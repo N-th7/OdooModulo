@@ -57,5 +57,4 @@
       </script>
     </t>
   </template>
-  <menuitem id="menu_internet_invoices" name="Facturas" parent="menu_internet_root" action="action_internet_invoices"/> 
 </odoo>

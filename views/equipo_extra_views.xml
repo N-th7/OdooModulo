@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Tree view -->
+  <record id="view_equipo_extra_tree" model="ir.ui.view">
+    <field name="name">internet.equipo_extra.tree</field>
+    <field name="model">internet.equipo_extra</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="codigo"/>
+        <field name="instalacion_id"/>
+        <field name="tipo"/>
+        <field name="estado"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- Form view -->
+  <record id="view_equipo_extra_form" model="ir.ui.view">
+    <field name="name">internet.equipo_extra.form</field>
+    <field name="model">internet.equipo_extra</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <group>
+              <field name="codigo"/>
+              <field name="instalacion_id"/>
+              <field name="tipo"/>
+            </group>
+            <group>
+              <field name="estado"/>
+              <field name="numero_serie"/>
+              <field name="modelo"/>
+            </group>
+          </group>
+          <group>
+            <field name="descripcion"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Action -->
+  <record id="action_internet_equipo_extra" model="ir.actions.act_window">
+    <field name="name">Equipos Extra</field>
+    <field name="res_model">internet.equipo_extra</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <!-- Menu -->
+  <menuitem id="menu_internet_equipo_extra" name="Equipos Extra" parent="menu_internet_root" action="action_internet_equipo_extra"/>
+</odoo>

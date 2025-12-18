@@ -24,10 +24,11 @@
         'views/tickets_views.xml',
         'views/pagos_views.xml',
         'views/aviso_cobro_views.xml',
+        'views/equipo_extra_views.xml',
+        'views/onu_views.xml',
+        'views/rango_ip_views.xml',
         'views/puerto_views.xml',
         'views/assets.xml',
-        'views/menu_items.xml',
-        "views/menu.xml",
         
     ],
     'installable': True,

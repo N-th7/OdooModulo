@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Tree view -->
+  <record id="view_rango_ip_tree" model="ir.ui.view">
+    <field name="name">internet.rango_ip.tree</field>
+    <field name="model">internet.rango_ip</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="codigo"/>
+        <field name="instalacion_id"/>
+        <field name="ip_inicio"/>
+        <field name="ip_fin"/>
+        <field name="estado"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- Form view -->
+  <record id="view_rango_ip_form" model="ir.ui.view">
+    <field name="name">internet.rango_ip.form</field>
+    <field name="model">internet.rango_ip</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <group>
+              <field name="codigo"/>
+              <field name="instalacion_id"/>
+              <field name="ip_inicio"/>
+            </group>
+            <group>
+              <field name="ip_fin"/>
+              <field name="estado"/>
+              <field name="gateway"/>
+            </group>
+          </group>
+          <group>
+            <field name="observaciones"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Action -->
+  <record id="action_internet_rango_ip" model="ir.actions.act_window">
+    <field name="name">Rangos IP</field>
+    <field name="res_model">internet.rango_ip</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <!-- Menu -->
+  <menuitem id="menu_internet_rango_ip" name="Rangos IP" parent="menu_internet_root" action="action_internet_rango_ip"/>
+</odoo>
