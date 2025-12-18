@@ -21,7 +21,7 @@ class Pagos(models.Model):
 
     # Campos computados y relacionales
     cliente_id = fields.Many2one(related='factura_id.client_id', string='Cliente', store=True)
-    contrato_id = fields.Many2one(related='factura_id.contract_id', string='Contrato', store=True)
+    contrato_id = fields.Many2one(related='factura_id.contrato_id', string='Contrato', store=True)
 
     name = fields.Char('Nombre', compute='_compute_name', store=True)
 

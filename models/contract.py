@@ -26,18 +26,18 @@ class InternetContract(models.Model):
     start_date = fields.Date('Fecha de Inicio', required=True)
     end_date = fields.Date('Fecha de Fin')    
 
-    contract_type = fields.Selection(  [
+    contract_type = fields.Selection([
         ('mensual', 'Mensual'),
         ('anual', 'Anual'),
-    ], default='mensual', string='Tipo de Contrato' )
+    ], default='mensual', string='Tipo de Contrato')
 
     address = fields.Char(string='Dirección', required=True)
     zone = fields.Char(string='Zona', required=True)
-    gps = fields.Char( string='Coordenadas GPS' )
-    reference = fields.Char( string='Referencia' )
-    url_location = fields.Char( string='URL de Ubicación' )
-    requires_invoice = fields.Boolean( string='Requiere Factura', default=False )
-    observations = fields.Text( string='Observaciones')
+    gps = fields.Char(string='Coordenadas GPS')
+    reference = fields.Char(string='Referencia')
+    url_location = fields.Char(string='URL de Ubicación')
+    requires_invoice = fields.Boolean(string='Requiere Factura', default=False)
+    observations = fields.Text(string='Observaciones')
     active = fields.Boolean(default=True)
 
     # Campo de compatibilidad
