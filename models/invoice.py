@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-from datetime import date
+from datetime import date, timedelta
 
 class InternetInvoice(models.Model):
     _name = 'internet.invoice'
@@ -86,24 +86,71 @@ class InternetInvoice(models.Model):
     @api.model
     def create(self, vals):
         if vals.get('name', 'New') == 'New':
-            vals['name'] = self.env['ir.sequence'].next_by_code('internet.invoice') or 'New'
+            # Generar número de factura con formato: [numero de contrato-dia-mes-año-secuencia]
+            contract_id = vals.get('contrato_id')
+            if contract_id:
+                contract = self.env['internet.contract'].browse(contract_id)
+                contract_code = contract.code if contract.code != 'New' else 'SIN-CODIGO'
+            else:
+                contract_code = 'SIN-CONTRATO'
+            
+            # Obtener fecha actual
+            today = fields.Date.context_today(self)
+            day = today.strftime('%d')
+            month = today.strftime('%m') 
+            year = today.strftime('%Y')
+            
+            # Buscar facturas existentes con el mismo patrón para evitar duplicados
+            base_pattern = f"{contract_code}-{day}-{month}-{year}"
+            existing_count = self.search_count([
+                ('name', 'like', base_pattern + '%')
+            ])
+            
+            # Generar número con secuencia si hay duplicados
+            if existing_count > 0:
+                vals['name'] = f"{base_pattern}-{existing_count + 1:02d}"
+            else:
+                vals['name'] = base_pattern
         return super(InternetInvoice, self).create(vals)
 
     @api.model
     def _cron_generate_invoices(self):
-        """Crear una factura por cada cliente activo, una vez al mes."""
-        clients = self.env['internet.client'].search([('active', '=', True)])
+        """Crear una factura por cada contrato activo con el monto del plan, cada 18 del mes."""
+        # Buscar contratos activos
+        contracts = self.env['internet.contract'].search([
+            ('estado', '=', 'activo'),
+            ('cliente_id', '!=', False),
+            ('plan_id', '!=', False)
+        ])
+        
         today = fields.Date.context_today(self)
-        for client in clients:
-            exists = self.search([
-                ('client_id', '=', client.id),
-                ('date_invoice', '=', today)
+        
+        # Solo generar facturas si es día 18
+        if today.day != 18:
+            return
+            
+        for contract in contracts:
+            # Verificar si ya existe factura para este contrato este mes
+            existing_invoice = self.search([
+                ('contrato_id', '=', contract.id),
+                ('fecha_factura', '>=', today.replace(day=1)),  # Desde el 1ro del mes
+                ('fecha_factura', '<=', today)  # Hasta hoy
             ], limit=1)
-            if exists:
+            
+            if existing_invoice:
                 continue
+                
+            # Calcular fecha de vencimiento (30 días después)
+            due_date = today + timedelta(days=30)
+            
+            # Crear factura con monto del plan
+            plan_amount = contract.plan_id.price if contract.plan_id else 0.0
+            
             self.create({
-                'client_id': client.id,
-                'date_invoice': today,
-                'due_date': today,  
+                'contrato_id': contract.id,
+                'fecha_factura': today,
+                'fecha_vencimiento': due_date,
+                'monto_factura': plan_amount,
+                'estado': 'impaga'
             })
 

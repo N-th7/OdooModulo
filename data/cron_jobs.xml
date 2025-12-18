@@ -2,11 +2,12 @@
   <!-- Cron: generar facturas mensuales -->
   <record id="cron_generate_monthly_invoices" model="ir.cron">
     <field name="name">Generar facturas mensuales</field>
-    <field name="model_id" ref="model_internet_client"/>
+    <field name="model_id" ref="model_internet_invoice"/>
     <field name="state">code</field>
     <field name="code">model = env['internet.invoice']; model._cron_generate_invoices()</field>
     <field name="interval_number">1</field>
     <field name="interval_type">months</field>
+    <field name="nextcall">2025-12-18 12:30:00</field>
     <field name="numbercall">-1</field>
     <field name="active">True</field>
   </record>
