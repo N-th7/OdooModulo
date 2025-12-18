@@ -8,9 +8,9 @@ class InternetContract(models.Model):
     code = fields.Char(string="Código", readonly=True, copy=False, default='New')
 
     # Campos según el diagrama
-    cliente_id = fields.Many2one('internet.client', string='Cliente', required=True, ondelete='cascade')
+    cliente_id = fields.Many2one('internet.client', string='Cliente')
     plan_id = fields.Many2one('internet.plan', string='Plan', required=True)
-    direccion_servicio = fields.Text('Dirección del Servicio', required=True)
+    direccion_servicio = fields.Text('Dirección del Servicio')
     fecha_activacion = fields.Date('Fecha de Activación')
     fecha_instalacion_programada = fields.Date('Fecha Instalación Programada')
     estado = fields.Selection([
@@ -31,8 +31,8 @@ class InternetContract(models.Model):
         ('anual', 'Anual'),
     ], default='mensual', string='Tipo de Contrato')
 
-    address = fields.Char(string='Dirección', required=True)
-    zone = fields.Char(string='Zona', required=True)
+    address = fields.Char(string='Dirección')
+    zone = fields.Char(string='Zona')
     gps = fields.Char(string='Coordenadas GPS')
     reference = fields.Char(string='Referencia')
     url_location = fields.Char(string='URL de Ubicación')
@@ -66,7 +66,11 @@ class InternetContract(models.Model):
     def name_get(self):
         result = []
         for rec in self:
-            label = f"{rec.code} {rec.client_id.name} {rec.client_id.second_name}({rec.client_id.ci}) - {rec.plan_id.name}"
+            client_name = ''
+            if rec.cliente_id:
+                client_name = f"{rec.cliente_id.name or ''} {rec.cliente_id.second_name or ''}({rec.cliente_id.ci or ''})".strip()
+            plan_name = rec.plan_id.name if rec.plan_id else 'Sin Plan'
+            label = f"{rec.code} {client_name} - {plan_name}"
             result.append((rec.id, label))
         return result
 
