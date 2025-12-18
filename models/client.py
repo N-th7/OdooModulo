@@ -4,20 +4,20 @@ from odoo.exceptions import ValidationError
 class InternetClient(models.Model):
     _name = 'internet.client'
     _description = 'Cliente de Internet'
-    _rec_name = False  
+    _rec_name = 'nombre_completo'  # Use computed field as display name
 
     _sql_constraints = [
         ('unique_ci', 'unique(ci)', 'El CI / NIT ya está registrado para otro cliente.')
     ]
 
     # Campos según el diagrama
-    cod_cliente = fields.Char('Código de Cliente', required=True)
-    nombre_cliente = fields.Char('Nombre Cliente', required=True)
+    cod_cliente = fields.Char('Código de Cliente', required=True, readonly=True, copy=False, default='New')
+    nombre_cliente = fields.Char('Nombre Cliente')
     nombre_completo = fields.Char('Nombre Completo', compute='_compute_nombre_completo', store=True)
     numero_telefono = fields.Char('Número Teléfono')
-    numero_celular = fields.Char('Número Celular', required=True)
+    numero_celular = fields.Char('Número Celular')
     carnet = fields.Char('Carnet')
-    ci_ro = fields.Char('CI/RO', required=True)
+    # Using 'ci' field from legacy section to avoid duplication
     direccion = fields.Text('Dirección')
     estado = fields.Selection([
         ('activo', 'Activo'),
@@ -68,10 +68,14 @@ class InternetClient(models.Model):
     ticket_ids = fields.One2many('internet.tickets', 'cliente_id', string='Tickets')
     ticket_count = fields.Integer(string='N° Tickets', compute='_compute_ticket_count')
 
-    @api.depends('name', 'second_name')
+    @api.depends('nombre_cliente', 'name', 'second_name')
     def _compute_nombre_completo(self):
         for record in self:
-            record.nombre_completo = f"{record.name or ''} {record.second_name or ''}".strip()
+            # Use nombre_cliente first, fallback to name + second_name for compatibility
+            if record.nombre_cliente:
+                record.nombre_completo = record.nombre_cliente
+            else:
+                record.nombre_completo = f"{record.name or ''} {record.second_name or ''}".strip()
 
     @api.depends('ticket_ids')
     def _compute_ticket_count(self):
@@ -135,3 +139,9 @@ class InternetClient(models.Model):
         for rec in self:
             if self.search([('ci', '=', rec.ci), ('id', '!=', rec.id)]):
                 raise ValidationError("El CI ya está registrado.")
+
+    @api.model
+    def create(self, vals):
+        if vals.get('cod_cliente', 'New') == 'New':
+            vals['cod_cliente'] = self.env['ir.sequence'].next_by_code('internet.client') or 'New'
+        return super(InternetClient, self).create(vals)

@@ -1,4 +1,14 @@
 <odoo>
+  <!-- Sequence for Internet Clients -->
+  <record id="seq_internet_client" model="ir.sequence">
+    <field name="name">Internet Client Code</field>
+    <field name="code">internet.client</field>
+    <field name="prefix">CLI</field>
+    <field name="padding">5</field>
+    <field name="company_id" eval="False"/>
+  </record>
+
+  <!-- Sequence for Internet Invoices -->
   <record id="seq_internet_contract" model="ir.sequence">
     <field name="name">Internet Invoice</field>
     <field name="code">internet.invoice</field>
