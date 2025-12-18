@@ -5,11 +5,14 @@
     <field name="arch" type="xml">
       <tree>
         <field name="name" />
+        <field name="contrato_id" />
         <field name="client_id" />
-        <field name="date_invoice" />
-        <field name="due_date" />
-        <field name="amount" />
-        <field name="state" />
+        <field name="fecha_factura" />
+        <field name="fecha_vencimiento" />
+        <field name="monto_factura" />
+        <field name="monto_pagado" />
+        <field name="saldo_pendiente" />
+        <field name="estado" widget="badge" />
       </tree>
     </field>
   </record>
@@ -21,13 +24,28 @@
       <form>
         <sheet>
           <group>
-            <field name="name" />
-            <field name="client_id" />
-            <field name="date_invoice" />
-            <field name="due_date" />
-            <field name="amount" />
-            <field name="state" />
+            <group>
+              <field name="name" />
+              <field name="contrato_id" />
+              <field name="client_id" readonly="1" />
+              <field name="fecha_factura" />
+              <field name="fecha_vencimiento" />
+            </group>
+            <group>
+              <field name="monto_factura" />
+              <field name="monto_pagado" readonly="1" />
+              <field name="saldo_pendiente" readonly="1" />
+              <field name="estado" />
+            </group>
           </group>
+          <notebook>
+            <page string="Pagos">
+              <field name="pago_ids" />
+            </page>
+            <page string="Avisos de Cobro">
+              <field name="aviso_cobro_ids" />
+            </page>
+          </notebook>
           <footer>
             <button name="action_register_payment" type="object" string="Marcar como pagada"
               class="btn-primary" />

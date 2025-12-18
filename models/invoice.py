@@ -10,7 +10,7 @@ class InternetInvoice(models.Model):
     name = fields.Char('Número', required=True, copy=False, readonly=True, default='New')
     
     # Campos según el diagrama
-    contrato_id = fields.Many2one('internet.contract', string='Contrato', required=True, ondelete='cascade')
+    contrato_id = fields.Many2one('internet.contract', string='Contrato')
     fecha_factura = fields.Date('Fecha de Factura', default=fields.Date.context_today, required=True)
     fecha_vencimiento = fields.Date('Fecha de Vencimiento', required=True)
     monto_factura = fields.Float('Monto Factura', digits=(16,2), required=True)
@@ -82,6 +82,12 @@ class InternetInvoice(models.Model):
     def action_register_payment(self):
         for inv in self:
             inv.state = 'pagada'
+
+    @api.model
+    def create(self, vals):
+        if vals.get('name', 'New') == 'New':
+            vals['name'] = self.env['ir.sequence'].next_by_code('internet.invoice') or 'New'
+        return super(InternetInvoice, self).create(vals)
 
     @api.model
     def _cron_generate_invoices(self):
