@@ -28,26 +28,11 @@
         'views/onu_views.xml',
         'views/rango_ip_views.xml',
         'views/puerto_views.xml',
-        'views/assets.xml',
         
     ],
     'installable': True,
     'application': True,
     'license': 'LGPL-3',
-    'assets': {
-    'web.assets_backend': [
-        'custom_clients/static/src/css/plan_form.css',
-        'custom_clients/static/src/css/kanban_plans.css',
-        'custom_clients/static/src/css/client_form.css',
-        'custom_clients/static/src/css/contract.css',
-        'custom_clients/static/src/css/survey_kanban.css',
-        'custom_clients/static/src/js/survey_kanban.js',
-        'custom_clients/static/src/js/survey_kanban_renderer.js',
-        'custom_clients/static/src/js/internet_survey_kanban.js',
-        'custom_clients/static/src/js/invoice_dashboard.js',
-        'custom_clients/static/src/css/invoice_dashboard.css',
-        
-    ],
-    },
+    # Assets section removed temporarily to fix loading issues
 
 }
