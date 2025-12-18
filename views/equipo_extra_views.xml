@@ -6,10 +6,11 @@
     <field name="model">internet.equipo_extra</field>
     <field name="arch" type="xml">
       <tree>
-        <field name="codigo"/>
+        <field name="name"/>
         <field name="instalacion_id"/>
         <field name="tipo"/>
-        <field name="estado"/>
+        <field name="marca"/>
+        <field name="modelo"/>
       </tree>
     </field>
   </record>
@@ -23,18 +24,24 @@
         <sheet>
           <group>
             <group>
-              <field name="codigo"/>
               <field name="instalacion_id"/>
+              <field name="numero_equipo"/>
               <field name="tipo"/>
             </group>
             <group>
-              <field name="estado"/>
-              <field name="numero_serie"/>
+              <field name="marca"/>
               <field name="modelo"/>
+              <field name="serial_number"/>
             </group>
           </group>
           <group>
-            <field name="descripcion"/>
+            <field name="observaciones"/>
+          </group>
+          <group>
+            <group>
+              <field name="usuario"/>
+              <field name="contraseña"/>
+            </group>
           </group>
         </sheet>
       </form>
