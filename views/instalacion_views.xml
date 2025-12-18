@@ -1,0 +1,88 @@
+<odoo>
+  <!-- Vista Tree para Instalaciones -->
+  <record id="view_instalacion_tree" model="ir.ui.view">
+    <field name="name">internet.instalacion.tree</field>
+    <field name="model">internet.instalacion</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="contrato_id"/>
+        <field name="fecha_instalacion"/>
+        <field name="estado"/>
+        <field name="empresa_instaladora"/>
+        <field name="puerto_id"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- Vista Form para Instalaciones -->
+  <record id="view_instalacion_form" model="ir.ui.view">
+    <field name="name">internet.instalacion.form</field>
+    <field name="model">internet.instalacion</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <group>
+              <field name="contrato_id"/>
+              <field name="puerto_id"/>
+              <field name="fecha_instalacion"/>
+              <field name="estado"/>
+            </group>
+            <group>
+              <field name="empresa_instaladora"/>
+              <field name="fecha_baja"/>
+            </group>
+          </group>
+          <group>
+            <field name="nota" placeholder="Notas sobre la instalación"/>
+          </group>
+          <notebook>
+            <page string="Equipos Extra">
+              <field name="equipo_extra_ids">
+                <tree editable="bottom">
+                  <field name="numero_equipo"/>
+                  <field name="tipo"/>
+                  <field name="marca"/>
+                  <field name="modelo"/>
+                  <field name="serial_number"/>
+                </tree>
+              </field>
+            </page>
+            <page string="ONUs">
+              <field name="onu_ids">
+                <tree editable="bottom">
+                  <field name="marca"/>
+                  <field name="modelo"/>
+                  <field name="pot_up"/>
+                  <field name="wifi_ssid"/>
+                </tree>
+              </field>
+            </page>
+            <page string="Rangos IP">
+              <field name="rango_ip_ids">
+                <tree editable="bottom">
+                  <field name="lan"/>
+                  <field name="wan"/>
+                </tree>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Acción para Instalaciones -->
+  <record id="action_instalaciones" model="ir.actions.act_window">
+    <field name="name">Instalaciones</field>
+    <field name="res_model">internet.instalacion</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <!-- Menú para Instalaciones -->
+  <menuitem id="menu_instalaciones" 
+            name="Instalaciones" 
+            parent="menu_internet_root"
+            action="action_instalaciones"/>
+
+</odoo>

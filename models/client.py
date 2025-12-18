@@ -10,6 +10,22 @@ class InternetClient(models.Model):
         ('unique_ci', 'unique(ci)', 'El CI / NIT ya está registrado para otro cliente.')
     ]
 
+    # Campos según el diagrama
+    cod_cliente = fields.Char('Código de Cliente', required=True)
+    nombre_cliente = fields.Char('Nombre Cliente', required=True)
+    nombre_completo = fields.Char('Nombre Completo', compute='_compute_nombre_completo', store=True)
+    numero_telefono = fields.Char('Número Teléfono')
+    numero_celular = fields.Char('Número Celular', required=True)
+    carnet = fields.Char('Carnet')
+    ci_ro = fields.Char('CI/RO', required=True)
+    direccion = fields.Text('Dirección')
+    estado = fields.Selection([
+        ('activo', 'Activo'),
+        ('inactivo', 'Inactivo'),
+        ('suspendido', 'Suspendido'),
+    ], string='Estado', default='activo', required=True)
+
+    # Campos anteriores mantenidos para compatibilidad
     name = fields.Char('Nombre(s)', required=True)
     second_name = fields.Char('Apellido(s)', required=True)
     social_reason = fields.Char('Razón Social')
@@ -47,6 +63,20 @@ class InternetClient(models.Model):
 
     contract_ids = fields.One2many('internet.contract', 'client_id', string='Contratos')
     contract_count = fields.Integer(string='N° Contratos', compute='_compute_contract_count')
+    
+    # Nuevas relaciones según el diagrama
+    ticket_ids = fields.One2many('internet.tickets', 'cliente_id', string='Tickets')
+    ticket_count = fields.Integer(string='N° Tickets', compute='_compute_ticket_count')
+
+    @api.depends('name', 'second_name')
+    def _compute_nombre_completo(self):
+        for record in self:
+            record.nombre_completo = f"{record.name or ''} {record.second_name or ''}".strip()
+
+    @api.depends('ticket_ids')
+    def _compute_ticket_count(self):
+        for record in self:
+            record.ticket_count = len(record.ticket_ids)
 
     invoice_ids = fields.One2many('internet.invoice', 'client_id', string='Facturas')
 

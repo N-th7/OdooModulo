@@ -7,8 +7,23 @@ class InternetContract(models.Model):
 
     code = fields.Char(string="Código", readonly=True, copy=False, default='New')
 
-    client_id = fields.Many2one('internet.client', string='Cliente', ondelete='cascade')
-    plan_id = fields.Many2one('internet.plan', string='Plan de Internet', required=True, placeholder='Seleccione un plan')
+    # Campos según el diagrama
+    cliente_id = fields.Many2one('internet.client', string='Cliente', required=True, ondelete='cascade')
+    plan_id = fields.Many2one('internet.plan', string='Plan', required=True)
+    direccion_servicio = fields.Text('Dirección del Servicio', required=True)
+    fecha_activacion = fields.Date('Fecha de Activación')
+    fecha_instalacion_programada = fields.Date('Fecha Instalación Programada')
+    estado = fields.Selection([
+        ('activo', 'Activo'),
+        ('suspendido', 'Suspendido'),
+        ('cancelado', 'Cancelado'),
+        ('pendiente', 'Pendiente'),
+    ], string='Estado', default='pendiente', required=True)
+    url_ubicacion = fields.Char('URL de Ubicación')
+    coordenadas = fields.Char('Coordenadas')
+
+    # Campos anteriores mantenidos para compatibilidad
+    client_id = fields.Many2one('internet.client', string='Cliente (Legacy)', ondelete='cascade')
     start_date = fields.Date('Fecha de Inicio', required=True)
     end_date = fields.Date('Fecha de Fin')    
 
@@ -26,11 +41,19 @@ class InternetContract(models.Model):
     observations = fields.Text( string='Observaciones')
     active = fields.Boolean(default=True)
 
+    # Relaciones según el diagrama
+    instalacion_ids = fields.One2many('internet.instalacion', 'contrato_id', string='Instalaciones')
+    factura_ids = fields.One2many('internet.invoice', 'contract_id', string='Facturas')
+    ticket_ids = fields.One2many('internet.tickets', 'contrato_id', string='Tickets')
+    aviso_cobro_ids = fields.One2many('internet.aviso_cobro', 'contrato_id', string='Avisos de Cobro')
+
+    # Compatibilidad con nombre anterior  
     state = fields.Selection([
         ('activo', 'Activo'),
         ('suspendido', 'Suspendido'),
         ('cancelado', 'Cancelado'),
-    ], default='activo')
+        ('pendiente', 'Pendiente'),
+    ], default='pendiente')
 
     @api.model
     def create(self, vals):

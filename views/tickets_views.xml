@@ -1,0 +1,93 @@
+<odoo>
+  <!-- Vista Tree para Tickets -->
+  <record id="view_tickets_tree" model="ir.ui.view">
+    <field name="name">internet.tickets.tree</field>
+    <field name="model">internet.tickets</field>
+    <field name="arch" type="xml">
+      <tree decoration-success="estado=='resuelto'" decoration-danger="prioridad=='critica'" decoration-warning="prioridad=='alta'">
+        <field name="cliente_id"/>
+        <field name="contrato_id"/>
+        <field name="descripcion"/>
+        <field name="fecha_reporte"/>
+        <field name="estado"/>
+        <field name="prioridad"/>
+        <field name="tecnico_asignado"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- Vista Form para Tickets -->
+  <record id="view_tickets_form" model="ir.ui.view">
+    <field name="name">internet.tickets.form</field>
+    <field name="model">internet.tickets</field>
+    <field name="arch" type="xml">
+      <form>
+        <header>
+          <field name="estado" widget="statusbar" statusbar_visible="abierto,en_proceso,resuelto,cerrado"/>
+        </header>
+        <sheet>
+          <group>
+            <group>
+              <field name="cliente_id"/>
+              <field name="contrato_id"/>
+              <field name="prioridad"/>
+              <field name="tecnico_asignado"/>
+            </group>
+            <group>
+              <field name="fecha_reporte"/>
+              <field name="fecha_resolucion"/>
+            </group>
+          </group>
+          <group>
+            <field name="descripcion" placeholder="Descripción detallada del problema"/>
+          </group>
+          <group>
+            <field name="observaciones" placeholder="Observaciones del técnico"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Vista Kanban para Tickets -->
+  <record id="view_tickets_kanban" model="ir.ui.view">
+    <field name="name">internet.tickets.kanban</field>
+    <field name="model">internet.tickets</field>
+    <field name="arch" type="xml">
+      <kanban default_group_by="estado">
+        <field name="cliente_id"/>
+        <field name="prioridad"/>
+        <field name="fecha_reporte"/>
+        <field name="tecnico_asignado"/>
+        <templates>
+          <t t-name="kanban-box">
+            <div class="oe_kanban_card oe_kanban_global_click">
+              <div class="oe_kanban_content">
+                <div class="oe_kanban_details">
+                  <strong><field name="cliente_id"/></strong>
+                  <div>Prioridad: <field name="prioridad"/></div>
+                  <div>Técnico: <field name="tecnico_asignado"/></div>
+                  <div>Fecha: <field name="fecha_reporte"/></div>
+                </div>
+              </div>
+            </div>
+          </t>
+        </templates>
+      </kanban>
+    </field>
+  </record>
+
+  <!-- Acción para Tickets -->
+  <record id="action_tickets" model="ir.actions.act_window">
+    <field name="name">Tickets de Soporte</field>
+    <field name="res_model">internet.tickets</field>
+    <field name="view_mode">kanban,tree,form</field>
+  </record>
+
+  <!-- Menú para Tickets -->
+  <menuitem id="menu_tickets" 
+            name="Tickets" 
+            parent="menu_internet_root"
+            action="action_tickets"/>
+
+</odoo>

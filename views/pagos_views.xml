@@ -1,0 +1,59 @@
+<odoo>
+  <!-- Vista Tree para Pagos -->
+  <record id="view_pagos_tree" model="ir.ui.view">
+    <field name="name">internet.pagos.tree</field>
+    <field name="model">internet.pagos</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="factura_id"/>
+        <field name="cliente_id"/>
+        <field name="fecha_pago"/>
+        <field name="monto"/>
+        <field name="metodo_pago"/>
+        <field name="referencia"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- Vista Form para Pagos -->
+  <record id="view_pagos_form" model="ir.ui.view">
+    <field name="name">internet.pagos.form</field>
+    <field name="model">internet.pagos</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <group>
+              <field name="factura_id"/>
+              <field name="cliente_id"/>
+              <field name="contrato_id"/>
+            </group>
+            <group>
+              <field name="fecha_pago"/>
+              <field name="monto"/>
+              <field name="metodo_pago"/>
+              <field name="referencia"/>
+            </group>
+          </group>
+          <group>
+            <field name="observaciones" placeholder="Observaciones sobre el pago"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Acción para Pagos -->
+  <record id="action_pagos" model="ir.actions.act_window">
+    <field name="name">Pagos</field>
+    <field name="res_model">internet.pagos</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <!-- Menú para Pagos -->
+  <menuitem id="menu_pagos" 
+            name="Pagos" 
+            parent="menu_internet_root"
+            action="action_pagos"/>
+
+</odoo>

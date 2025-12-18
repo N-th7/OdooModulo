@@ -8,11 +8,50 @@ class InternetInvoice(models.Model):
     _order = 'date_invoice desc'
 
     name = fields.Char('Número', required=True, copy=False, readonly=True, default='New')
-    client_id = fields.Many2one('internet.client', string='Cliente', required=True, ondelete='cascade')
+    
+    # Campos según el diagrama
+    contrato_id = fields.Many2one('internet.contract', string='Contrato', required=True, ondelete='cascade')
+    fecha_factura = fields.Date('Fecha de Factura', default=fields.Date.context_today, required=True)
+    fecha_vencimiento = fields.Date('Fecha de Vencimiento', required=True)
+    monto_factura = fields.Float('Monto Factura', digits=(16,2), required=True)
+    monto_pagado = fields.Float('Monto Pagado', digits=(16,2), compute='_compute_monto_pagado', store=True)
+    saldo_pendiente = fields.Float('Saldo Pendiente', digits=(16,2), compute='_compute_saldo_pendiente', store=True)
+    estado = fields.Selection([
+        ('pagada', 'Pagada'), 
+        ('impaga', 'Impaga'),
+        ('parcial', 'Pago Parcial'),
+        ('vencida', 'Vencida'),
+    ], string='Estado', default='impaga', required=True)
+    
+    # Campos anteriores mantenidos para compatibilidad
+    client_id = fields.Many2one('internet.client', string='Cliente (Legacy)', required=True, ondelete='cascade')
     date_invoice = fields.Date('Fecha de emisión', default=fields.Date.context_today)
     due_date = fields.Date('Fecha de vencimiento')
     amount = fields.Float('Monto', digits=(16,2))
-    state = fields.Selection([('pagada','Pagada'), ('impaga','Impaga')], string='Estado', default='impaga')
+    state = fields.Selection([('pagada','Pagada'), ('impaga','Impaga')], string='Estado (Legacy)', default='impaga')
+    
+    # Relaciones según el diagrama
+    pago_ids = fields.One2many('internet.pagos', 'factura_id', string='Pagos')
+    aviso_cobro_ids = fields.One2many('internet.aviso_cobro', 'factura_id', string='Avisos de Cobro')
+    
+    @api.depends('pago_ids.monto')
+    def _compute_monto_pagado(self):
+        for record in self:
+            record.monto_pagado = sum(record.pago_ids.mapped('monto'))
+    
+    @api.depends('monto_factura', 'monto_pagado')
+    def _compute_saldo_pendiente(self):
+        for record in self:
+            record.saldo_pendiente = record.monto_factura - record.monto_pagado
+            # Actualizar estado según el saldo
+            if record.saldo_pendiente <= 0:
+                record.estado = 'pagada'
+            elif record.monto_pagado > 0:
+                record.estado = 'parcial'
+            elif record.fecha_vencimiento and record.fecha_vencimiento < fields.Date.context_today(record):
+                record.estado = 'vencida'
+            else:
+                record.estado = 'impaga'
 
     @api.model
     def create(self, vals):

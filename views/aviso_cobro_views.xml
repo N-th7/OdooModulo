@@ -1,0 +1,59 @@
+<odoo>
+  <!-- Vista Tree para Avisos de Cobro -->
+  <record id="view_aviso_cobro_tree" model="ir.ui.view">
+    <field name="name">internet.aviso_cobro.tree</field>
+    <field name="model">internet.aviso_cobro</field>
+    <field name="arch" type="xml">
+      <tree decoration-success="estado=='entregado'" decoration-danger="estado=='fallido'">
+        <field name="factura_id"/>
+        <field name="cliente_id"/>
+        <field name="fecha_aviso"/>
+        <field name="medio_envio"/>
+        <field name="estado"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- Vista Form para Avisos de Cobro -->
+  <record id="view_aviso_cobro_form" model="ir.ui.view">
+    <field name="name">internet.aviso_cobro.form</field>
+    <field name="model">internet.aviso_cobro</field>
+    <field name="arch" type="xml">
+      <form>
+        <header>
+          <field name="estado" widget="statusbar" statusbar_visible="enviado,entregado,leido,fallido"/>
+        </header>
+        <sheet>
+          <group>
+            <group>
+              <field name="contrato_id"/>
+              <field name="factura_id"/>
+              <field name="cliente_id"/>
+            </group>
+            <group>
+              <field name="fecha_aviso"/>
+              <field name="medio_envio"/>
+            </group>
+          </group>
+          <group>
+            <field name="mensaje" placeholder="Mensaje del aviso de cobro"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Acción para Avisos de Cobro -->
+  <record id="action_aviso_cobro" model="ir.actions.act_window">
+    <field name="name">Avisos de Cobro</field>
+    <field name="res_model">internet.aviso_cobro</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <!-- Menú para Avisos de Cobro -->
+  <menuitem id="menu_aviso_cobro" 
+            name="Avisos de Cobro" 
+            parent="menu_internet_root"
+            action="action_aviso_cobro"/>
+
+</odoo>

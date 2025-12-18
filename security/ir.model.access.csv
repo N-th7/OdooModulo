@@ -4,4 +4,12 @@ access_internet_client,internet.client,model_internet_client,,1,1,1,1
 access_internet_invoice,internet.invoice,model_internet_invoice,,1,1,1,1
 access_internet_contract,internet.contract,model_internet_contract,,1,1,1,1
 access_internet_survey,internet.survey,model_internet_survey,,1,1,1,1
+access_internet_instalacion,internet.instalacion,model_internet_instalacion,,1,1,1,1
+access_internet_tickets,internet.tickets,model_internet_tickets,,1,1,1,1
+access_internet_pagos,internet.pagos,model_internet_pagos,,1,1,1,1
+access_internet_aviso_cobro,internet.aviso_cobro,model_internet_aviso_cobro,,1,1,1,1
+access_internet_equipo_extra,internet.equipo_extra,model_internet_equipo_extra,,1,1,1,1
+access_internet_onu,internet.onu,model_internet_onu,,1,1,1,1
+access_internet_rango_ip,internet.rango_ip,model_internet_rango_ip,,1,1,1,1
+access_internet_puerto,internet.puerto,model_internet_puerto,,1,1,1,1
 
