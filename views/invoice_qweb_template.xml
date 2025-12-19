@@ -2,7 +2,8 @@
 <odoo>
   <!-- Invoice Dashboard Template -->
   <template id="invoice_dashboard_template" name="Invoice Dashboard">
-    <t t-call="web.internal_layout">
+    <t t-call="web.layout">
+      <t t-set="title">Dashboard de Facturas</t>
       <div class="o_invoice_container">
         <div class="container-fluid">
           <div class="row">
