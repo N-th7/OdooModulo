@@ -114,6 +114,53 @@ class InternetInvoice(models.Model):
         return super(InternetInvoice, self).create(vals)
 
     @api.model
+    def get_dashboard_data(self):
+        """Obtener datos para el dashboard de facturas agrupadas por cliente"""
+        # Obtener todas las facturas con sus clientes
+        invoices = self.search([])
+        
+        # Calcular totales generales
+        total_invoices = len(invoices)
+        total_income = sum(inv.monto_pagado for inv in invoices)
+        total_pending = sum(inv.saldo_pendiente for inv in invoices)
+        overdue_count = len(invoices.filtered(lambda inv: inv.fecha_vencimiento < fields.Date.today() and inv.saldo_pendiente > 0))
+        
+        # Agrupar facturas por cliente
+        client_groups = {}
+        for invoice in invoices:
+            client = invoice.client_id
+            if not client:
+                continue
+                
+            client_key = client.id
+            if client_key not in client_groups:
+                client_groups[client_key] = {
+                    'client_id': client.id,
+                    'client_name': client.nombre,
+                    'client_phone': client.telefono or 'No registrado',
+                    'client_email': client.email or 'No registrado',
+                    'invoices': [],
+                    'total_pending': 0.0,
+                    'total_amount': 0.0
+                }
+            
+            client_groups[client_key]['invoices'].append(invoice)
+            client_groups[client_key]['total_pending'] += invoice.saldo_pendiente
+            client_groups[client_key]['total_amount'] += invoice.monto_factura
+        
+        # Convertir a lista y ordenar por deuda pendiente (mayor a menor)
+        client_groups_list = list(client_groups.values())
+        client_groups_list.sort(key=lambda x: x['total_pending'], reverse=True)
+        
+        return {
+            'total_invoices': total_invoices,
+            'total_income': total_income,
+            'total_pending': total_pending,
+            'overdue_count': overdue_count,
+            'client_groups': client_groups_list
+        }
+
+    @api.model
     def _cron_generate_invoices(self):
         """Crear una factura por cada contrato activo con el monto del plan, cada 18 del mes."""
         # Buscar contratos activos

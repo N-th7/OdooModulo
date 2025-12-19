@@ -24,7 +24,6 @@
       </tree>
     </field>
   </record>
-  <!-- Search View -->
         <record id="internet_client_search" model="ir.ui.view">
             <field name="name">internet.client.search</field>
             <field name="model">internet.client</field>

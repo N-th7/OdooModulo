@@ -1,5 +1,4 @@
 <odoo>
-  <!-- Vista Tree para Instalaciones -->
   <record id="view_instalacion_tree" model="ir.ui.view">
     <field name="name">internet.instalacion.tree</field>
     <field name="model">internet.instalacion</field>
@@ -14,7 +13,6 @@
     </field>
   </record>
 
-  <!-- Vista Form para Instalaciones -->
   <record id="view_instalacion_form" model="ir.ui.view">
     <field name="name">internet.instalacion.form</field>
     <field name="model">internet.instalacion</field>
@@ -72,14 +70,12 @@
     </field>
   </record>
 
-  <!-- Acción para Instalaciones -->
   <record id="action_instalaciones" model="ir.actions.act_window">
     <field name="name">Instalaciones</field>
     <field name="res_model">internet.instalacion</field>
     <field name="view_mode">tree,form</field>
   </record>
 
-  <!-- Menú para Instalaciones -->
   <menuitem id="menu_instalaciones" 
             name="Instalaciones" 
             parent="menu_internet_root"

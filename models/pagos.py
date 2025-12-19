@@ -36,7 +36,63 @@ class Pagos(models.Model):
     @api.model
     def create(self, vals):
         pago = super().create(vals)
-        # Actualizar el saldo de la factura cuando se registre un pago
+        # Actualizar el saldo y estado de la factura cuando se registre un pago
         if pago.factura_id:
-            pago.factura_id._compute_saldo_pendiente()
+            factura = pago.factura_id
+            factura._compute_saldo_pendiente()
+            
+            # Actualizar estado según el saldo
+            if factura.saldo_pendiente <= 0:
+                factura.estado = 'pagada'
+            elif factura.saldo_pendiente < factura.monto_factura:
+                factura.estado = 'parcial'
+            else:
+                # Verificar si está vencida
+                if factura.fecha_vencimiento < factura.fecha_factura.today():
+                    factura.estado = 'vencida'
+                else:
+                    factura.estado = 'impaga'
+        
         return pago
+    
+    def write(self, vals):
+        res = super().write(vals)
+        # Actualizar estado de facturas al modificar pagos
+        for pago in self:
+            if pago.factura_id:
+                factura = pago.factura_id
+                factura._compute_saldo_pendiente()
+                
+                # Actualizar estado según el saldo
+                if factura.saldo_pendiente <= 0:
+                    factura.estado = 'pagada'
+                elif factura.saldo_pendiente < factura.monto_factura:
+                    factura.estado = 'parcial'
+                else:
+                    # Verificar si está vencida
+                    if factura.fecha_vencimiento < factura.fecha_factura.today():
+                        factura.estado = 'vencida'
+                    else:
+                        factura.estado = 'impaga'
+        return res
+    
+    def unlink(self):
+        facturas = self.mapped('factura_id')
+        res = super().unlink()
+        # Actualizar estado de facturas al eliminar pagos
+        for factura in facturas:
+            if factura.exists():
+                factura._compute_saldo_pendiente()
+                
+                # Actualizar estado según el saldo
+                if factura.saldo_pendiente <= 0:
+                    factura.estado = 'pagada'
+                elif factura.saldo_pendiente < factura.monto_factura:
+                    factura.estado = 'parcial'
+                else:
+                    # Verificar si está vencida
+                    if factura.fecha_vencimiento < factura.fecha_factura.today():
+                        factura.estado = 'vencida'
+                    else:
+                        factura.estado = 'impaga'
+        return res

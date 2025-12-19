@@ -1,5 +1,4 @@
 <odoo>
-  <!-- Vista Tree para Puertos -->
   <record id="view_puerto_tree" model="ir.ui.view">
     <field name="name">internet.puerto.tree</field>
     <field name="model">internet.puerto</field>
@@ -14,7 +13,6 @@
     </field>
   </record>
 
-  <!-- Vista Form para Puertos -->
   <record id="view_puerto_form" model="ir.ui.view">
     <field name="name">internet.puerto.form</field>
     <field name="model">internet.puerto</field>
@@ -53,14 +51,12 @@
     </field>
   </record>
 
-  <!-- Acción para Puertos -->
   <record id="action_puertos" model="ir.actions.act_window">
     <field name="name">Puertos</field>
     <field name="res_model">internet.puerto</field>
     <field name="view_mode">tree,form</field>
   </record>
 
-  <!-- Menú para Puertos -->
   <menuitem id="menu_puertos" 
             name="Puertos" 
             parent="menu_internet_root"

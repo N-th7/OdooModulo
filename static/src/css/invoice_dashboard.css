@@ -1,38 +1,183 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+
 .o_toggle_btn {
   margin-right: 8px;
 }
+
 .o_invoice_container {
   padding: 20px;
+  background: #f8f9fa;
+  min-height: 100vh;
 }
+
 .o_client_group {
   background: #fff;
   margin-bottom: 20px;
-  border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
+
 .o_client_header {
-  background: #f5f5f5;
-  padding: 10px 20px;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+  padding: 15px 20px;
   font-size: 16px;
-  border: 1px solid #eee;
+  border-bottom: 1px solid #eee;
 }
+
 .o_invoices_list {
   padding: 10px 20px;
 }
+
 .o_invoice_card {
-  margin-bottom: 10px;
-  padding: 10px;
+  margin-bottom: 12px;
+  padding: 15px;
   background: #f9fafb;
-  border: 1px solid #eee;
-  border-radius: 2px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  transition: all 0.3s ease;
 }
+
+.o_invoice_card:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
 .invoice-state {
   font-weight: bold;
   text-transform: uppercase;
-  border: 1px solid #111827;
-  padding: 2px 6px;
+  padding: 4px 8px;
   border-radius: 4px;
+  font-size: 11px;
+  display: inline-block;
+  min-width: 70px;
+  text-align: center;
+}
+
+.invoice-state.state-pagada {
+  background-color: #10b981;
+  color: white;
+}
+
+.invoice-state.state-impaga {
+  background-color: #ef4444;
+  color: white;
+}
+
+.invoice-state.state-parcial {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.invoice-state.state-vencida {
+  background-color: #7c3aed;
+  color: white;
+}
+
+.pay-invoice-btn {
+  border-radius: 5px;
   font-size: 12px;
-  margin: 2px 5px;
+  padding: 5px 10px;
+  transition: all 0.3s ease;
+}
+
+.pay-invoice-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+/* Estilos para el modal de pago */
+.modal-content {
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+}
+
+.modal-title {
+  font-weight: 600;
+}
+
+.modal-body {
+  padding: 25px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 5px;
+}
+
+.form-control {
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  padding: 10px 12px;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.input-group-text {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+  font-weight: 600;
+}
+
+/* Estilos para las tarjetas de resumen */
+.card {
+  border: none;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card h5 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+
+.card h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Badges */
+.badge {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
 }
