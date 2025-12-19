@@ -39,7 +39,7 @@
                   <div class="card bg-info text-white">
                     <div class="card-body">
                       <h5>Vencidas</h5>
-                      <h3 t-esc="overdue_count"/></h3>
+                      <h3 t-esc="overdue_count"/>
                     </div>
                   </div>
                 </div>
@@ -141,7 +141,7 @@
             <div class="modal-header">
               <h5 class="modal-title">Registrar Pago</h5>
               <button type="button" class="close" data-dismiss="modal">
-                <span aria-hidden="true">&times;</span>
+                <span aria-hidden="true">×</span>
               </button>
             </div>
             <div class="modal-body">
