@@ -136,8 +136,8 @@ class InternetInvoice(models.Model):
             if client_key not in client_groups:
                 client_groups[client_key] = {
                     'client_id': client.id,
-                    'client_name': client.nombre,
-                    'client_phone': client.telefono or 'No registrado',
+                    'client_name': client.nombre_completo or 'Cliente sin nombre',
+                    'client_phone': client.phone or 'No registrado',
                     'client_email': client.email or 'No registrado',
                     'invoices': [],
                     'total_pending': 0.0,
