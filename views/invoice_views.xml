@@ -62,7 +62,7 @@
   </record>
 
   <!-- Acción para dashboard de facturas -->
-  <record id="action_invoice_dashboard" model="ir.actions.act_url">
+  <record id="action_invoice_dashboard_web" model="ir.actions.act_url">
     <field name="name">Dashboard de Facturas</field>
     <field name="url">/custom_clients/invoice_dashboard</field>
     <field name="target">self</field>
@@ -72,6 +72,6 @@
     action="action_internet_invoices" />
     
   <menuitem id="menu_invoice_dashboard" name="Dashboard de Facturas" parent="menu_internet_root"
-    action="action_invoice_dashboard" sequence="5" />
+    action="action_invoice_dashboard_web" sequence="5" />
 
 </odoo>
