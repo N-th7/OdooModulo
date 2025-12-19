@@ -61,9 +61,13 @@
                 <!-- Facturas agrupadas por cliente -->
                 <t t-foreach="state.dashboardData.client_groups" t-as="client_data" t-key="client_data.client_id">
                   <div class="o_client_group mb-4">
-                    <div class="o_client_header d-flex justify-content-between align-items-center">
+                    <div class="o_client_header d-flex justify-content-between align-items-center" 
+                         style="cursor: pointer;" 
+                         t-attf-data-client-id="#{client_data.client_id}">
                       <div>
                         <h5 class="mb-0">
+                          <i class="fa fa-chevron-down toggle-icon mr-2" 
+                             t-attf-id="toggle-icon-#{client_data.client_id}"/>
                           <i class="fa fa-user mr-2"/>
                           <t t-esc="client_data.client_name"/>
                         </h5>
@@ -85,7 +89,8 @@
                       </div>
                     </div>
                     
-                    <div class="o_invoices_list">
+                    <!-- Lista de facturas colapsable -->
+                    <div class="o_invoices_list" t-attf-id="invoices-#{client_data.client_id}">
                       <t t-foreach="client_data.invoices" t-as="invoice" t-key="invoice.id">
                         <div class="o_invoice_card">
                           <div class="row align-items-center">

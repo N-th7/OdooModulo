@@ -23,10 +23,22 @@
   padding: 15px 20px;
   font-size: 16px;
   border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.o_client_header:hover {
+  background: linear-gradient(135deg, #e8e8e8 0%, #ddd 100%);
+}
+
+.toggle-icon {
+  transition: transform 0.3s ease;
+  color: #666;
 }
 
 .o_invoices_list {
   padding: 10px 20px;
+  transition: all 0.3s ease;
 }
 
 .o_invoice_card {

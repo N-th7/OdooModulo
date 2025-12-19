@@ -38,9 +38,10 @@ export class InvoiceDashboardAction extends Component {
     }
 
     setupPaymentModal() {
-        // Setup payment modal after component is mounted
+        // Setup payment modal and toggle events after component is mounted
         setTimeout(() => {
             this.setupPaymentEvents();
+            this.setupToggleEvents();
         }, 100);
     }
 
@@ -72,6 +73,40 @@ export class InvoiceDashboardAction extends Component {
             savePaymentBtn.addEventListener('click', () => {
                 this.savePayment();
             });
+        }
+    }
+
+    setupToggleEvents() {
+        const container = document.querySelector('.o_invoice_container');
+        if (!container) return;
+
+        // Configure client header click events for toggle
+        container.addEventListener('click', (e) => {
+            const header = e.target.closest('.o_client_header');
+            if (header) {
+                e.preventDefault();
+                const clientId = header.dataset.clientId;
+                this.toggleClientGroup(clientId);
+            }
+        });
+    }
+
+    toggleClientGroup(clientId) {
+        const invoicesList = document.getElementById(`invoices-${clientId}`);
+        const toggleIcon = document.getElementById(`toggle-icon-${clientId}`);
+        
+        if (!invoicesList || !toggleIcon) return;
+
+        if (invoicesList.style.display === 'none') {
+            // Mostrar facturas
+            invoicesList.style.display = 'block';
+            toggleIcon.classList.remove('fa-chevron-right');
+            toggleIcon.classList.add('fa-chevron-down');
+        } else {
+            // Ocultar facturas
+            invoicesList.style.display = 'none';
+            toggleIcon.classList.remove('fa-chevron-down');
+            toggleIcon.classList.add('fa-chevron-right');
         }
     }
 

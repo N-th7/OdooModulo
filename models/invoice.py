@@ -144,7 +144,22 @@ class InternetInvoice(models.Model):
                     'total_amount': 0.0
                 }
             
-            client_groups[client_key]['invoices'].append(invoice)
+            # Agregar datos de la factura como diccionario
+            invoice_data = {
+                'id': invoice.id,
+                'name': invoice.name,
+                'fecha_factura': invoice.fecha_factura.strftime('%d/%m/%Y') if invoice.fecha_factura else '',
+                'fecha_vencimiento': invoice.fecha_vencimiento.strftime('%d/%m/%Y') if invoice.fecha_vencimiento else '',
+                'monto_factura': invoice.monto_factura,
+                'saldo_pendiente': invoice.saldo_pendiente,
+                'estado': invoice.estado,
+                'contrato_id': {
+                    'code': invoice.contrato_id.code if invoice.contrato_id else None,
+                    'id': invoice.contrato_id.id if invoice.contrato_id else None
+                } if invoice.contrato_id else None
+            }
+            
+            client_groups[client_key]['invoices'].append(invoice_data)
             client_groups[client_key]['total_pending'] += invoice.saldo_pendiente
             client_groups[client_key]['total_amount'] += invoice.monto_factura
         
