@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
-  <!-- Invoice Dashboard Template -->
-  <template id="custom_clients.invoice_dashboard_template" name="Invoice Dashboard">
+<templates xml:space="preserve">
+  <t t-name="custom_clients.invoice_dashboard_template" owl="1">
     <div class="o_invoice_container">
       <div class="o_control_panel">
         <div class="o_cp_top">
@@ -214,5 +213,5 @@
         </div>
       </div>
     </div>
-  </template>
-</odoo>
+  </t>
+</templates>

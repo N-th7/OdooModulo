@@ -41,6 +41,7 @@
             'custom_clients/static/src/js/invoice_dashboard.js',
             'custom_clients/static/src/js/survey_kanban.js',
             'custom_clients/static/src/js/survey_kanban_renderer.js',
+            'custom_clients/views/invoice_qweb_template.xml',
         ],
     },
     'installable': True,
