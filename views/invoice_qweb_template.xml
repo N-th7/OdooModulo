@@ -79,7 +79,7 @@
                           <div class="col-md-2">
                             <strong t-esc="invoice.name"/>
                             <br/>
-                            <small class="text-muted" t-esc="invoice.contrato_id.codigo if invoice.contrato_id else 'Sin contrato'"/>
+                            <small class="text-muted" t-esc="invoice.contrato_id.code if invoice.contrato_id else 'Sin contrato'"/>
                           </div>
                           <div class="col-md-2">
                             <span class="text-muted">Emisión:</span>
