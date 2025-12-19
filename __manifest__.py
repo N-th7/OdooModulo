@@ -31,12 +31,16 @@
     ],
     'assets': {
         'web.assets_backend': [
-            'custom_clients/static/src/css/custom_clients.css',
-            'custom_clients/static/src/js/custom_clients.js',
-        ],
-        'web.assets_frontend': [
-            'custom_clients/static/src/css/frontend.css',
-            'custom_clients/static/src/js/frontend.js',
+            'custom_clients/static/src/css/client_form.css',
+            'custom_clients/static/src/css/contract.css',
+            'custom_clients/static/src/css/invoice_dashboard.css',
+            'custom_clients/static/src/css/kanban_plans.css',
+            'custom_clients/static/src/css/plan_form.css',
+            'custom_clients/static/src/css/survey_kanban.css',
+            'custom_clients/static/src/js/internet_survey_kanban.js',
+            'custom_clients/static/src/js/invoice_dashboard.js',
+            'custom_clients/static/src/js/survey_kanban.js',
+            'custom_clients/static/src/js/survey_kanban_renderer.js',
         ],
     },
     'installable': True,
