@@ -92,7 +92,10 @@
                             <div class="col-md-2">
                               <strong t-esc="invoice.name"/>
                               <br/>
-                              <small class="text-muted" t-esc="invoice.contrato_id.code if invoice.contrato_id else 'Sin contrato'"/>
+                              <small class="text-muted">
+                                <t t-if="invoice.contrato_id" t-esc="invoice.contrato_id.code"/>
+                                <t t-else="">Sin contrato</t>
+                              </small>
                             </div>
                             <div class="col-md-2">
                               <span class="text-muted">Emisión:</span>
@@ -111,7 +114,7 @@
                             </div>
                             <div class="col-md-2">
                               <span class="invoice-state" t-attf-class="invoice-state state-#{invoice.estado}">
-                                <t t-esc="invoice.estado.charAt(0).toUpperCase() + invoice.estado.slice(1)"/>
+                                <t t-esc="invoice.estado"/>
                               </span>
                               <br/>
                               <t t-if="invoice.saldo_pendiente > 0">
