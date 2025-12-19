@@ -9,7 +9,7 @@ class CustomInvoiceDashboard(http.Controller):
         invoice_model = request.env['internet.invoice']
         dashboard_data = invoice_model.get_dashboard_data()
         
-        return request.render('custom_clients.custom_clients.invoice_dashboard_template', dashboard_data)
+        return request.render('custom_clients.invoice_dashboard_template', dashboard_data)
     
     @http.route('/custom_clients/register_payment', type='json', auth='user', methods=['POST'])
     def register_payment(self, **kw):

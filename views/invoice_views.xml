@@ -62,9 +62,10 @@
   </record>
 
   <!-- Acción para dashboard de facturas -->
-  <record id="action_invoice_dashboard" model="ir.actions.client">
+  <record id="action_invoice_dashboard" model="ir.actions.act_url">
     <field name="name">Dashboard de Facturas</field>
-    <field name="tag">custom_invoice_dashboard</field>
+    <field name="url">/custom_clients/invoice_dashboard</field>
+    <field name="target">self</field>
   </record>
 
   <menuitem id="menu_internet_invoices" name="Facturas" parent="menu_internet_root"

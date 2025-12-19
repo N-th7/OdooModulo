@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <!-- Invoice Dashboard Template -->
-  <template id="custom_clients.invoice_dashboard_template" name="Invoice Dashboard">
-    <t t-call="web.html_container">
+  <template id="invoice_dashboard_template" name="Invoice Dashboard">
+    <t t-call="web.internal_layout">
       <div class="o_invoice_container">
         <div class="container-fluid">
           <div class="row">
@@ -198,6 +198,9 @@
           </div>
         </div>
       </div>
+      
+      <!-- Include JavaScript for dashboard functionality -->
+      <script type="text/javascript" src="/custom_clients/static/src/js/invoice_dashboard.js"/>
     </t>
   </template>
 </odoo>

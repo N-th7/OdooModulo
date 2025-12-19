@@ -1,48 +1,25 @@
 /** @odoo-module */
 
-import { registry } from "@web/core/registry";
-import { Component, useState, onMounted } from "@odoo/owl";
-import { useService } from "@web/core/utils/hooks";
+// Global JavaScript for Invoice Dashboard functionality
+(function() {
+    'use strict';
 
-export class InvoiceDashboard extends Component {
-    static template = "custom_clients.invoice_dashboard_template";
+    // Wait for DOM to be ready
+    document.addEventListener('DOMContentLoaded', function() {
+        setupInvoiceDashboard();
+    });
 
-    setup() {
-        this.rpc = useService("rpc");
-        this.notification = useService("notification");
-        this.state = useState({
-            dashboardData: null,
-            loading: true
-        });
-
-        onMounted(() => {
-            this.loadDashboardData();
-            this.setupPaymentModal();
-        });
+    function setupInvoiceDashboard() {
+        setupPaymentModal();
     }
 
-    async loadDashboardData() {
-        try {
-            const data = await this.rpc("/web/dataset/call_kw", {
-                model: "internet.invoice",
-                method: "get_dashboard_data",
-                args: [],
-                kwargs: {}
-            });
-            this.state.dashboardData = data;
-            this.state.loading = false;
-        } catch (error) {
-            console.error("Error loading dashboard data:", error);
-            this.state.loading = false;
-        }
-    }
-
-    setupPaymentModal() {
-        // Configurar eventos para los botones de pago
-        document.addEventListener('click', (e) => {
+    function setupPaymentModal() {
+        // Configure payment button events
+        document.addEventListener('click', function(e) {
             if (e.target.classList.contains('pay-invoice-btn') || 
                 e.target.closest('.pay-invoice-btn')) {
                 
+                e.preventDefault();
                 const btn = e.target.classList.contains('pay-invoice-btn') 
                     ? e.target 
                     : e.target.closest('.pay-invoice-btn');
@@ -51,41 +28,42 @@ export class InvoiceDashboard extends Component {
                 const amount = btn.dataset.amount;
                 const invoiceName = btn.dataset.invoiceName;
                 
-                this.openPaymentModal(invoiceId, amount, invoiceName);
+                openPaymentModal(invoiceId, amount, invoiceName);
             }
         });
 
-        // Configurar evento para guardar pago
+        // Configure save payment button
         const savePaymentBtn = document.getElementById('savePayment');
         if (savePaymentBtn) {
-            savePaymentBtn.addEventListener('click', () => {
-                this.savePayment();
+            savePaymentBtn.addEventListener('click', function() {
+                savePayment();
             });
         }
     }
 
-    openPaymentModal(invoiceId, amount, invoiceName) {
-        // Llenar el formulario con los datos de la factura
+    function openPaymentModal(invoiceId, amount, invoiceName) {
+        // Fill form with invoice data
         document.getElementById('invoice_id').value = invoiceId;
         document.getElementById('invoice_name').value = invoiceName;
         document.getElementById('amount').value = amount;
         
-        // Establecer fecha actual por defecto
+        // Set current date as default
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('payment_date').value = today;
         
-        // Mostrar modal (usando Bootstrap)
+        // Show modal (using Bootstrap)
         const modal = document.getElementById('paymentModal');
         if (window.$ && window.$.fn.modal) {
             window.$(modal).modal('show');
         } else {
-            // Fallback para mostrar modal sin jQuery/Bootstrap
+            // Fallback for showing modal without jQuery/Bootstrap
             modal.style.display = 'block';
             modal.classList.add('show');
+            document.body.classList.add('modal-open');
         }
     }
 
-    async savePayment() {
+    function savePayment() {
         const form = document.getElementById('paymentForm');
         const formData = new FormData(form);
         
@@ -98,40 +76,73 @@ export class InvoiceDashboard extends Component {
             observaciones: formData.get('observations')
         };
 
-        try {
-            await this.rpc("/web/dataset/call_kw", {
-                model: "internet.pagos",
-                method: "create",
-                args: [paymentData],
-                kwargs: {}
-            });
-
-            this.notification.add("Pago registrado exitosamente", {
-                type: "success"
-            });
-
-            // Cerrar modal
-            const modal = document.getElementById('paymentModal');
-            if (window.$ && window.$.fn.modal) {
-                window.$(modal).modal('hide');
+        // Make AJAX request to save payment
+        fetch('/custom_clients/register_payment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: JSON.stringify(paymentData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Show success message
+                showNotification('Pago registrado exitosamente', 'success');
+                
+                // Close modal
+                closePaymentModal();
+                
+                // Reload page to reflect changes
+                window.location.reload();
+                
+                // Clear form
+                form.reset();
             } else {
-                modal.style.display = 'none';
-                modal.classList.remove('show');
+                showNotification('Error al registrar el pago: ' + data.message, 'danger');
             }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showNotification('Error al registrar el pago', 'danger');
+        });
+    }
 
-            // Recargar datos del dashboard
-            this.loadDashboardData();
-            
-            // Limpiar formulario
-            form.reset();
-
-        } catch (error) {
-            console.error("Error saving payment:", error);
-            this.notification.add("Error al registrar el pago", {
-                type: "danger"
-            });
+    function closePaymentModal() {
+        const modal = document.getElementById('paymentModal');
+        if (window.$ && window.$.fn.modal) {
+            window.$(modal).modal('hide');
+        } else {
+            modal.style.display = 'none';
+            modal.classList.remove('show');
+            document.body.classList.remove('modal-open');
         }
     }
-}
 
-registry.category("actions").add("custom_invoice_dashboard", InvoiceDashboard);
+    function showNotification(message, type) {
+        // Simple notification system
+        const notification = document.createElement('div');
+        notification.className = `alert alert-${type} alert-dismissible fade show`;
+        notification.style.position = 'fixed';
+        notification.style.top = '20px';
+        notification.style.right = '20px';
+        notification.style.zIndex = '9999';
+        notification.innerHTML = `
+            ${message}
+            <button type="button" class="close" onclick="this.parentElement.remove();">
+                <span>&times;</span>
+            </button>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Auto-remove after 5 seconds
+        setTimeout(() => {
+            if (notification.parentElement) {
+                notification.remove();
+            }
+        }, 5000);
+    }
+
+})();
