@@ -28,11 +28,18 @@
         'views/onu_views.xml',
         'views/rango_ip_views.xml',
         'views/puerto_views.xml',
-        
     ],
+    'assets': {
+        'web.assets_backend': [
+            'custom_clients/static/src/css/custom_clients.css',
+            'custom_clients/static/src/js/custom_clients.js',
+        ],
+        'web.assets_frontend': [
+            'custom_clients/static/src/css/frontend.css',
+            'custom_clients/static/src/js/frontend.js',
+        ],
+    },
     'installable': True,
     'application': True,
     'license': 'LGPL-3',
-    # Assets section removed temporarily to fix loading issues
-
 }
