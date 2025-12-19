@@ -60,88 +60,88 @@
 
                 <!-- Facturas agrupadas por cliente -->
                 <t t-foreach="state.dashboardData.client_groups" t-as="client_data">
-                <div class="o_client_group mb-4">
-                  <div class="o_client_header d-flex justify-content-between align-items-center">
-                    <div>
-                      <h5 class="mb-0">
-                        <i class="fa fa-user mr-2"/>
-                        <t t-esc="client_data['client_name']"/>
-                      </h5>
-                      <small class="text-muted">
-                        Teléfono: <t t-esc="client_data['client_phone']"/> | 
-                        Email: <t t-esc="client_data['client_email']"/>
-                      </small>
+                  <div class="o_client_group mb-4">
+                    <div class="o_client_header d-flex justify-content-between align-items-center">
+                      <div>
+                        <h5 class="mb-0">
+                          <i class="fa fa-user mr-2"/>
+                          <t t-esc="client_data.client_name"/>
+                        </h5>
+                        <small class="text-muted">
+                          Teléfono: <t t-esc="client_data.client_phone"/> | 
+                          Email: <t t-esc="client_data.client_email"/>
+                        </small>
+                      </div>
+                      <div class="text-right">
+                        <span class="badge badge-info mr-2">
+                          <t t-esc="client_data.invoices.length"/> facturas
+                        </span>
+                        <span class="badge badge-warning" t-if="client_data.total_pending > 0">
+                          Deuda: Bs <t t-esc="client_data.total_pending"/>
+                        </span>
+                        <span class="badge badge-success" t-if="client_data.total_pending == 0">
+                          Al día
+                        </span>
+                      </div>
                     </div>
-                    <div class="text-right">
-                      <span class="badge badge-info mr-2">
-                        <t t-esc="len(client_data['invoices'])"/> facturas
-                      </span>
-                      <span class="badge badge-warning" t-if="client_data['total_pending'] > 0">
-                        Deuda: Bs <t t-esc="client_data['total_pending']"/>
-                      </span>
-                      <span class="badge badge-success" t-if="client_data['total_pending'] == 0">
-                        Al día
-                      </span>
-                    </div>
-                  </div>
-                  
-                  <div class="o_invoices_list">
-                    <t t-foreach="client_data['invoices']" t-as="invoice">
-                      <div class="o_invoice_card">
-                        <div class="row align-items-center">
-                          <div class="col-md-2">
-                            <strong t-esc="invoice.name"/>
-                            <br/>
-                            <small class="text-muted" t-esc="invoice.contrato_id.code if invoice.contrato_id else 'Sin contrato'"/>
-                          </div>
-                          <div class="col-md-2">
-                            <span class="text-muted">Emisión:</span>
-                            <br/>
-                            <t t-esc="invoice.fecha_factura"/>
-                          </div>
-                          <div class="col-md-2">
-                            <span class="text-muted">Vencimiento:</span>
-                            <br/>
-                            <t t-esc="invoice.fecha_vencimiento"/>
-                          </div>
-                          <div class="col-md-2">
-                            <span class="text-muted">Monto:</span>
-                            <br/>
-                            <strong>Bs <t t-esc="invoice.monto_factura"/></strong>
-                          </div>
-                          <div class="col-md-2">
-                            <span class="invoice-state" t-attf-class="invoice-state state-#{invoice.estado}">
-                              <t t-esc="invoice.estado.title()"/>
-                            </span>
-                            <br/>
-                            <t t-if="invoice.saldo_pendiente > 0">
-                              <small class="text-danger">
-                                Saldo: Bs <t t-esc="invoice.saldo_pendiente"/>
-                              </small>
-                            </t>
-                          </div>
-                          <div class="col-md-2 text-right">
-                            <t t-if="invoice.saldo_pendiente > 0">
-                              <button class="btn btn-primary btn-sm pay-invoice-btn" 
-                                      t-attf-data-invoice-id="#{invoice.id}"
-                                      t-attf-data-amount="#{invoice.saldo_pendiente}"
-                                      t-attf-data-invoice-name="#{invoice.name}">
-                                <i class="fa fa-credit-card mr-1"/>
-                                Pagar
-                              </button>
-                            </t>
-                            <t t-if="invoice.estado == 'pagada'">
-                              <span class="badge badge-success">
-                                <i class="fa fa-check"/> Pagada
+                    
+                    <div class="o_invoices_list">
+                      <t t-foreach="client_data.invoices" t-as="invoice">
+                        <div class="o_invoice_card">
+                          <div class="row align-items-center">
+                            <div class="col-md-2">
+                              <strong t-esc="invoice.name"/>
+                              <br/>
+                              <small class="text-muted" t-esc="invoice.contrato_id.code if invoice.contrato_id else 'Sin contrato'"/>
+                            </div>
+                            <div class="col-md-2">
+                              <span class="text-muted">Emisión:</span>
+                              <br/>
+                              <t t-esc="invoice.fecha_factura"/>
+                            </div>
+                            <div class="col-md-2">
+                              <span class="text-muted">Vencimiento:</span>
+                              <br/>
+                              <t t-esc="invoice.fecha_vencimiento"/>
+                            </div>
+                            <div class="col-md-2">
+                              <span class="text-muted">Monto:</span>
+                              <br/>
+                              <strong>Bs <t t-esc="invoice.monto_factura"/></strong>
+                            </div>
+                            <div class="col-md-2">
+                              <span class="invoice-state" t-attf-class="invoice-state state-#{invoice.estado}">
+                                <t t-esc="invoice.estado.charAt(0).toUpperCase() + invoice.estado.slice(1)"/>
                               </span>
-                            </t>
+                              <br/>
+                              <t t-if="invoice.saldo_pendiente > 0">
+                                <small class="text-danger">
+                                  Saldo: Bs <t t-esc="invoice.saldo_pendiente"/>
+                                </small>
+                              </t>
+                            </div>
+                            <div class="col-md-2 text-right">
+                              <t t-if="invoice.saldo_pendiente > 0">
+                                <button class="btn btn-primary btn-sm pay-invoice-btn" 
+                                        t-attf-data-invoice-id="#{invoice.id}"
+                                        t-attf-data-amount="#{invoice.saldo_pendiente}"
+                                        t-attf-data-invoice-name="#{invoice.name}">
+                                  <i class="fa fa-credit-card mr-1"/>
+                                  Pagar
+                                </button>
+                              </t>
+                              <t t-if="invoice.estado == 'pagada'">
+                                <span class="badge badge-success">
+                                  <i class="fa fa-check"/> Pagada
+                                </span>
+                              </t>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </t>
+                      </t>
+                    </div>
                   </div>
-                </div>
-              </t>
+                </t>
               </t>
             </div>
           </div>
