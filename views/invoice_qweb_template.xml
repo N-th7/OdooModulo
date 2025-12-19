@@ -2,52 +2,65 @@
 <odoo>
   <!-- Invoice Dashboard Template -->
   <template id="invoice_dashboard_template" name="Invoice Dashboard">
-    <t t-call="web.layout">
-      <t t-set="title">Dashboard de Facturas</t>
-      <div class="o_invoice_container">
+    <div class="o_invoice_container">
+      <div class="o_control_panel">
+        <div class="o_cp_top">
+          <div class="o_cp_top_left">
+            <h1 class="o_cp_action_name">Dashboard de Facturas por Cliente</h1>
+          </div>
+        </div>
+      </div>
+      
+      <div class="o_content">
         <div class="container-fluid">
           <div class="row">
             <div class="col-12">
-              <h2 class="mb-3">Dashboard de Facturas por Cliente</h2>
               
               <!-- Resumen general -->
-              <div class="row mb-4">
-                <div class="col-md-3">
-                  <div class="card bg-primary text-white">
-                    <div class="card-body">
-                      <h5>Total Facturas</h5>
-                      <h3 t-esc="total_invoices"/>
+              <t t-if="state.loading">
+                <div class="text-center p-4">
+                  <i class="fa fa-spinner fa-spin fa-3x"></i>
+                  <p>Cargando dashboard...</p>
+                </div>
+              </t>
+              <t t-if="!state.loading and state.dashboardData">
+                <div class="row mb-4">
+                  <div class="col-md-3">
+                    <div class="card bg-primary text-white">
+                      <div class="card-body">
+                        <h5>Total Facturas</h5>
+                        <h3 t-esc="state.dashboardData.total_invoices"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card bg-success text-white">
+                      <div class="card-body">
+                        <h5>Ingresos</h5>
+                        <h3>Bs <t t-esc="state.dashboardData.total_income"/></h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card bg-warning text-white">
+                      <div class="card-body">
+                        <h5>Pendiente</h5>
+                        <h3>Bs <t t-esc="state.dashboardData.total_pending"/></h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card bg-info text-white">
+                      <div class="card-body">
+                        <h5>Vencidas</h5>
+                        <h3 t-esc="state.dashboardData.overdue_count"/>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-3">
-                  <div class="card bg-success text-white">
-                    <div class="card-body">
-                      <h5>Ingresos</h5>
-                      <h3>Bs <t t-esc="total_income"/></h3>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <div class="card bg-warning text-white">
-                    <div class="card-body">
-                      <h5>Pendiente</h5>
-                      <h3>Bs <t t-esc="total_pending"/></h3>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <div class="card bg-info text-white">
-                    <div class="card-body">
-                      <h5>Vencidas</h5>
-                      <h3 t-esc="overdue_count"/>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-              <!-- Facturas agrupadas por cliente -->
-              <t t-foreach="client_groups" t-as="client_data">
+                <!-- Facturas agrupadas por cliente -->
+                <t t-foreach="state.dashboardData.client_groups" t-as="client_data">
                 <div class="o_client_group mb-4">
                   <div class="o_client_header d-flex justify-content-between align-items-center">
                     <div>
@@ -130,6 +143,7 @@
                   </div>
                 </div>
               </t>
+              </t>
             </div>
           </div>
         </div>
@@ -199,9 +213,11 @@
           </div>
         </div>
       </div>
-      
-      <!-- Include JavaScript for dashboard functionality -->
-      <script type="text/javascript" src="/custom_clients/static/src/js/invoice_dashboard.js"/>
-    </t>
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
   </template>
 </odoo>
