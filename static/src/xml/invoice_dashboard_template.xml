@@ -59,7 +59,7 @@
                 </div>
 
                 <!-- Facturas agrupadas por cliente -->
-                <t t-foreach="state.dashboardData.client_groups" t-as="client_data">
+                <t t-foreach="state.dashboardData.client_groups" t-as="client_data" t-key="client_data.client_id">
                   <div class="o_client_group mb-4">
                     <div class="o_client_header d-flex justify-content-between align-items-center">
                       <div>
@@ -86,7 +86,7 @@
                     </div>
                     
                     <div class="o_invoices_list">
-                      <t t-foreach="client_data.invoices" t-as="invoice">
+                      <t t-foreach="client_data.invoices" t-as="invoice" t-key="invoice.id">
                         <div class="o_invoice_card">
                           <div class="row align-items-center">
                             <div class="col-md-2">
