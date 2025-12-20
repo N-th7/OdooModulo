@@ -83,7 +83,7 @@
 
                 <kanban js_class="internet_survey_kanban_js"
                     class="internet_survey_kanban o_kanban_small_column"
-                    create="false" edit="false">
+                    create="true" edit="false">
 
                     <kanban_header>
                         <div class="survey-dashboard"
