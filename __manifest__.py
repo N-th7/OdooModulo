@@ -14,6 +14,7 @@
         'data/new_sequences.xml',
         'data/plan_data.xml',
         'data/cron_jobs.xml',
+        'data/ticket_demo_data.xml',
         'views/plan_views.xml',
         'views/client_views.xml',
         'views/invoice_views.xml',

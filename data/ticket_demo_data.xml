@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <record id="client_demo_1" model="internet.client">
+            <field name="name">Juan Carlos</field>
+            <field name="second_name">Pérez López</field>
+            <field name="ci">12345678</field>
+            <field name="phone">70123456</field>
+            <field name="city">la_paz</field>
+            <field name="client_type">residencial</field>
+            <field name="active">True</field>
+        </record>
+
+        <record id="client_demo_2" model="internet.client">
+            <field name="name">María Elena</field>
+            <field name="second_name">García Morales</field>
+            <field name="ci">87654321</field>
+            <field name="phone">75987654</field>
+            <field name="city">el_alto</field>
+            <field name="client_type">residencial</field>
+            <field name="active">True</field>
+        </record>
+        
+        <record id="ticket_demo_1" model="internet.tickets">
+            <field name="cliente_id" ref="client_demo_1"/>
+            <field name="descripcion">Problema con la velocidad de internet. La conexión está muy lenta desde ayer por la tarde.</field>
+            <field name="estado">abierto</field>
+            <field name="prioridad">alta</field>
+            <field name="fecha_reporte">2025-12-24 08:00:00</field>
+        </record>
+
+        <record id="ticket_demo_2" model="internet.tickets">
+            <field name="cliente_id" ref="client_demo_2"/>
+            <field name="descripcion">No hay conexión a internet desde esta mañana. El modem no enciende.</field>
+            <field name="estado">en_proceso</field>
+            <field name="prioridad">critica</field>
+            <field name="fecha_reporte">2025-12-24 09:30:00</field>
+            <field name="tecnico_asignado" ref="base.user_admin"/>
+        </record>
+
+        <record id="ticket_demo_3" model="internet.tickets">
+            <field name="cliente_id" ref="client_demo_1"/>
+            <field name="descripcion">Configuración de red WiFi para dispositivos adicionales.</field>
+            <field name="estado">resuelto</field>
+            <field name="prioridad">baja</field>
+            <field name="fecha_reporte">2025-12-23 14:00:00</field>
+            <field name="fecha_resolucion">2025-12-23 16:00:00</field>
+            <field name="tecnico_asignado" ref="base.user_admin"/>
+        </record>
+
+        <record id="ticket_demo_4" model="internet.tickets">
+            <field name="cliente_id" ref="client_demo_2"/>
+            <field name="descripcion">Solicitud de cambio de ubicación del router.</field>
+            <field name="estado">cerrado</field>
+            <field name="prioridad">media</field>
+            <field name="fecha_reporte">2025-12-22 10:00:00</field>
+            <field name="fecha_resolucion">2025-12-22 15:30:00</field>
+            <field name="tecnico_asignado" ref="base.user_admin"/>
+        </record>
+
+        <record id="ticket_demo_5" model="internet.tickets">
+            <field name="cliente_id" ref="client_demo_1"/>
+            <field name="descripcion">Consulta sobre facturación y planes disponibles.</field>
+            <field name="estado">abierto</field>
+            <field name="prioridad">baja</field>
+            <field name="fecha_reporte">2025-12-24 10:15:00</field>
+        </record>
+
+        <record id="ticket_demo_6" model="internet.tickets">
+            <field name="cliente_id" ref="client_demo_2"/>
+            <field name="descripcion">Intermitencia en la señal WiFi durante las noches.</field>
+            <field name="estado">en_proceso</field>
+            <field name="prioridad">media</field>
+            <field name="fecha_reporte">2025-12-23 20:00:00</field>
+            <field name="tecnico_asignado" ref="base.user_admin"/>
+        </record>
+
+    </data>
+</odoo>
