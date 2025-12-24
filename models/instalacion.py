@@ -4,7 +4,6 @@ class Instalacion(models.Model):
     _name = 'internet.instalacion'
     _description = 'Instalación de Internet'
 
-    # Campos según el diagrama
     puerto_id = fields.Many2one('internet.puerto', string='Puerto')
     contrato_id = fields.Many2one('internet.contract', string='Contrato', required=True)
     fecha_instalacion = fields.Date('Fecha de Instalación')
@@ -18,7 +17,6 @@ class Instalacion(models.Model):
     nota = fields.Text('Nota')
     empresa_instaladora = fields.Char('Empresa Instaladora')
 
-    # Relaciones
     equipo_extra_ids = fields.One2many('internet.equipo_extra', 'instalacion_id', string='Equipos Extra')
     onu_ids = fields.One2many('internet.onu', 'instalacion_id', string='ONUs')
     rango_ip_ids = fields.One2many('internet.rango_ip', 'instalacion_id', string='Rangos IP')

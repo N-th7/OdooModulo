@@ -5,7 +5,6 @@ class Tickets(models.Model):
     _description = 'Tickets de Soporte'
     _order = 'fecha_reporte desc'
 
-    # Campos según el diagrama
     cliente_id = fields.Many2one('internet.client', string='Cliente', required=True)
     contrato_id = fields.Many2one('internet.contract', string='Contrato')
     descripcion = fields.Text('Descripción', required=True)
@@ -25,6 +24,7 @@ class Tickets(models.Model):
     ], string='Prioridad', default='media', required=True)
     tecnico_asignado = fields.Many2one('res.users', string='Técnico Asignado')
     observaciones = fields.Text('Observaciones')
+    color = fields.Integer('Color', default=0)
 
     name = fields.Char('Número de Ticket', readonly=True, default='Nuevo')
 

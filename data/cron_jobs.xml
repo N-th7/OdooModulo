@@ -1,5 +1,4 @@
 <odoo>
-  <!-- Cron: generar facturas mensuales -->
   <record id="cron_generate_monthly_invoices" model="ir.cron">
     <field name="name">Generar facturas mensuales</field>
     <field name="model_id" ref="model_internet_invoice"/>
@@ -12,7 +11,6 @@
     <field name="active">True</field>
   </record>
 
-  <!-- Cron: verificar corte de servicio -->
   <record id="cron_check_clients_for_cut" model="ir.cron">
     <field name="name">Verificar clientes para corte</field>
     <field name="model_id" ref="model_internet_client"/>

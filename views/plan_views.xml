@@ -73,7 +73,6 @@
     <field name="arch" type="xml">
         <kanban class="o_kanban_mobile internet_plan_kanban" archivable="false">
 
-            <!-- CAMPOS A CARGAR -->
             <field name="name"/>
             <field name="price"/>
             <field name="download_speed"/>
@@ -89,7 +88,6 @@
                                 display:flex; flex-direction:column; gap:14px;">
 
 
-                        <!-- Nombre -->
                         <div style="display:flex; align-items:center; gap:12px;">
                           <div class="internet_plan_icon" 
                              style="font-size:28px; display:flex; align-items:center; justify-content:center;
@@ -100,7 +98,6 @@
                             <t t-if="record.name">
                                 <t t-esc="record.name.value"/>
                             </t>
-                            <!-- Estado -->
                         <div>
                             <t t-if="record.active and record.active.raw_value">
                                 <span style="background:#10b981;color:#fff;padding:4px 12px;
@@ -116,14 +113,12 @@
 
                         
 
-                        <!-- Descripción -->
                         <div style="color:#6b7280; font-size:14px; min-height:48px;">
                             <t t-if="record.description">
                                 <t t-esc="record.description.value"/>
                             </t>
                         </div>
 
-                        <!-- Precio -->
                         <div style="font-size:26px; font-weight:700; color:#111827;">
                             <t t-if="record.price">
                                 Bs <t t-esc="record.price.value"/>
@@ -131,7 +126,6 @@
                             </t>
                         </div>
 
-                        <!-- Velocidad bajada -->
                         <div style="display:flex; align-items:center; gap:6px; color:#374151;">
                             <i class="fa fa-download" style="color:#4f46e5;"></i>
                             <t t-if="record.download_speed">
@@ -139,7 +133,6 @@
                             </t>
                         </div>
 
-                        <!-- Velocidad subida -->
                         <div style="display:flex; align-items:center; gap:6px; color:#374151;">
                             <i class="fa fa-upload" style="color:#4f46e5;"></i>
                             <t t-if="record.upload_speed">
@@ -147,7 +140,6 @@
                             </t>
                         </div>
 
-                        <!-- Botones -->
                         <div style="display:flex; gap:10px; margin-top:10px;">
                             <button type="edit"
                                     style="padding:8px 14px; background:#4f46e5; color:#fff;

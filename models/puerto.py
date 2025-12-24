@@ -20,7 +20,6 @@ class Puerto(models.Model):
     ubicacion = fields.Char('Ubicación')
     observaciones = fields.Text('Observaciones')
 
-    # Relaciones
     instalacion_ids = fields.One2many('internet.instalacion', 'puerto_id', string='Instalaciones')
 
     def name_get(self):

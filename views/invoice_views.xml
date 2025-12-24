@@ -61,7 +61,6 @@
     <field name="view_mode">kanban,tree,form</field>
   </record>
 
-  <!-- Acción para dashboard de facturas -->
   <record id="action_invoice_dashboard_client" model="ir.actions.client">
     <field name="name">Dashboard de Facturas</field>
     <field name="tag">invoice_dashboard_action</field>

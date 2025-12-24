@@ -15,7 +15,6 @@
           <div class="row">
             <div class="col-12">
               
-              <!-- Resumen general -->
               <t t-if="state.loading">
                 <div class="text-center p-4">
                   <i class="fa fa-spinner fa-spin fa-3x"></i>
@@ -58,7 +57,6 @@
                   </div>
                 </div>
 
-                <!-- Facturas agrupadas por cliente -->
                 <t t-foreach="state.dashboardData.client_groups" t-as="client_data" t-key="client_data.client_id">
                   <div class="o_client_group mb-4">
                     <div class="o_client_header d-flex justify-content-between align-items-center" 
@@ -89,7 +87,6 @@
                       </div>
                     </div>
                     
-                    <!-- Lista de facturas colapsable -->
                     <div class="o_invoices_list" t-attf-id="invoices-#{client_data.client_id}">
                       <t t-foreach="client_data.invoices" t-as="invoice" t-key="invoice.id">
                         <div class="o_invoice_card">
@@ -156,7 +153,6 @@
         </div>
       </div>
       
-      <!-- Modal para formulario de pago -->
       <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">

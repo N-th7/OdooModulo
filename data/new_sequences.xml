@@ -1,5 +1,4 @@
 <odoo>
-    <!-- Secuencia para Tickets -->
     <record id="seq_internet_tickets" model="ir.sequence">
         <field name="name">Tickets de Soporte</field>
         <field name="code">internet.tickets</field>
@@ -9,7 +8,6 @@
         <field name="number_increment">1</field>
     </record>
 
-    <!-- Secuencia para Instalaciones -->
     <record id="seq_internet_instalacion" model="ir.sequence">
         <field name="name">Instalaciones</field>
         <field name="code">internet.instalacion</field>
@@ -19,7 +17,6 @@
         <field name="number_increment">1</field>
     </record>
 
-    <!-- Secuencia para Pagos -->
     <record id="seq_internet_pagos" model="ir.sequence">
         <field name="name">Pagos</field>
         <field name="code">internet.pagos</field>
@@ -29,7 +26,6 @@
         <field name="number_increment">1</field>
     </record>
 
-    <!-- Secuencia para Avisos de Cobro -->
     <record id="seq_internet_aviso_cobro" model="ir.sequence">
         <field name="name">Avisos de Cobro</field>
         <field name="code">internet.aviso_cobro</field>

@@ -24,14 +24,11 @@ class CustomInvoiceDashboard(http.Controller):
                 'observaciones': kw.get('observaciones')
             }
             
-            # Crear el pago
             payment = request.env['internet.pagos'].create(payment_data)
             
-            # Recalcular estado de la factura
             invoice = request.env['internet.invoice'].browse(payment_data['factura_id'])
             invoice._compute_saldo_pendiente()
             
-            # Actualizar estado según el saldo
             if invoice.saldo_pendiente <= 0:
                 invoice.estado = 'pagada'
             elif invoice.saldo_pendiente < invoice.monto_factura:

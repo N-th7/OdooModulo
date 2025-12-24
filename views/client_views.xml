@@ -50,7 +50,6 @@
       <form string="Cliente de Internet" class="internet_client_form">
         <sheet>
 
-          <!-- SMART BUTTONS -->
           <header>
             <button name="action_add_contract"
                     type="object"

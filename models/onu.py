@@ -4,7 +4,6 @@ class ONU(models.Model):
     _name = 'internet.onu'
     _description = 'ONU (Optical Network Unit)'
 
-    # Campos según el diagrama
     instalacion_id = fields.Many2one('internet.instalacion', string='Instalación', required=True)
     marca = fields.Char('Marca', required=True)
     modelo = fields.Char('Modelo', required=True)
@@ -13,7 +12,6 @@ class ONU(models.Model):
     wifi_password = fields.Char('WiFi Password')
     observaciones = fields.Text('Observaciones')
 
-    # Campo relacional
     contrato_id = fields.Many2one(related='instalacion_id.contrato_id', string='Contrato', store=True)
 
     name = fields.Char('Nombre', compute='_compute_name', store=True)

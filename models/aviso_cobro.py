@@ -5,7 +5,6 @@ class AvisoCobro(models.Model):
     _description = 'Aviso de Cobro'
     _order = 'fecha_aviso desc'
 
-    # Campos según el diagrama
     contrato_id = fields.Many2one('internet.contract', string='Contrato', required=True)
     factura_id = fields.Many2one('internet.invoice', string='Factura', required=True)
     fecha_aviso = fields.Datetime('Fecha de Aviso', default=fields.Datetime.now, required=True)
@@ -24,7 +23,6 @@ class AvisoCobro(models.Model):
         ('fallido', 'Fallido'),
     ], string='Estado', default='enviado', required=True)
 
-    # Campos relacionales
     cliente_id = fields.Many2one(related='contrato_id.client_id', string='Cliente', store=True)
 
     name = fields.Char('Nombre', compute='_compute_name', store=True)

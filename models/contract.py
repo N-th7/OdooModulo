@@ -7,7 +7,6 @@ class InternetContract(models.Model):
 
     code = fields.Char(string="Código", readonly=True, copy=False, default='New')
 
-    # Campos según el diagrama
     cliente_id = fields.Many2one('internet.client', string='Cliente')
     plan_id = fields.Many2one('internet.plan', string='Plan', required=True)
     direccion_servicio = fields.Text('Dirección del Servicio')
@@ -22,7 +21,6 @@ class InternetContract(models.Model):
     url_ubicacion = fields.Char('URL de Ubicación')
     coordenadas = fields.Char('Coordenadas')
 
-    # Campos anteriores mantenidos para compatibilidad
     start_date = fields.Date('Fecha de Inicio', required=True)
     end_date = fields.Date('Fecha de Fin')    
 
@@ -40,16 +38,13 @@ class InternetContract(models.Model):
     observations = fields.Text(string='Observaciones')
     active = fields.Boolean(default=True)
 
-    # Campo de compatibilidad
     client_id = fields.Many2one(related='cliente_id', string='Cliente (Legacy)', store=True, readonly=True)
 
-    # Relaciones según el diagrama
     instalacion_ids = fields.One2many('internet.instalacion', 'contrato_id', string='Instalaciones')
     invoice_ids = fields.One2many('internet.invoice', 'contrato_id', string='Facturas')
     ticket_ids = fields.One2many('internet.tickets', 'contrato_id', string='Tickets')
     aviso_cobro_ids = fields.One2many('internet.aviso_cobro', 'contrato_id', string='Avisos de Cobro')
 
-    # Compatibilidad con nombre anterior  
     state = fields.Selection([
         ('activo', 'Activo'),
         ('suspendido', 'Suspendido'),

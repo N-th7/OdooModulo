@@ -6,6 +6,6 @@ export class SurveyKanbanRenderer extends KanbanRenderer {
     async willStart() {
         await super.willStart();
         const stats = await this.rpc("/internet_survey/stats", {});
-        this.state.stats = stats;   // <-- enviamos los datos al template
+        this.state.stats = stats;
     }
 }

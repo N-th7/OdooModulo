@@ -38,7 +38,6 @@ export class InvoiceDashboardAction extends Component {
     }
 
     setupPaymentModal() {
-        // Setup payment modal and toggle events after component is mounted
         setTimeout(() => {
             this.setupPaymentEvents();
             this.setupToggleEvents();
@@ -49,7 +48,6 @@ export class InvoiceDashboardAction extends Component {
         const container = document.querySelector('.o_invoice_container');
         if (!container) return;
 
-        // Configure payment button events
         container.addEventListener('click', (e) => {
             if (e.target.classList.contains('pay-invoice-btn') || 
                 e.target.closest('.pay-invoice-btn')) {
@@ -67,7 +65,6 @@ export class InvoiceDashboardAction extends Component {
             }
         });
 
-        // Configure save payment button
         const savePaymentBtn = document.getElementById('savePayment');
         if (savePaymentBtn) {
             savePaymentBtn.addEventListener('click', () => {
@@ -80,7 +77,6 @@ export class InvoiceDashboardAction extends Component {
         const container = document.querySelector('.o_invoice_container');
         if (!container) return;
 
-        // Configure client header click events for toggle
         container.addEventListener('click', (e) => {
             const header = e.target.closest('.o_client_header');
             if (header) {
@@ -98,12 +94,10 @@ export class InvoiceDashboardAction extends Component {
         if (!invoicesList || !toggleIcon) return;
 
         if (invoicesList.style.display === 'none') {
-            // Mostrar facturas
             invoicesList.style.display = 'block';
             toggleIcon.classList.remove('fa-chevron-right');
             toggleIcon.classList.add('fa-chevron-down');
         } else {
-            // Ocultar facturas
             invoicesList.style.display = 'none';
             toggleIcon.classList.remove('fa-chevron-down');
             toggleIcon.classList.add('fa-chevron-right');
@@ -111,16 +105,13 @@ export class InvoiceDashboardAction extends Component {
     }
 
     openPaymentModal(invoiceId, amount, invoiceName) {
-        // Fill form with invoice data
         document.getElementById('invoice_id').value = invoiceId;
         document.getElementById('invoice_name').value = invoiceName;
         document.getElementById('amount').value = amount;
         
-        // Set current date as default
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('payment_date').value = today;
         
-        // Show modal using Odoo's modal service or Bootstrap
         const modal = document.getElementById('paymentModal');
         if (window.$ && window.$.fn.modal) {
             window.$(modal).modal('show');
@@ -152,16 +143,13 @@ export class InvoiceDashboardAction extends Component {
                 type: "success"
             });
 
-            // Close modal
             const modal = document.getElementById('paymentModal');
             if (window.$ && window.$.fn.modal) {
                 window.$(modal).modal('hide');
             }
 
-            // Reload dashboard data
             this.loadDashboardData();
             
-            // Clear form
             form.reset();
 
         } catch (error) {
@@ -173,5 +161,4 @@ export class InvoiceDashboardAction extends Component {
     }
 }
 
-// Register the action
 registry.category("actions").add("invoice_dashboard_action", InvoiceDashboardAction);

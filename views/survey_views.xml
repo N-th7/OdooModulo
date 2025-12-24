@@ -114,7 +114,6 @@
                         </div>
                     </kanban_header>
 
-                    <!-- CAMPOS DEL KANBAN -->
                     <field name="survey_code" />
                     <field name="client_id" />
                     <field name="survey_date" />

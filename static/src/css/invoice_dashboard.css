@@ -100,7 +100,6 @@
   box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
 }
 
-/* Estilos para el modal de pago */
 .modal-content {
   border-radius: 10px;
   border: none;
@@ -146,7 +145,6 @@
   font-weight: 600;
 }
 
-/* Estilos para las tarjetas de resumen */
 .card {
   border: none;
   border-radius: 10px;
@@ -174,14 +172,12 @@
   margin: 0;
 }
 
-/* Badges */
 .badge {
   font-size: 12px;
   padding: 6px 10px;
   border-radius: 6px;
 }
 
-/* Loading spinner */
 .loading-spinner {
   display: flex;
   justify-content: center;

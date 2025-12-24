@@ -7,7 +7,6 @@ class SurveyKanbanRenderer extends KanbanRenderer {
     render() {
         const el = super.render(...arguments);
 
-        // Crear el dashboard
         const dashboard = document.createElement("div");
         dashboard.classList.add("survey-dashboard");
         dashboard.style.cssText =
@@ -28,14 +27,12 @@ class SurveyKanbanRenderer extends KanbanRenderer {
             </div>
         `;
 
-        // Insertar antes de las tarjetas
         el.prepend(dashboard);
 
         return el;
     }
 }
 
-// Registrar renderer para este modelo
 registry.category("views").add("internet_survey_kanban_js", {
     ...registry.category("views").get("kanban"),
     Renderer: SurveyKanbanRenderer,

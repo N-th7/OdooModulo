@@ -9,7 +9,6 @@ class InternetInvoice(models.Model):
 
     name = fields.Char('Número', required=True, copy=False, readonly=True, default='New')
     
-    # Campos según el diagrama
     contrato_id = fields.Many2one('internet.contract', string='Contrato')
     fecha_factura = fields.Date('Fecha de Factura', default=fields.Date.context_today, required=True)
     fecha_vencimiento = fields.Date('Fecha de Vencimiento', required=True)
@@ -23,14 +22,12 @@ class InternetInvoice(models.Model):
         ('vencida', 'Vencida'),
     ], string='Estado', default='impaga', required=True)
     
-    # Campos anteriores mantenidos para compatibilidad
     client_id = fields.Many2one('internet.client', string='Cliente (Legacy)', compute='_compute_client_id', store=True)
     date_invoice = fields.Date('Fecha de emisión', default=fields.Date.context_today)
     due_date = fields.Date('Fecha de vencimiento')
     amount = fields.Float('Monto', digits=(16,2))
     state = fields.Selection([('pagada','Pagada'), ('impaga','Impaga')], string='Estado (Legacy)', default='impaga')
     
-    # Relaciones según el diagrama
     pago_ids = fields.One2many('internet.pagos', 'factura_id', string='Pagos')
     aviso_cobro_ids = fields.One2many('internet.aviso_cobro', 'factura_id', string='Avisos de Cobro')
     
@@ -48,7 +45,6 @@ class InternetInvoice(models.Model):
     def _compute_saldo_pendiente(self):
         for record in self:
             record.saldo_pendiente = record.monto_factura - record.monto_pagado
-            # Actualizar estado según el saldo
             if record.saldo_pendiente <= 0:
                 record.estado = 'pagada'
             elif record.monto_pagado > 0:
@@ -63,7 +59,6 @@ class InternetInvoice(models.Model):
         if vals.get('name', 'New') == 'New':
             vals['name'] = self.env['ir.sequence'].next_by_code('internet.invoice') or '/'
         
-        # Sincronizar campos nuevos con legacy
         if 'contrato_id' in vals and vals.get('contrato_id'):
             contrato = self.env['internet.contract'].browse(vals['contrato_id'])
             if contrato.plan_id and not vals.get('monto_factura'):
@@ -86,7 +81,6 @@ class InternetInvoice(models.Model):
     @api.model
     def create(self, vals):
         if vals.get('name', 'New') == 'New':
-            # Generar número de factura con formato: [numero de contrato-dia-mes-año-secuencia]
             contract_id = vals.get('contrato_id')
             if contract_id:
                 contract = self.env['internet.contract'].browse(contract_id)
@@ -94,19 +88,16 @@ class InternetInvoice(models.Model):
             else:
                 contract_code = 'SIN-CONTRATO'
             
-            # Obtener fecha actual
             today = fields.Date.context_today(self)
             day = today.strftime('%d')
             month = today.strftime('%m') 
             year = today.strftime('%Y')
             
-            # Buscar facturas existentes con el mismo patrón para evitar duplicados
             base_pattern = f"{contract_code}-{day}-{month}-{year}"
             existing_count = self.search_count([
                 ('name', 'like', base_pattern + '%')
             ])
             
-            # Generar número con secuencia si hay duplicados
             if existing_count > 0:
                 vals['name'] = f"{base_pattern}-{existing_count + 1:02d}"
             else:
@@ -116,16 +107,13 @@ class InternetInvoice(models.Model):
     @api.model
     def get_dashboard_data(self):
         """Obtener datos para el dashboard de facturas agrupadas por cliente"""
-        # Obtener todas las facturas con sus clientes
         invoices = self.search([])
         
-        # Calcular totales generales
         total_invoices = len(invoices)
         total_income = sum(inv.monto_pagado for inv in invoices)
         total_pending = sum(inv.saldo_pendiente for inv in invoices)
         overdue_count = len(invoices.filtered(lambda inv: inv.fecha_vencimiento < fields.Date.today() and inv.saldo_pendiente > 0))
         
-        # Agrupar facturas por cliente
         client_groups = {}
         for invoice in invoices:
             client = invoice.client_id
@@ -144,7 +132,6 @@ class InternetInvoice(models.Model):
                     'total_amount': 0.0
                 }
             
-            # Agregar datos de la factura como diccionario
             invoice_data = {
                 'id': invoice.id,
                 'name': invoice.name,
@@ -163,7 +150,6 @@ class InternetInvoice(models.Model):
             client_groups[client_key]['total_pending'] += invoice.saldo_pendiente
             client_groups[client_key]['total_amount'] += invoice.monto_factura
         
-        # Convertir a lista y ordenar por deuda pendiente (mayor a menor)
         client_groups_list = list(client_groups.values())
         client_groups_list.sort(key=lambda x: x['total_pending'], reverse=True)
         
@@ -178,7 +164,6 @@ class InternetInvoice(models.Model):
     @api.model
     def _cron_generate_invoices(self):
         """Crear una factura por cada contrato activo con el monto del plan, cada 18 del mes."""
-        # Buscar contratos activos
         contracts = self.env['internet.contract'].search([
             ('estado', '=', 'activo'),
             ('cliente_id', '!=', False),
@@ -187,12 +172,10 @@ class InternetInvoice(models.Model):
         
         today = fields.Date.context_today(self)
         
-        # Solo generar facturas si es día 18
         if today.day != 18:
             return
             
         for contract in contracts:
-            # Verificar si ya existe factura para este contrato este mes
             existing_invoice = self.search([
                 ('contrato_id', '=', contract.id),
                 ('fecha_factura', '>=', today.replace(day=1)),  # Desde el 1ro del mes
@@ -202,10 +185,8 @@ class InternetInvoice(models.Model):
             if existing_invoice:
                 continue
                 
-            # Calcular fecha de vencimiento (30 días después)
             due_date = today + timedelta(days=30)
             
-            # Crear factura con monto del plan
             plan_amount = contract.plan_id.price if contract.plan_id else 0.0
             
             self.create({
