@@ -51,7 +51,7 @@
     <field name="name">internet.tickets.kanban</field>
     <field name="model">internet.tickets</field>
     <field name="arch" type="xml">
-      <kanban default_group_by="estado" class="o_kanban_small_column" group_create="false" group_delete="false" group_edit="false" group_expand="true">
+      <kanban default_group_by="estado" class="o_kanban_small_column" group_create="false" group_delete="false" group_edit="false">
         <field name="cliente_id"/>
         <field name="contrato_id"/>
         <field name="descripcion"/>
@@ -61,7 +61,6 @@
         <field name="tecnico_asignado"/>
         <field name="estado"/>
         <field name="color"/>
-        <progressbar field="prioridad" colors='{"baja": "success", "media": "warning", "alta": "danger", "critica": "danger"}'/>
         <templates>
           <t t-name="kanban-box">
             <div class="oe_kanban_card oe_kanban_global_click o_has_icon" t-attf-style="border-left: 3px solid #{record.prioridad.raw_value == 'critica' ? '#d9534f' : record.prioridad.raw_value == 'alta' ? '#f0ad4e' : record.prioridad.raw_value == 'media' ? '#5bc0de' : '#5cb85c'};">

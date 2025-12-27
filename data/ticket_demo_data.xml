@@ -76,5 +76,25 @@
             <field name="tecnico_asignado" ref="base.user_admin"/>
         </record>
 
+        <!-- Tickets adicionales para mostrar todas las columnas -->
+        <record id="ticket_demo_7" model="internet.tickets">
+            <field name="cliente_id" ref="client_demo_1"/>
+            <field name="descripcion">Ticket demo para estado cerrado.</field>
+            <field name="estado">cerrado</field>
+            <field name="prioridad">baja</field>
+            <field name="fecha_reporte">2025-12-20 10:00:00</field>
+            <field name="fecha_resolucion">2025-12-21 14:00:00</field>
+            <field name="tecnico_asignado" ref="base.user_admin"/>
+        </record>
+
+        <record id="ticket_demo_8" model="internet.tickets">
+            <field name="cliente_id" ref="client_demo_2"/>
+            <field name="descripcion">Ticket demo adicional para estado en proceso.</field>
+            <field name="estado">en_proceso</field>
+            <field name="prioridad">alta</field>
+            <field name="fecha_reporte">2025-12-25 15:00:00</field>
+            <field name="tecnico_asignado" ref="base.user_admin"/>
+        </record>
+
     </data>
 </odoo>
