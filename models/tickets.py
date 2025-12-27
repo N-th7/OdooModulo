@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 class Tickets(models.Model):
     _name = 'internet.tickets'
@@ -31,7 +31,7 @@ class Tickets(models.Model):
     def name_get(self):
         return [(rec.id, f"Ticket #{rec.id} - {rec.cliente_id.name if rec.cliente_id else 'Sin cliente'}") for rec in self]
 
-    @models.model
+    @api.model
     def _group_expand_estado(self, states, domain, order):
         """Expandir todos los estados en vista kanban, incluso si están vacíos"""
         return [key for key, value in self._fields['estado'].selection]
