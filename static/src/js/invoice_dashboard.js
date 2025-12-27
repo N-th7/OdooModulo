@@ -97,10 +97,12 @@ export class InvoiceDashboardAction extends Component {
             invoicesList.style.display = 'block';
             toggleIcon.classList.remove('fa-chevron-right');
             toggleIcon.classList.add('fa-chevron-down');
+            toggleIcon.classList.add('expanded');
         } else {
             invoicesList.style.display = 'none';
             toggleIcon.classList.remove('fa-chevron-down');
             toggleIcon.classList.add('fa-chevron-right');
+            toggleIcon.classList.remove('expanded');
         }
     }
 

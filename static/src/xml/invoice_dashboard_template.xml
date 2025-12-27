@@ -10,7 +10,7 @@
         </div>
       </div>
       
-      <div class="o_content">
+      <div class="o_content" style="height: auto; max-height: none; overflow-y: auto;">
         <div class="container-fluid">
           <div class="row">
             <div class="col-12">
@@ -64,7 +64,7 @@
                          t-attf-data-client-id="#{client_data.client_id}">
                       <div>
                         <h5 class="mb-0">
-                          <i class="fa fa-chevron-down toggle-icon mr-2" 
+                          <i class="fa fa-chevron-right toggle-icon mr-2" 
                              t-attf-id="toggle-icon-#{client_data.client_id}"/>
                           <i class="fa fa-user mr-2"/>
                           <t t-esc="client_data.client_name"/>
@@ -87,7 +87,7 @@
                       </div>
                     </div>
                     
-                    <div class="o_invoices_list" t-attf-id="invoices-#{client_data.client_id}">
+                    <div class="o_invoices_list" t-attf-id="invoices-#{client_data.client_id}" style="display: none;">
                       <t t-foreach="client_data.invoices" t-as="invoice" t-key="invoice.id">
                         <div class="o_invoice_card">
                           <div class="row align-items-center">

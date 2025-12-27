@@ -8,6 +8,8 @@
   padding: 20px;
   background: #f8f9fa;
   min-height: 100vh;
+  height: auto;
+  overflow-y: auto;
 }
 
 .o_client_group {
@@ -34,11 +36,17 @@
 .toggle-icon {
   transition: transform 0.3s ease;
   color: #666;
+  cursor: pointer;
+}
+
+.toggle-icon.expanded {
+  transform: rotate(90deg);
 }
 
 .o_invoices_list {
   padding: 10px 20px;
   transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 .o_invoice_card {
