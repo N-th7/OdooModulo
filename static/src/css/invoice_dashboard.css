@@ -7,9 +7,9 @@
 .o_invoice_container {
   padding: 20px;
   background: #f8f9fa;
-  min-height: 100vh;
-  height: auto;
-  overflow-y: auto;
+  max-height: none !important;
+  height: auto !important;
+  overflow: visible !important;
 }
 
 .o_client_group {
